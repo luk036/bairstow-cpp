@@ -45,14 +45,14 @@ namespace numeric {
          *
          * @return constexpr const T1&
          */
-        [[nodiscard]] constexpr auto x() const noexcept -> const T1& { return this->_x; }
+        constexpr auto x() const noexcept -> const T1& { return this->_x; }
 
         /**
          * @brief
          *
          * @return constexpr const T2&
          */
-        [[nodiscard]] constexpr auto y() const noexcept -> const T2& { return this->_y; }
+        constexpr auto y() const noexcept -> const T2& { return this->_y; }
 
         /**
          * @brief
@@ -63,7 +63,7 @@ namespace numeric {
          * @return constexpr auto
          */
         template <typename U1, typename U2>  //
-        [[nodiscard]] constexpr auto dot(const vector2<U1, U2>& other) const -> double {
+        constexpr auto dot(const vector2<U1, U2>& other) const -> double {
             return this->_x * other._x + this->_y * other._y;
         }
 
@@ -76,7 +76,7 @@ namespace numeric {
          * @return constexpr auto
          */
         template <typename U1, typename U2>  //
-        [[nodiscard]] constexpr auto cross(const vector2<U1, U2>& other) const -> double {
+        constexpr auto cross(const vector2<U1, U2>& other) const -> double {
             return this->_x * other._y - other._x * this->_y;
         }
 
@@ -158,7 +158,8 @@ namespace numeric {
          * @return vector2
          */
         template <typename U1, typename U2>  //
-        friend constexpr auto operator+(vector2<T1, T2> x, const vector2<U1, U2>& y) -> vector2<T1, T2> {
+        friend constexpr auto operator+(vector2<T1, T2> x, const vector2<U1, U2>& y)
+            -> vector2<T1, T2> {
             return x += y;
         }
 
@@ -172,7 +173,8 @@ namespace numeric {
          * @return vector2
          */
         template <typename U1, typename U2>  //
-        friend constexpr auto operator-(vector2<T1, T2> x, const vector2<U1, U2>& y) -> vector2<T1, T2> {
+        friend constexpr auto operator-(vector2<T1, T2> x, const vector2<U1, U2>& y)
+            -> vector2<T1, T2> {
             return x -= y;
         }
 
@@ -225,7 +227,8 @@ namespace numeric {
          * @param[in] v
          * @return Stream&
          */
-        template <class Stream> friend auto operator<<(Stream& out, const vector2<T1, T2>& v) -> Stream& {
+        template <class Stream> friend auto operator<<(Stream& out, const vector2<T1, T2>& v)
+            -> Stream& {
             out << "{" << v.x() << ", " << v.y() << "}";
             return out;
         }

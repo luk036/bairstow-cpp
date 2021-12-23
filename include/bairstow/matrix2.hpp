@@ -175,7 +175,7 @@ namespace numeric {
          * @return constexpr auto
          */
         template <typename U1, typename U2>  //
-        [[nodiscard]] constexpr auto mdot(const vector2<U1, U2>& other) const -> vector2<U1, U2> {
+        constexpr auto mdot(const vector2<U1, U2>& other) const -> vector2<U1, U2> {
             return {this->_x.dot(other), this->_y.dot(other)};
         }
 
@@ -187,7 +187,7 @@ namespace numeric {
          * @param[in] other
          * @return constexpr auto
          */
-        [[nodiscard]] constexpr auto det() const -> double {
+        constexpr auto det() const -> double {
             return this->x().x() * this->y().y() - this->x().y() * this->y().x();
         }
 

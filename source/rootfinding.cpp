@@ -101,18 +101,18 @@ auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
     static const auto PI = std::acos(-1.);
 
     auto N = pa.size() - 1;
-    auto M = N / 2;
     auto Nf = double(N);
     auto c = -pa[1] / (Nf * pa[0]);
     auto pb = pa;
     auto Pc = horner_eval(pb, N, c);  // ???
     auto re = std::pow(std::abs(Pc), 1. / Nf);
-    auto k = 2 * PI / Nf;
+    auto k = PI / Nf;
     auto m = c * c + re * re;
     auto vr0s = std::vector<vec2>{};
-    for (auto i = 1U; i != M + 1; ++i) {
-        auto r0 = 2 * (c + re * std::cos(k * i));
-        auto q0 = m + r0;
+    for (auto i = 1U; i < N; i += 2) {
+        auto temp = re * std::cos(k * i);
+        auto r0 = 2 * (c + temp);
+        auto q0 = m + 2 * c * temp;
         vr0s.emplace_back(vec2{r0, q0});
     }
     return vr0s;
