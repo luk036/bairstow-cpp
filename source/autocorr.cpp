@@ -1,95 +1,10 @@
 #include <bairstow/ThreadPool.h>
 
+#include <bairstow/vector2.hpp>
+#include <bairstow/matrix2.hpp>
 #include <bairstow/rootfinding.hpp>
+#include <bairstow/autocorr.hpp>
 #include <cmath>  // import pow, cos, sqrt
-
-// using vec2 = numeric::vector2<double>;
-// using mat2 = numeric::matrix2<vec2>;
-
-/**
- * @brief
- *
- * @param[in] vr
- * @param[in] vp
- * @return mat2
- */
-auto makeG(const vec2& vr, const vec2& vp) -> mat2 {
-    const auto &r = vr.x(), q = vr.y();
-    const auto &p = vp.x(), s = vp.y();
-    return mat2{vec2{p * r + s, p}, vec2{p * q, s}};
-}
-
-/**
- * @brief
- *
- * @param[in] vr
- * @param[in] vp
- * @return mat2
- */
-auto makeadjoint(const vec2& vr, const vec2& vp) -> mat2 {
-    const auto &r = vr.x(), q = vr.y();
-    const auto &p = vp.x(), s = vp.y();
-    return mat2{vec2{s, -p}, vec2{-p * q, p * r + s}};
-}
-
-/**
- * @brief
- *
- * @param vA
- * @param vA1
- * @param vr
- * @param vrj
- */
-void suppress(const vec2& vA, vec2& vA1, const vec2& vr, const vec2& vrj) {
-    auto mp = makeadjoint(vrj, vr - vrj);  // 2 mul's
-    vA1 -= mp.mdot(vA) / mp.det();         // 6 mul's + 2 div's
-}
-
-/**
- * @brief
- *
- * @param[in] vA
- * @param[in] vA1
- * @param[in] vr
- * @return vec2
- */
-auto check_newton(const vec2& vA, const vec2& vA1, const vec2& vr) -> vec2 {
-    auto mA1 = makeadjoint(vr, vA1);  // 2 mul's
-    return mA1.mdot(vA) / mA1.det();  // 6 mul's + 2 div's
-}
-
-/**
- * @brief
- *
- * @param[in,out] pb
- * @param[in] n
- * @param[in] r
- * @return double
- */
-auto horner_eval(std::vector<double>& pb, std::size_t n, const double& r) -> double {
-    for (auto i = 0U; i != n; ++i) {
-        pb[i + 1] += pb[i] * r;
-    }
-    return pb[n];
-}
-
-/**
- * @brief
- *
- * @param[in,out] pb
- * @param[in] n
- * @param[in] vr
- * @return vec2
- */
-auto horner(std::vector<double>& pb, size_t n, const vec2& vr) -> vec2 {
-    const auto &r = vr.x(), q = vr.y();
-    pb[1] += pb[0] * r;
-    for (auto i = 2U; i != n; ++i) {
-        pb[i] += pb[i - 2] * q + pb[i - 1] * r;
-    }
-    pb[n] += pb[n - 2] * q;
-    return vec2{pb[n - 1], pb[n]};
-}
 
 /**
  * @brief
@@ -97,23 +12,19 @@ auto horner(std::vector<double>& pb, size_t n, const vec2& vr) -> vec2 {
  * @param[in] pa
  * @return std::vector<vec2>
  */
-auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
+auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2> {
     static const auto PI = std::acos(-1.);
 
-    auto N = pa.size() - 1;
-    auto Nf = double(N);
-    auto c = -pa[1] / (Nf * pa[0]);
-    auto pb = pa;
-    auto Pc = horner_eval(pb, N, c);  // ???
-    auto re = std::pow(std::abs(Pc), 1. / Nf);
-    auto k = PI / Nf;
-    auto m = c * c + re * re;
+    unsigned int N = pa.size() - 1;
+    auto re = std::pow(pa.back(), 1.0 / N);
+
+    N /= 2;
+    auto k = PI / N;
+    auto m = re * re;
     auto vr0s = std::vector<vec2>{};
     for (auto i = 1U; i < N; i += 2) {
         auto temp = re * std::cos(k * i);
-        auto r0 = 2 * (c + temp);
-        auto q0 = m + 2 * c * temp;
-        vr0s.emplace_back(vec2{r0, q0});
+        vr0s.emplace_back(vec2{2 * temp, m});
     }
     return vr0s;
 }
@@ -126,7 +37,7 @@ auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
  * @param[in] options maximum iterations and tolorance
  * @return std::tuple<unsigned int, bool>
  */
-auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
+auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
                     const Options& options = Options()) -> std::tuple<unsigned int, bool> {
     auto N = pa.size() - 1;  // degree, assume even
     auto M = vrs.size();
@@ -153,10 +64,17 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
                 }
                 // tol = std::max(tol, toli);
                 auto vA1 = horner(pb, N - 2, vrs[i]);
+                auto vrn = numeric::vector2<double>(-vrs[i].x(), 1.0) / vrs[i].y();
+                auto mp = makeadjoint(vrn, vrs[i] - vrn);  // 2 mul's
+                vA1 -= mp.mdot(vA) / mp.det();             // 6 mul's + 2 div's
+
                 for (auto j = 0U; j != M && j != i; ++j) {  // exclude i
                     auto vrj = vrs[j];
                     auto mp = makeadjoint(vrj, vrs[i] - vrj);  // 2 mul's
                     vA1 -= mp.mdot(vA) / mp.det();             // 6 mul's + 2 div's
+                    auto vrn = numeric::vector2<double>(-vrj.x(), 1.0) / vrj.y();
+                    auto mpn = makeadjoint(vrn, vrs[i] - vrn);  // 2 mul's
+                    vA1 -= mpn.mdot(vA) / mpn.det();             // 6 mul's + 2 div's
                     // vA1 = suppress(vA, vA1, vrs[i], vrs[j]);
                 }
                 auto mA1 = makeadjoint(vrs[i], vA1);  // 2 mul's
