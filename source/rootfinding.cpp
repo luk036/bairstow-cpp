@@ -104,25 +104,22 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
             results.emplace_back(pool.enqueue([&, i]() {
                 auto pb = pa;
                 // auto n = pa.size() - 1;
-                auto vA = horner(pb, N, vrs[i]);
-                const auto &A = vA.x(), B = vA.y();
-                auto toli = std::max(std::abs(A), std::abs(B));
-                if (toli < options.tol) {
+                const auto& vri = vrs[i];
+                const auto vA = horner(pb, N, vri);
+                auto tol_i = vA.norm_inf();
+                if (tol_i < options.tol) {
                     converged[i] = true;
                     // continue;
-                    return toli;
+                    return tol_i;
                 }
                 // tol = std::max(tol, toli);
-                auto vA1 = horner(pb, N - 2, vrs[i]);
+                auto vA1 = horner(pb, N - 2, vri);
                 for (auto j = 0U; j != M && j != i; ++j) {  // exclude i
-                    auto vrj = vrs[j];
-                    auto mp = makeadjoint(vrj, vrs[i] - vrj);  // 2 mul's
-                    vA1 -= mp.mdot(vA) / mp.det();             // 6 mul's + 2 div's
-                    // vA1 = suppress(vA, vA1, vrs[i], vrs[j]);
+                    auto vrj = vrs[j];                      // make a copy, don't reference!
+                    vA1 -= delta(vA, vrj, vri - vrj);
                 }
-                auto mA1 = makeadjoint(vrs[i], vA1);  // 2 mul's
-                vrs[i] -= mA1.mdot(vA) / mA1.det();   // Gauss-Seidel fashion
-                return toli;
+                vrs[i] -= delta(vA, vri, std::move(vA1));  // Gauss-Seidel fashion
+                return tol_i;
             }));
         }
         for (auto&& result : results) {

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cmath>
 #include <tuple>    // import std::tie()
 #include <utility>  // import std::move
 
@@ -53,6 +54,15 @@ namespace numeric {
          * @return constexpr const T2&
          */
         constexpr auto y() const noexcept -> const T2& { return this->_y; }
+
+        /**
+         * @brief
+         *
+         * @return double
+         */
+        constexpr auto norm_inf() const -> double {
+            return std::max(std::abs(this->_x), std::abs(this->_y));
+        }
 
         /**
          * @brief

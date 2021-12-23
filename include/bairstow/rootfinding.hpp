@@ -17,10 +17,23 @@ using mat2 = numeric::matrix2<vec2>;
  * @param[in] vp
  * @return mat2
  */
-inline auto makeadjoint(const vec2& vr, const vec2& vp) -> mat2 {
+inline auto makeadjoint(const vec2& vr, vec2&& vp) -> mat2 {
     const auto &r = vr.x(), q = vr.y();
     const auto &p = vp.x(), s = vp.y();
-    return mat2{vec2{s, -p}, vec2{-p * q, p * r + s}};
+    return {vec2{s, -p}, vec2{-p * q, p * r + s}};
+}
+
+/**
+ * @brief
+ *
+ * @param[in] vA
+ * @param[in] vr
+ * @param[in] vp
+ * @return mat2
+ */
+inline auto delta(const vec2& vA, const vec2& vr, vec2&& vp) -> vec2 {
+    const auto mp = makeadjoint(vr, std::move(vp));  // 2 mul's
+    return mp.mdot(vA) / mp.det();                   // 6 mul's + 2 div's
 }
 
 // extern void suppress(const vec2& vA, vec2& vA1, const vec2& vr, const vec2& vrj);

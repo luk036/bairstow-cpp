@@ -53,38 +53,31 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
             results.emplace_back(pool.enqueue([&, i]() {
                 auto pb = pa;
                 // auto n = pa.size() - 1;
-                auto vA = horner(pb, N, vrs[i]);
-                const auto &A = vA.x(), B = vA.y();
-                auto toli = std::max(std::abs(A), std::abs(B));
-                if (toli < options.tol) {
+                const auto& vri = vrs[i];
+                const auto vA = horner(pb, N, vri);
+                const auto tol_i = vA.norm_inf();
+                if (tol_i < options.tol) {
                     converged[i] = true;
-                    // continue;
-                    return toli;
+                    return tol_i;
                 }
                 // tol = std::max(tol, toli);
-                auto vA1 = horner(pb, N - 2, vrs[i]);
-                auto vrin = numeric::vector2<double>(-vrs[i].x(), 1.0) / vrs[i].y();
-                auto mpin = makeadjoint(vrin, vrs[i] - vrin);  // 2 mul's
-                vA1 -= mpin.mdot(vA) / mpin.det();             // 6 mul's + 2 div's
+                auto vA1 = horner(pb, N - 2, vri);
+                auto vrin = numeric::vector2<double>(-vri.x(), 1.0) / vri.y();
+                vA1 -= delta(vA, vrin, vri - vrin);
 
                 for (auto j = 0U; j != M && j != i; ++j) {  // exclude i
-                    auto vrj = vrs[j];
-                    auto mpj = makeadjoint(vrj, vrs[i] - vrj);  // 2 mul's
-                    vA1 -= mpj.mdot(vA) / mpj.det();            // 6 mul's + 2 div's
+                    auto vrj = vrs[j];                      // make a copy, don't reference!
+                    vA1 -= delta(vA, vrj, vri - vrj);
                     auto vrjn = numeric::vector2<double>(-vrj.x(), 1.0) / vrj.y();
-                    auto mpjn = makeadjoint(vrjn, vrs[i] - vrjn);  // 2 mul's
-                    vA1 -= mpjn.mdot(vA) / mpjn.det();             // 6 mul's + 2 div's
-                    // vA1 = suppress(vA, vA1, vrs[i], vrs[j]);
+                    vA1 -= delta(vA, vrjn, vri - vrjn);
                 }
-                auto mA1 = makeadjoint(vrs[i], vA1);  // 2 mul's
-                vrs[i] -= mA1.mdot(vA) / mA1.det();   // Gauss-Seidel fashion
-                return toli;
+                vrs[i] -= delta(vA, vri, std::move(vA1));  // Gauss-Seidel fashion
+                return tol_i;
             }));
         }
         for (auto&& result : results) {
             tol = std::max(tol, result.get());
         }
-
         // fmt::print("tol: {}\n", tol);
         if (tol < options.tol) {
             found = true;
