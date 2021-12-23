@@ -1,0 +1,5 @@
+name: bairstow
+channels:
+  - conda-forge
+dependencies:
+  - doxygen

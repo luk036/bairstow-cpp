@@ -39,4 +39,4 @@ jobs:
         run: cmake --build build --config Debug -j4
 
       - name: run
-        run: ./build/test_installed/Bingo
+        run: ./build/test_installed/Bairstow

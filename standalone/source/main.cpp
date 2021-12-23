@@ -1,5 +1,5 @@
-#include <bingo/greeter.h>
-#include <bingo/version.h>
+#include <bairstow/greeter.h>
+#include <bairstow/version.h>
 
 #include <cxxopts.hpp>
 #include <iostream>
@@ -7,11 +7,11 @@
 #include <unordered_map>
 
 auto main(int argc, char** argv) -> int {
-    const std::unordered_map<std::string, bingo::LanguageCode> languages{
-        {"en", bingo::LanguageCode::EN},
-        {"de", bingo::LanguageCode::DE},
-        {"es", bingo::LanguageCode::ES},
-        {"fr", bingo::LanguageCode::FR},
+    const std::unordered_map<std::string, bairstow::LanguageCode> languages{
+        {"en", bairstow::LanguageCode::EN},
+        {"de", bairstow::LanguageCode::DE},
+        {"es", bairstow::LanguageCode::ES},
+        {"fr", bairstow::LanguageCode::FR},
     };
 
     cxxopts::Options options(*argv, "A program to welcome the world!");
@@ -36,7 +36,7 @@ auto main(int argc, char** argv) -> int {
     }
 
     if (result["version"].as<bool>()) {
-        std::cout << "Bingo, version " << BINGO_VERSION << std::endl;
+        std::cout << "Bairstow, version " << BAIRSTOW_VERSION << std::endl;
         return 0;
     }
 
@@ -46,8 +46,8 @@ auto main(int argc, char** argv) -> int {
         return 1;
     }
 
-    bingo::Bingo bingo(name);
-    std::cout << bingo.greet(langIt->second) << std::endl;
+    bairstow::Bairstow bairstow(name);
+    std::cout << bairstow.greet(langIt->second) << std::endl;
 
     return 0;
 }

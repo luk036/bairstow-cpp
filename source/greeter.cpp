@@ -1,12 +1,12 @@
-#include <bingo/greeter.h>
+#include <bairstow/greeter.h>
 #include <fmt/format.h>
 
-using namespace bingo;
+using namespace bairstow;
 using namespace std;
 
-Bingo::Bingo(string _name) : name(move(_name)) {}
+Bairstow::Bairstow(string _name) : name(move(_name)) {}
 
-std::string Bingo::greet(LanguageCode lang) const {
+std::string Bairstow::greet(LanguageCode lang) const {
     switch (lang) {
         default:
         case LanguageCode::EN:

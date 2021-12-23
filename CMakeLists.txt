@@ -9,7 +9,7 @@ option(INSTALL_ONLY "Enable for installation only" OFF)
 
 # Note: update this to your new project's name and version
 project(
-  Bingo
+  Bairstow
   VERSION 1.0
   LANGUAGES CXX)
 
@@ -47,6 +47,9 @@ cpmaddpackage(
   "FMT_INSTALL YES" # create an installable target
 )
 
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 # ---- Add source files ----
 
 # Note: globbing sources is considered bad practice as CMake's generators may
@@ -63,14 +66,14 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS
 # create an interface target: add_library(${PROJECT_NAME} INTERFACE)
 add_library(${PROJECT_NAME} ${headers} ${sources})
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 14)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${PROJECT_NAME}
                        PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
 # Link dependencies
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt Threads::Threads)
 
 target_include_directories(
   ${PROJECT_NAME}
