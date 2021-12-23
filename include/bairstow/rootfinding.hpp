@@ -10,11 +10,22 @@
 using vec2 = numeric::vector2<double>;
 using mat2 = numeric::matrix2<vec2>;
 
-extern auto makeG(const vec2& vr, const vec2& vp) -> mat2;
-extern auto makeadjoint(const vec2& vr, const vec2& vp) -> mat2;
-extern void suppress(const vec2& vA, vec2& vA1, const vec2& vr, const vec2& vrj);
-extern auto check_newton(const vec2& vA, const vec2& vA1, const vec2& vr) -> vec2;
-extern auto horner_eval(std::vector<double>& pb, std::size_t n, const double& r) -> double;
+/**
+ * @brief
+ *
+ * @param[in] vr
+ * @param[in] vp
+ * @return mat2
+ */
+inline auto makeadjoint(const vec2& vr, const vec2& vp) -> mat2 {
+    const auto &r = vr.x(), q = vr.y();
+    const auto &p = vp.x(), s = vp.y();
+    return mat2{vec2{s, -p}, vec2{-p * q, p * r + s}};
+}
+
+// extern void suppress(const vec2& vA, vec2& vA1, const vec2& vr, const vec2& vrj);
+// extern auto check_newton(const vec2& vA, const vec2& vA1, const vec2& vr) -> vec2;
+// extern auto horner_eval(std::vector<double>& pb, std::size_t n, const double& r) -> double;
 extern auto horner(std::vector<double>& pb, std::size_t n, const vec2& vr) -> vec2;
 
 class Options {

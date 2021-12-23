@@ -21,13 +21,13 @@ namespace numeric {
          */
         constexpr matrix2(T1&& x, T2&& y) noexcept : vector2<T1, T2>{std::move(x), std::move(y)} {}
 
-        /**
-         * @brief Construct a new matrix2 object
-         *
-         * @param x
-         * @param y
-         */
-        constexpr matrix2(const T1& x, const T2& y) : vector2<T1, T2>{x, y} {}
+        // /**
+        //  * @brief Construct a new matrix2 object
+        //  *
+        //  * @param x
+        //  * @param y
+        //  */
+        // constexpr matrix2(const T1& x, const T2& y) : vector2<T1, T2>{x, y} {}
 
         /** @name Arithmetic operators
          *  definie +, -, *, /, +=, -=, *=, /=, etc.
@@ -109,7 +109,7 @@ namespace numeric {
         template <typename U1, typename U2>  //
         friend constexpr auto operator+(matrix2<T1, T2> x, const matrix2<U1, U2>& y)
             -> matrix2<T1, T2> {
-            return x += y;
+            return std::move(x) += y;
         }
 
         /**
@@ -124,7 +124,7 @@ namespace numeric {
         template <typename U1, typename U2>  //
         friend constexpr auto operator-(matrix2<T1, T2> x, const matrix2<U1, U2>& y)
             -> matrix2<T1, T2> {
-            return x -= y;
+            return std::move(x) -= y;
         }
 
         /**

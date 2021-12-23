@@ -15,7 +15,7 @@
 auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2> {
     static const auto PI = std::acos(-1.);
 
-    unsigned int N = pa.size() - 1;
+    auto N = pa.size() - 1;
     auto re = std::pow(pa.back(), 1.0 / N);
 
     N /= 2;
@@ -23,8 +23,7 @@ auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2> {
     auto m = re * re;
     auto vr0s = std::vector<vec2>{};
     for (auto i = 1U; i < N; i += 2) {
-        auto temp = re * std::cos(k * i);
-        vr0s.emplace_back(vec2{2 * temp, m});
+        vr0s.emplace_back(vec2{2 * re * std::cos(k * i), m});
     }
     return vr0s;
 }

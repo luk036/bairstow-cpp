@@ -9,32 +9,6 @@
 /**
  * @brief
  *
- * @param[in] vr
- * @param[in] vp
- * @return mat2
- */
-auto makeG(const vec2& vr, const vec2& vp) -> mat2 {
-    const auto &r = vr.x(), q = vr.y();
-    const auto &p = vp.x(), s = vp.y();
-    return mat2{vec2{p * r + s, p}, vec2{p * q, s}};
-}
-
-/**
- * @brief
- *
- * @param[in] vr
- * @param[in] vp
- * @return mat2
- */
-auto makeadjoint(const vec2& vr, const vec2& vp) -> mat2 {
-    const auto &r = vr.x(), q = vr.y();
-    const auto &p = vp.x(), s = vp.y();
-    return mat2{vec2{s, -p}, vec2{-p * q, p * r + s}};
-}
-
-/**
- * @brief
- *
  * @param vA
  * @param vA1
  * @param vr
@@ -43,19 +17,6 @@ auto makeadjoint(const vec2& vr, const vec2& vp) -> mat2 {
 void suppress(const vec2& vA, vec2& vA1, const vec2& vr, const vec2& vrj) {
     auto mp = makeadjoint(vrj, vr - vrj);  // 2 mul's
     vA1 -= mp.mdot(vA) / mp.det();         // 6 mul's + 2 div's
-}
-
-/**
- * @brief
- *
- * @param[in] vA
- * @param[in] vA1
- * @param[in] vr
- * @return vec2
- */
-auto check_newton(const vec2& vA, const vec2& vA1, const vec2& vr) -> vec2 {
-    auto mA1 = makeadjoint(vr, vA1);  // 2 mul's
-    return mA1.mdot(vA) / mA1.det();  // 6 mul's + 2 div's
 }
 
 /**
