@@ -3,8 +3,8 @@
 #include <doctest/doctest.h>
 #include <fmt/ranges.h>
 
-#include <bairstow/rootfinding.hpp> // import horner
-#include <bairstow/autocorr.hpp> // import pbairstow_autocorr, initial_autocorr
+#include <bairstow/autocorr.hpp>     // import pbairstow_autocorr, initial_autocorr
+#include <bairstow/rootfinding.hpp>  // import horner
 
 TEST_CASE("test auto-corr") {
     // auto vA = vec2{0.1, 1.2};
