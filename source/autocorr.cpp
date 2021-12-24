@@ -16,14 +16,14 @@ auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2> {
     static const auto PI = std::acos(-1.);
 
     auto N = pa.size() - 1;
-    auto re = std::pow(pa.back(), 1.0 / N);
+    auto re = std::pow(std::abs(pa[N]), 1.0 / N);
 
     N /= 2;
     auto k = PI / N;
     auto m = re * re;
     auto vr0s = std::vector<vec2>{};
     for (auto i = 1U; i < N; i += 2) {
-        vr0s.emplace_back(vec2{2 * re * std::cos(k * i), m});
+        vr0s.emplace_back(vec2{2 * re * std::cos(k * i), -m});
     }
     return vr0s;
 }
@@ -85,6 +85,38 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
         }
     }
     return {niter, found};
+}
+
+auto find_autocorr(double r, double t) -> vec2 {
+    /** Extract the quadratic function where its roots are within a unit circle
+
+    x^2 - r*x + t  or x^2 - (r/t) * x + (1/t)
+
+    (x - x1)(x - x2) = x^2 - (x1 + x2) x + x1 * x2
+
+    determinant r/2 + q
+
+    Args:
+        vr ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    */
+    auto hr = r / 2.0;
+    auto d = hr * hr - t;
+    if (d < 0.0) {  // complex conjugate root
+        return t <= 0 ? vec2{r, t} : vec2{r, 1.0} / t;
+    }
+    // two real roots
+    auto x1 = hr + (hr >= 0.0 ? sqrt(d) : -sqrt(d));
+    auto x2 = t / x1;
+    if (std::abs(x1) > 1.0) {
+        x1 = 1.0 / x1;
+    }
+    if (std::abs(x2) > 1.0) {
+        x2 = 1.0 / x2;
+    }
+    return vec2{x1 + x2, x1 * x2};
 }
 
 // auto find_rootq(const vec2& r) {

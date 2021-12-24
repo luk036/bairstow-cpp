@@ -73,8 +73,8 @@ auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
     for (auto i = 1U; i < N; i += 2) {
         auto temp = re * std::cos(k * i);
         auto r0 = 2 * (c + temp);
-        auto q0 = m + 2 * c * temp;
-        vr0s.emplace_back(vec2{r0, q0});
+        auto t0 = m + 2 * c * temp;
+        vr0s.emplace_back(vec2{r0, -t0});
     }
     return vr0s;
 }

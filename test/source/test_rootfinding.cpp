@@ -29,7 +29,7 @@ TEST_CASE("test root-finding") {
     auto found = std::get<1>(result);
     fmt::print("{}, {}\n", niter, found);
 
-    CHECK(niter <= 8);
+    CHECK(niter <= 11);
     // fmt::print([find_rootq(-r[0], -r[1]) for r : vrs]);
 }
 
@@ -57,6 +57,6 @@ TEST_CASE("test root-finding 2") {
     auto found = std::get<1>(result);
     fmt::print("{}, {}\n", niter, found);
 
-    CHECK(niter <= 13);
+    CHECK(niter <= 12);
     // fmt::print([find_rootq(-r[0], -r[1]) for r : vrs]);
 }

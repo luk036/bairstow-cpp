@@ -25,11 +25,13 @@ TEST_CASE("test auto-corr") {
     auto vA1h = horner(pb, N - 2, vrs[1]);
     fmt::print("{}, {}\n", vA1h.x(), vA1h.y());
 
-    auto result = pbairstow_autocorr(r, vrs, Options());
+    auto options = Options();
+    options.tol = 1e-12;
+    auto result = pbairstow_autocorr(r, vrs, options);
     auto niter = std::get<0>(result);
     auto found = std::get<1>(result);
     fmt::print("{}, {}\n", niter, found);
 
-    CHECK(niter <= 13);
+    CHECK(niter <= 11);
     // fmt::print([find_rootq(-r[0], -r[1]) for r : vrs]);
 }
