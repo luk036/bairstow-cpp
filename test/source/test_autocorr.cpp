@@ -32,6 +32,12 @@ TEST_CASE("test auto-corr") {
     auto found = std::get<1>(result);
     fmt::print("{}, {}\n", niter, found);
 
+    for (auto& vr : vrs) {
+        extract_autocorr(vr);
+        fmt::print("{}, {}\n", vr.x(), vr.y());
+    }
+
     CHECK(niter <= 11);
+
     // fmt::print([find_rootq(-r[0], -r[1]) for r : vrs]);
 }

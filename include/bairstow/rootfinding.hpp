@@ -18,9 +18,9 @@ using mat2 = numeric::matrix2<vec2>;
  * @return mat2
  */
 inline auto makeadjoint(const vec2& vr, vec2&& vp) -> mat2 {
-    const auto &r = vr.x(), q = vr.y();
-    const auto &p = vp.x(), s = vp.y();
-    return {vec2{s, -p}, vec2{-p * q, p * r + s}};
+    const auto &r = vr.x(), t = vr.y();
+    const auto &p = vp.x(), m = vp.y();
+    return {vec2{-m, p}, vec2{-p * t, p * r - m}};
 }
 
 /**

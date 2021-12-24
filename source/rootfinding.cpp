@@ -15,8 +15,8 @@
  * @param vrj
  */
 void suppress(const vec2& vA, vec2& vA1, const vec2& vr, const vec2& vrj) {
-    auto mp = makeadjoint(vrj, vr - vrj);  // 2 mul's
-    vA1 -= mp.mdot(vA) / mp.det();         // 6 mul's + 2 div's
+    const auto mp = makeadjoint(vrj, vr - vrj);  // 2 mul's
+    vA1 -= mp.mdot(vA) / mp.det();               // 6 mul's + 2 div's
 }
 
 /**
@@ -43,13 +43,13 @@ auto horner_eval(std::vector<double>& pb, std::size_t n, const double& r) -> dou
  * @return vec2
  */
 auto horner(std::vector<double>& pb, size_t n, const vec2& vr) -> vec2 {
-    const auto &r = vr.x(), q = vr.y();
+    const auto &r = vr.x(), t = vr.y();
     pb[1] += pb[0] * r;
     for (auto i = 2U; i != n; ++i) {
-        pb[i] += pb[i - 2] * q + pb[i - 1] * r;
+        pb[i] += pb[i - 1] * r - pb[i - 2] * t;
     }
-    pb[n] += pb[n - 2] * q;
-    return vec2{pb[n - 1], pb[n]};
+    pb[n] -= pb[n - 2] * t;
+    return vec2{pb[n - 1], -pb[n]};
 }
 
 /**
@@ -61,20 +61,20 @@ auto horner(std::vector<double>& pb, size_t n, const vec2& vr) -> vec2 {
 auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
     static const auto PI = std::acos(-1.);
 
-    auto N = pa.size() - 1;
-    auto Nf = double(N);
-    auto c = -pa[1] / (Nf * pa[0]);
+    const auto N = pa.size() - 1;
+    const auto Nf = double(N);
+    const auto c = -pa[1] / (Nf * pa[0]);
     auto pb = pa;
-    auto Pc = horner_eval(pb, N, c);  // ???
-    auto re = std::pow(std::abs(Pc), 1. / Nf);
-    auto k = PI / Nf;
-    auto m = c * c + re * re;
+    const auto Pc = horner_eval(pb, N, c);  // ???
+    const auto re = std::pow(std::abs(Pc), 1. / Nf);
+    const auto k = PI / Nf;
+    const auto m = c * c + re * re;
     auto vr0s = std::vector<vec2>{};
     for (auto i = 1U; i < N; i += 2) {
-        auto temp = re * std::cos(k * i);
+        const auto temp = re * std::cos(k * i);
         auto r0 = 2 * (c + temp);
         auto t0 = m + 2 * c * temp;
-        vr0s.emplace_back(vec2{r0, -t0});
+        vr0s.emplace_back(vec2{std::move(r0), std::move(t0)});
     }
     return vr0s;
 }
@@ -89,8 +89,8 @@ auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
  */
 auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
                     const Options& options = Options()) -> std::tuple<unsigned int, bool> {
-    auto N = pa.size() - 1;  // degree, assume even
-    auto M = vrs.size();
+    const auto N = pa.size() - 1;  // degree, assume even
+    const auto M = vrs.size();
     auto found = false;
     auto converged = std::vector<bool>(M, false);
     auto niter = 1U;
@@ -106,16 +106,15 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
                 // auto n = pa.size() - 1;
                 const auto& vri = vrs[i];
                 const auto vA = horner(pb, N, vri);
-                auto tol_i = vA.norm_inf();
+                const auto tol_i = vA.norm_inf();
                 if (tol_i < options.tol) {
                     converged[i] = true;
-                    // continue;
                     return tol_i;
                 }
                 // tol = std::max(tol, toli);
                 auto vA1 = horner(pb, N - 2, vri);
                 for (auto j = 0U; j != M && j != i; ++j) {  // exclude i
-                    auto vrj = vrs[j];                      // make a copy, don't reference!
+                    const auto vrj = vrs[j];                // make a copy, don't reference!
                     vA1 -= delta(vA, vrj, vri - vrj);
                 }
                 vrs[i] -= delta(vA, vri, std::move(vA1));  // Gauss-Seidel fashion

@@ -15,3 +15,4 @@ class Options;
 extern auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2>;
 extern auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
                                const Options& options) -> std::tuple<unsigned int, bool>;
+extern void extract_autocorr(vec2& vr);
