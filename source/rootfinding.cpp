@@ -44,12 +44,12 @@ auto horner_eval(std::vector<double>& pb, std::size_t n, const double& r) -> dou
  */
 auto horner(std::vector<double>& pb, size_t n, const vec2& vr) -> vec2 {
     const auto &r = vr.x(), t = vr.y();
-    pb[1] += pb[0] * r;
+    pb[1] -= pb[0] * r;
     for (auto i = 2U; i != n; ++i) {
-        pb[i] += pb[i - 1] * r - pb[i - 2] * t;
+        pb[i] -= pb[i - 1] * r + pb[i - 2] * t;
     }
     pb[n] -= pb[n - 2] * t;
-    return vec2{pb[n - 1], -pb[n]};
+    return vec2{pb[n - 1], pb[n]};
 }
 
 /**
@@ -72,7 +72,7 @@ auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
     auto vr0s = std::vector<vec2>{};
     for (auto i = 1U; i < N; i += 2) {
         const auto temp = re * std::cos(k * i);
-        auto r0 = 2 * (c + temp);
+        auto r0 = -2 * (c + temp);
         auto t0 = m + 2 * c * temp;
         vr0s.emplace_back(vec2{std::move(r0), std::move(t0)});
     }

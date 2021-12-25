@@ -23,7 +23,7 @@ auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2> {
     const auto m = re * re;
     auto vr0s = std::vector<vec2>{};
     for (auto i = 1U; i < N; i += 2) {
-        vr0s.emplace_back(vec2{2 * re * std::cos(k * i), m});
+        vr0s.emplace_back(vec2{-2 * re * std::cos(k * i), m});
     }
     return vr0s;
 }
@@ -62,7 +62,7 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
                 }
                 // tol = std::max(tol, toli);
                 auto vA1 = horner(pb, N - 2, vri);
-                const auto vrin = numeric::vector2<double>(-vri.x(), 1.0) / vri.y();
+                const auto vrin = numeric::vector2<double>(vri.x(), 1.0) / vri.y();
                 vA1 -= delta(vA, vrin, vri - vrin);
 
                 for (auto j = 0U; j != M && j != i; ++j) {  // exclude i
@@ -90,9 +90,9 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
 void extract_autocorr(vec2& vr) {
     /** Extract the quadratic function where its roots are within a unit circle
 
-    x^2 - r*x + t  or x^2 - (r/t) * x + (1/t)
+    x^2 + r*x + t  or x^2 + (r/t) * x + (1/t)
 
-    (x - x1)(x - x2) = x^2 - (x1 + x2) x + x1 * x2
+    (x + a1)(x + a2) = x^2 + (a1 + a2) x + a1 * a2
 
     determinant r/2 + q
 
@@ -106,22 +106,22 @@ void extract_autocorr(vec2& vr) {
     const auto hr = r / 2.0;
     const auto d = hr * hr - t;
     if (d < 0.0) {  // complex conjugate root
-        if (t > 0) {
+        if (t > 0.0) {
             vr = vec2{r, 1.0} / t;
         }
         // else no need to change
     } else {  // two real roots
-        auto x1 = hr + (hr >= 0.0 ? sqrt(d) : -sqrt(d));
-        auto x2 = t / x1;
-        if (std::abs(x1) > 1.0) {
-            if (std::abs(x2) > 1.0) {
-                x2 = 1.0 / x2;
+        auto a1 = hr + (hr >= 0.0 ? sqrt(d) : -sqrt(d));
+        auto a2 = t / a1;
+        if (std::abs(a1) > 1.0) {
+            if (std::abs(a2) > 1.0) {
+                a2 = 1.0 / a2;
             }
-            x1 = 1.0 / x1;
-            vr = vec2{x1 + x2, x1 * x2};
-        } else if (std::abs(x2) > 1.0) {
-            x2 = 1.0 / x2;
-            vr = vec2{x1 + x2, x1 * x2};
+            a1 = 1.0 / a1;
+            vr = vec2{a1 + a2, a1 * a2};
+        } else if (std::abs(a2) > 1.0) {
+            a2 = 1.0 / a2;
+            vr = vec2{a1 + a2, a1 * a2};
         }
         // else no need to change
     }
