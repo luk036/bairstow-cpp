@@ -106,7 +106,7 @@ void extract_autocorr(vec2& vr) {
     const auto hr = r / 2.0;
     const auto d = hr * hr - t;
     if (d < 0.0) {  // complex conjugate root
-        if (t > 0.0) {
+        if (t > 1.0) {
             vr = vec2{r, 1.0} / t;
         }
         // else no need to change
