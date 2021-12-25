@@ -52,7 +52,9 @@ TEST_CASE("test root-finding 2") {
     auto vA1h = horner(pb, N - 2, vrs[1]);
     fmt::print("{}, {}\n", vA1h.x(), vA1h.y());
 
-    auto result = pbairstow_even(h, vrs, Options());
+    auto options = Options();
+    options.tol = 1e-12;
+    auto result = pbairstow_even(h, vrs, options);
     auto niter = std::get<0>(result);
     auto found = std::get<1>(result);
     fmt::print("{}, {}\n", niter, found);
