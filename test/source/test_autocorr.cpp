@@ -37,7 +37,7 @@ TEST_CASE("test auto-corr") {
         fmt::print("{}, {}\n", vr.x(), vr.y());
     }
 
-    CHECK(niter <= 11);
+    CHECK(niter <= 12);
 
     // fmt::print([find_rootq(-r[0], -r[1]) for r : vrs]);
 }

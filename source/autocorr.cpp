@@ -7,7 +7,7 @@
 #include <cmath>  // import pow, cos, sqrt
 
 /**
- * @brief
+ * @brief initial guess (specific for auto-correlation function)
  *
  * @param[in] pa
  * @return std::vector<vec2>
@@ -29,7 +29,7 @@ auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2> {
 }
 
 /**
- * @brief Multi-threading Bairstow's method (even degree only)
+ * @brief Multi-threading Bairstow's method (specific for auto-correlation function)
  *
  * @param[in] pa polynomial
  * @param[in,out] vrs vector of iterates
@@ -48,11 +48,10 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
     for (; niter != options.max_iter; ++niter) {
         auto tol = 0.0;
         std::vector<std::future<double>> results;
-
-        for (auto i = 0U; i != M && !converged[i]; ++i) {
+        for (auto i = 0U; i != M; ++i) {
+            if (converged[i]) continue;
             results.emplace_back(pool.enqueue([&, i]() {
                 auto pb = pa;
-                // auto n = pa.size() - 1;
                 const auto& vri = vrs[i];
                 const auto vA = horner(pb, N, vri);
                 const auto tol_i = vA.norm_inf();
@@ -60,13 +59,13 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
                     converged[i] = true;
                     return tol_i;
                 }
-                // tol = std::max(tol, toli);
                 auto vA1 = horner(pb, N - 2, vri);
                 const auto vrin = numeric::vector2<double>(vri.x(), 1.0) / vri.y();
                 vA1 -= delta(vA, vrin, vri - vrin);
 
-                for (auto j = 0U; j != M && j != i; ++j) {  // exclude i
-                    const auto vrj = vrs[j];                // make a copy, don't reference!
+                for (auto j = 0U; j != M; ++j) {  // exclude i
+                    if (j == i) continue;
+                    const auto vrj = vrs[j];  // make a copy, don't reference!
                     vA1 -= delta(vA, vrj, vri - vrj);
                     const auto vrjn = numeric::vector2<double>(vrj.x(), 1.0) / vrj.y();
                     vA1 -= delta(vA, vrjn, vri - vrjn);
@@ -87,21 +86,15 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
     return {niter, found};
 }
 
+/**
+ * @brief Extract the quadratic function where its roots are within a unit circle
+ *
+ *   x^2 + r*x + t or x^2 + (r/t) * x + (1/t)
+ *   (x + a1)(x + a2) = x^2 + (a1 + a2) x + a1 * a2
+ *
+ * @param[in,out] vr
+ */
 void extract_autocorr(vec2& vr) {
-    /** Extract the quadratic function where its roots are within a unit circle
-
-    x^2 + r*x + t  or x^2 + (r/t) * x + (1/t)
-
-    (x + a1)(x + a2) = x^2 + (a1 + a2) x + a1 * a2
-
-    determinant r/2 + q
-
-    Args:
-        vr ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    */
     const auto &r = vr.x(), t = vr.y();
     const auto hr = r / 2.0;
     const auto d = hr * hr - t;
@@ -126,16 +119,3 @@ void extract_autocorr(vec2& vr) {
         // else no need to change
     }
 }
-
-// auto find_rootq(const vec2& r) {
-//     auto hb = b / 2.;
-//     auto d = hb * hb - c;
-//     if (d < 0.) {
-//         auto x1 = -hb + (sqrt(-d) if (hb < 0. else -sqrt(-d))*1j;
-//     }
-//     else {
-//         auto x1 = -hb + (sqrt(d) if (hb < 0. else -sqrt(d));
-//     }
-//     auto x2 = c / x1;
-//     return x1, x2;
-// }

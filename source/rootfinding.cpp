@@ -9,19 +9,6 @@
 /**
  * @brief
  *
- * @param vA
- * @param vA1
- * @param vr
- * @param vrj
- */
-void suppress(const vec2& vA, vec2& vA1, const vec2& vr, const vec2& vrj) {
-    const auto mp = makeadjoint(vrj, vr - vrj);  // 2 mul's
-    vA1 -= mp.mdot(vA) / mp.det();               // 6 mul's + 2 div's
-}
-
-/**
- * @brief
- *
  * @param[in,out] pb
  * @param[in] n
  * @param[in] r
@@ -61,13 +48,14 @@ auto horner(std::vector<double>& pb, size_t n, const vec2& vr) -> vec2 {
 auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
     static const auto PI = std::acos(-1.);
 
-    const auto N = pa.size() - 1;
-    const auto Nf = double(N);
-    const auto c = -pa[1] / (Nf * pa[0]);
+    auto N = pa.size() - 1;
+    const auto c = -pa[1] / (N * pa[0]);
     auto pb = pa;
     const auto Pc = horner_eval(pb, N, c);  // ???
-    const auto re = std::pow(std::abs(Pc), 1. / Nf);
-    const auto k = PI / Nf;
+    const auto re = std::pow(std::abs(Pc), 1. / N);
+    N /= 2;
+    N *= 2;  // make even
+    const auto k = PI / N;
     const auto m = c * c + re * re;
     auto vr0s = std::vector<vec2>{};
     for (auto i = 1U; i < N; i += 2) {
@@ -100,7 +88,8 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
         auto tol = 0.0;
         std::vector<std::future<double>> results;
 
-        for (auto i = 0U; i != M && !converged[i]; ++i) {
+        for (auto i = 0U; i != M; ++i) {
+            if (converged[i]) continue;
             results.emplace_back(pool.enqueue([&, i]() {
                 auto pb = pa;
                 // auto n = pa.size() - 1;
@@ -111,10 +100,10 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
                     converged[i] = true;
                     return tol_i;
                 }
-                // tol = std::max(tol, toli);
                 auto vA1 = horner(pb, N - 2, vri);
-                for (auto j = 0U; j != M && j != i; ++j) {  // exclude i
-                    const auto vrj = vrs[j];                // make a copy, don't reference!
+                for (auto j = 0U; j != M; ++j) {  // exclude i
+                    if (j == i) continue;
+                    const auto vrj = vrs[j];  // make a copy, don't reference!
                     vA1 -= delta(vA, vrj, vri - vrj);
                 }
                 vrs[i] -= delta(vA, vri, std::move(vA1));  // Gauss-Seidel fashion
@@ -124,8 +113,6 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
         for (auto&& result : results) {
             tol = std::max(tol, result.get());
         }
-
-        // fmt::print("tol: {}\n", tol);
         if (tol < options.tol) {
             found = true;
             break;
