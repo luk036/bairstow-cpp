@@ -55,14 +55,11 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
                 const auto& vri = vrs[i];
                 const auto vA = horner(pb, N, vri);
                 const auto tol_i = vA.norm_inf();
-                if (tol_i < options.tol) {
+                if (tol_i < 1e-15) {
                     converged[i] = true;
                     return tol_i;
                 }
                 auto vA1 = horner(pb, N - 2, vri);
-                const auto vrin = numeric::vector2<double>(vri.x(), 1.0) / vri.y();
-                vA1 -= delta(vA, vrin, vri - vrin);
-
                 for (auto j = 0U; j != M; ++j) {  // exclude i
                     if (j == i) continue;
                     const auto vrj = vrs[j];  // make a copy, don't reference!
@@ -70,6 +67,9 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
                     const auto vrjn = numeric::vector2<double>(vrj.x(), 1.0) / vrj.y();
                     vA1 -= delta(vA, vrjn, vri - vrjn);
                 }
+                const auto vrin = numeric::vector2<double>(vri.x(), 1.0) / vri.y();
+                vA1 -= delta(vA, vrin, vri - vrin);
+
                 vrs[i] -= delta(vA, vri, std::move(vA1));  // Gauss-Seidel fashion
                 return tol_i;
             }));

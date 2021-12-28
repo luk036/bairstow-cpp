@@ -96,7 +96,7 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
                 const auto& vri = vrs[i];
                 const auto vA = horner(pb, N, vri);
                 const auto tol_i = vA.norm_inf();
-                if (tol_i < options.tol) {
+                if (tol_i < 1e-15) {
                     converged[i] = true;
                     return tol_i;
                 }
