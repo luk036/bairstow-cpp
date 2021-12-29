@@ -46,3 +46,18 @@ inline auto delta(const vec2& vA, const vec2& vr, vec2&& vp) -> vec2 {
     const auto mp = makeadjoint(vr, std::move(vp));  // 2 mul's
     return mp.mdot(vA) / mp.det();                   // 6 mul's + 2 div's
 }
+
+/**
+ * @brief
+ *
+ * @param[in,out] pb
+ * @param[in] n
+ * @param[in] r
+ * @return double
+ */
+inline auto horner_eval(std::vector<double>& pb, std::size_t n, const double& z) -> double {
+    for (auto i = 0U; i != n; ++i) {
+        pb[i + 1] += pb[i] * z;
+    }
+    return pb[n];
+}

@@ -11,21 +11,6 @@
  *
  * @param[in,out] pb
  * @param[in] n
- * @param[in] r
- * @return double
- */
-auto horner_eval(std::vector<double>& pb, std::size_t n, const double& r) -> double {
-    for (auto i = 0U; i != n; ++i) {
-        pb[i + 1] += pb[i] * r;
-    }
-    return pb[n];
-}
-
-/**
- * @brief
- *
- * @param[in,out] pb
- * @param[in] n
  * @param[in] vr
  * @return vec2
  */
