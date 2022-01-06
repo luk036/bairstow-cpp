@@ -15,14 +15,14 @@
 auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2> {
     static const auto PI = std::acos(-1.);
 
-    unsigned int N = pa.size() - 1;
+    auto N = int(pa.size()) - 1;
     const auto re = std::pow(std::abs(pa[N]), 1.0 / N);
 
     N /= 2;
     const auto k = PI / N;
     const auto m = re * re;
     auto vr0s = std::vector<vec2>{};
-    for (auto i = 1U; i < N; i += 2) {
+    for (auto i = 1; i < N; i += 2) {
         vr0s.emplace_back(vec2{-2 * re * std::cos(k * i), m});
     }
     return vr0s;

@@ -34,7 +34,7 @@ auto horner(std::vector<double>& pb, size_t n, const vec2& vr) -> vec2 {
 auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
     static const auto PI = std::acos(-1.);
 
-    unsigned int N = pa.size() - 1;
+    auto N = int(pa.size()) - 1;
     const auto c = -pa[1] / (N * pa[0]);
     auto pb = pa;
     const auto Pc = horner_eval(pb, N, c);  // ???
@@ -44,7 +44,7 @@ auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
     const auto k = PI / N;
     const auto m = c * c + re * re;
     auto vr0s = std::vector<vec2>{};
-    for (auto i = 1U; i < N; i += 2) {
+    for (auto i = 1; i < N; i += 2) {
         const auto temp = re * std::cos(k * i);
         auto r0 = -2 * (c + temp);
         auto t0 = m + 2 * c * temp;

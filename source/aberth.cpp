@@ -29,13 +29,13 @@ template <typename C, typename Tp> inline auto horner_eval_g(const C& pb, const 
 auto initial_aberth(const std::vector<double>& pa) -> std::vector<std::complex<double>> {
     static const auto PI = std::acos(-1.);
 
-    const unsigned int N = pa.size() - 1;
+    const auto N = int(pa.size()) - 1;
     const auto c = -pa[1] / (N * pa[0]);
     const auto Pc = horner_eval_g(pa, c);
     const auto re = std::pow(std::complex<double>(-Pc), 1. / N);
     const auto k = 2 * PI / N;
     auto z0s = std::vector<std::complex<double>>{};
-    for (auto i = 0U; i < N; ++i) {
+    for (auto i = 0; i < N; ++i) {
         auto theta = k * (i + 0.25);
         auto z0 = c + re * std::complex<double>{std::cos(theta), std::sin(theta)};
         z0s.emplace_back(z0);
@@ -54,11 +54,11 @@ auto initial_aberth(const std::vector<double>& pa) -> std::vector<std::complex<d
 auto aberth(const std::vector<double>& pa, std::vector<std::complex<double>>& zs,
             const Options& options = Options()) -> std::tuple<unsigned int, bool> {
     const auto M = zs.size();
-    const unsigned int N = pa.size() - 1;  // degree, assume even
+    const auto N = int(pa.size()) - 1;  // degree, assume even
     auto found = false;
     auto converged = std::vector<bool>(M, false);
     auto pb = std::vector<double>(N);
-    for (auto i = 0U; i < N; ++i) {
+    for (auto i = 0; i < N; ++i) {
         pb[i] = (N - i) * pa[i];
     }
     auto niter = 1U;

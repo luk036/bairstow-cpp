@@ -24,7 +24,7 @@ set_target_properties(${PROJECT_NAME}Tests PROPERTIES CXX_STANDARD 14)
 # enable compiler warnings
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   target_compile_options(${PROJECT_NAME} PUBLIC -Wall -Wpedantic -Wextra
-                                                -Werror)
+                                                -Werror -Wconversion)
 elseif(MSVC)
   target_compile_options(${PROJECT_NAME} PUBLIC /W4 /WX /wd4819)
   target_compile_definitions(${PROJECT_NAME}Tests
