@@ -89,6 +89,6 @@ TEST_CASE("test root-finding FIR") {
     auto found = std::get<1>(result);
     fmt::print("{}, {}\n", niter, found);
 
-    CHECK(niter <= 12);
+    CHECK(niter <= 14);
     // fmt::print([find_rootq(-r[0], -r[1]) for r : vrs]);
 }
