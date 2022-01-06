@@ -15,7 +15,8 @@
  * @return vec2
  */
 auto horner(std::vector<double>& pb, size_t n, const vec2& vr) -> vec2 {
-    const auto &r = vr.x(), t = vr.y();
+    const auto& r = vr.x();
+    const auto& t = vr.y();
     pb[1] -= pb[0] * r;
     for (auto i = 2U; i != n; ++i) {
         pb[i] -= pb[i - 1] * r + pb[i - 2] * t;
@@ -33,7 +34,7 @@ auto horner(std::vector<double>& pb, size_t n, const vec2& vr) -> vec2 {
 auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
     static const auto PI = std::acos(-1.);
 
-    auto N = pa.size() - 1;
+    unsigned int N = pa.size() - 1;
     const auto c = -pa[1] / (N * pa[0]);
     auto pb = pa;
     const auto Pc = horner_eval(pb, N, c);  // ???
@@ -74,7 +75,9 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
         std::vector<std::future<double>> results;
 
         for (auto i = 0U; i != M; ++i) {
-            if (converged[i]) continue;
+            if (converged[i]) {
+                continue;
+            }
             results.emplace_back(pool.enqueue([&, i]() {
                 auto pb = pa;
                 // auto n = pa.size() - 1;
@@ -87,7 +90,9 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
                 }
                 auto vA1 = horner(pb, N - 2, vri);
                 for (auto j = 0U; j != M; ++j) {  // exclude i
-                    if (j == i) continue;
+                    if (j == i) {
+                        continue;
+                    }
                     const auto vrj = vrs[j];  // make a copy, don't reference!
                     vA1 -= delta(vA, vrj, vri - vrj);
                 }

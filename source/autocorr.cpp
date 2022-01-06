@@ -15,7 +15,7 @@
 auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2> {
     static const auto PI = std::acos(-1.);
 
-    auto N = pa.size() - 1;
+    unsigned int N = pa.size() - 1;
     const auto re = std::pow(std::abs(pa[N]), 1.0 / N);
 
     N /= 2;
@@ -49,7 +49,9 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
         auto tol = 0.0;
         std::vector<std::future<double>> results;
         for (auto i = 0U; i != M; ++i) {
-            if (converged[i]) continue;
+            if (converged[i]) {
+                continue;
+            }
             results.emplace_back(pool.enqueue([&, i]() {
                 auto pb = pa;
                 const auto& vri = vrs[i];
@@ -61,7 +63,9 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
                 }
                 auto vA1 = horner(pb, N - 2, vri);
                 for (auto j = 0U; j != M; ++j) {  // exclude i
-                    if (j == i) continue;
+                    if (j == i) {
+                        continue;
+                    }
                     const auto vrj = vrs[j];  // make a copy, don't reference!
                     vA1 -= delta(vA, vrj, vri - vrj);
                     const auto vrjn = numeric::vector2<double>(vrj.x(), 1.0) / vrj.y();
@@ -95,7 +99,8 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
  * @param[in,out] vr
  */
 void extract_autocorr(vec2& vr) {
-    const auto &r = vr.x(), t = vr.y();
+    const auto& r = vr.x();
+    const auto& t = vr.y();
     const auto hr = r / 2.0;
     const auto d = hr * hr - t;
     if (d < 0.0) {  // complex conjugate root

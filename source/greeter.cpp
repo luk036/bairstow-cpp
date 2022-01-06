@@ -6,7 +6,7 @@ using namespace std;
 
 Bairstow::Bairstow(string _name) : name(move(_name)) {}
 
-std::string Bairstow::greet(LanguageCode lang) const {
+auto Bairstow::greet(LanguageCode lang) const -> std::string {
     switch (lang) {
         default:
         case LanguageCode::EN:

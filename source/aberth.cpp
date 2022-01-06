@@ -29,7 +29,7 @@ template <typename C, typename Tp> inline auto horner_eval_g(const C& pb, const 
 auto initial_aberth(const std::vector<double>& pa) -> std::vector<std::complex<double>> {
     static const auto PI = std::acos(-1.);
 
-    const auto N = pa.size() - 1;
+    const unsigned int N = pa.size() - 1;
     const auto c = -pa[1] / (N * pa[0]);
     const auto Pc = horner_eval_g(pa, c);
     const auto re = std::pow(std::complex<double>(-Pc), 1. / N);
@@ -38,7 +38,7 @@ auto initial_aberth(const std::vector<double>& pa) -> std::vector<std::complex<d
     for (auto i = 0U; i < N; ++i) {
         auto theta = k * (i + 0.25);
         auto z0 = c + re * std::complex<double>{std::cos(theta), std::sin(theta)};
-        z0s.emplace_back(std::move(z0));
+        z0s.emplace_back(z0);
     }
     return z0s;
 }
@@ -54,7 +54,7 @@ auto initial_aberth(const std::vector<double>& pa) -> std::vector<std::complex<d
 auto aberth(const std::vector<double>& pa, std::vector<std::complex<double>>& zs,
             const Options& options = Options()) -> std::tuple<unsigned int, bool> {
     const auto M = zs.size();
-    const auto N = pa.size() - 1;  // degree, assume even
+    const unsigned int N = pa.size() - 1;  // degree, assume even
     auto found = false;
     auto converged = std::vector<bool>(M, false);
     auto pb = std::vector<double>(N);
@@ -69,7 +69,9 @@ auto aberth(const std::vector<double>& pa, std::vector<std::complex<double>>& zs
         std::vector<std::future<double>> results;
 
         for (auto i = 0U; i != M; ++i) {
-            if (converged[i]) continue;
+            if (converged[i]) {
+                continue;
+            }
             results.emplace_back(pool.enqueue([&, i]() {
                 const auto& zi = zs[i];
                 const auto P = horner_eval_g(pa, zi);
@@ -80,7 +82,9 @@ auto aberth(const std::vector<double>& pa, std::vector<std::complex<double>>& zs
                 }
                 auto P1 = horner_eval_g(pb, zi);
                 for (auto j = 0U; j != M; ++j) {  // exclude i
-                    if (j == i) continue;
+                    if (j == i) {
+                        continue;
+                    }
                     const auto zj = zs[j];  // make a copy, don't reference!
                     P1 -= P / (zi - zj);
                 }
