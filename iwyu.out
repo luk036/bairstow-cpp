@@ -1,0 +1,261 @@
+[0/2] Re-checking globbed directories...
+[1/17] Building CXX object CMakeFiles/Bairstow.dir/source/greeter.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/include/bairstow/greeter.h should add these lines:
+#include <iosfwd>  // for string
+
+/data/data/com.termux/files/home/github/bairstow-cpp/include/bairstow/greeter.h should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/include/bairstow/greeter.h:
+#include <iosfwd>  // for string
+#include <string>  // for basic_string
+---
+
+/data/data/com.termux/files/home/github/bairstow-cpp/source/greeter.cpp should add these lines:
+#include <__config>      // for std
+#include <type_traits>   // for move
+
+/data/data/com.termux/files/home/github/bairstow-cpp/source/greeter.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/source/greeter.cpp:
+#include <bairstow/greeter.h>
+#include <fmt/format.h>  // for format
+#include <__config>      // for std
+#include <type_traits>   // for move
+---
+
+[2/17] Building CXX object test/CMakeFiles/BairstowTests.dir/source/test_fir.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_fir.cpp should add these lines:
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+#include "bairstow/vector2.hpp"      // for vector2
+#include "format.h"                  // for print
+
+/data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_fir.cpp should remove these lines:
+- #include <fmt/ranges.h>  // lines 4-4
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_fir.cpp:
+#include <doctest/doctest.h>         // for ResultBuilder, CHECK, TEST_CASE
+#include <bairstow/autocorr.hpp>     // for extract_autocorr, initial_autocorr
+#include <bairstow/rootfinding.hpp>  // for horner, Options
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+#include "bairstow/vector2.hpp"      // for vector2
+#include "format.h"                  // for print
+---
+
+[3/17] Building CXX object test/CMakeFiles/BairstowTests.dir/source/test_autocorr.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_autocorr.cpp should add these lines:
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+#include "bairstow/vector2.hpp"      // for vector2
+#include "format.h"                  // for print
+
+/data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_autocorr.cpp should remove these lines:
+- #include <fmt/ranges.h>  // lines 4-4
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_autocorr.cpp:
+#include <doctest/doctest.h>         // for ResultBuilder, CHECK, TEST_CASE
+#include <bairstow/autocorr.hpp>     // for extract_autocorr, initial_autocorr
+#include <bairstow/rootfinding.hpp>  // for horner, Options
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+#include "bairstow/vector2.hpp"      // for vector2
+#include "format.h"                  // for print
+---
+
+[4/17] Building CXX object test/CMakeFiles/BairstowTests.dir/source/test_aberth.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_aberth.cpp should add these lines:
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+#include "format.h"                  // for print
+
+/data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_aberth.cpp should remove these lines:
+- #include <fmt/ranges.h>  // lines 4-4
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_aberth.cpp:
+#include <doctest/doctest.h>         // for ResultBuilder, CHECK, TEST_CASE
+#include <bairstow/aberth.hpp>       // for aberth, initial_aberth
+#include <bairstow/rootfinding.hpp>  // for Options
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+#include "format.h"                  // for print
+---
+
+[5/17] Building CXX object CMakeFiles/Bairstow.dir/source/rootfinding.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/source/rootfinding.cpp should add these lines:
+#include <stddef.h>                  // for size_t
+#include <__bit_reference>           // for __bit_reference
+#include <algorithm>                 // for max
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <tuple>                     // for tuple
+#include <type_traits>               // for move
+#include <vector>                    // for vector, vector<>::reference, __v...
+#include "bairstow/vector2.hpp"      // for operator-, vector2
+
+/data/data/com.termux/files/home/github/bairstow-cpp/source/rootfinding.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/source/rootfinding.cpp:
+#include <bairstow/ThreadPool.h>     // for ThreadPool
+#include <stddef.h>                  // for size_t
+#include <__bit_reference>           // for __bit_reference
+#include <algorithm>                 // for max
+#include <bairstow/rootfinding.hpp>  // for vec2, delta, Options, horner_eval
+#include <cmath>                     // for abs, acos, cos, pow
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <tuple>                     // for tuple
+#include <type_traits>               // for move
+#include <vector>                    // for vector, vector<>::reference, __v...
+#include "bairstow/vector2.hpp"      // for operator-, vector2
+---
+
+[6/17] Building CXX object CMakeFiles/Bairstow.dir/source/autocorr.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/source/autocorr.cpp should add these lines:
+#include <__bit_reference>           // for __bit_reference
+#include <algorithm>                 // for max
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <tuple>                     // for tuple
+#include <type_traits>               // for move
+#include <vector>                    // for vector, vector<>::reference, __v...
+
+/data/data/com.termux/files/home/github/bairstow-cpp/source/autocorr.cpp should remove these lines:
+- #include <bairstow/matrix2.hpp>  // lines 4-4
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/source/autocorr.cpp:
+#include <bairstow/ThreadPool.h>     // for ThreadPool
+#include <__bit_reference>           // for __bit_reference
+#include <algorithm>                 // for max
+#include <bairstow/autocorr.hpp>     // for extract_autocorr, initial_autocorr
+#include <bairstow/rootfinding.hpp>  // for vec2, delta, horner, Options
+#include <bairstow/vector2.hpp>      // for vector2, operator-, operator/
+#include <cmath>                     // for abs, sqrt, acos, cos, pow
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <tuple>                     // for tuple
+#include <type_traits>               // for move
+#include <vector>                    // for vector, vector<>::reference, __v...
+---
+
+[7/17] Building CXX object CMakeFiles/Bairstow.dir/source/aberth.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/source/aberth.cpp should add these lines:
+#include <__bit_reference>           // for __bit_reference
+#include <algorithm>                 // for max
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <tuple>                     // for tuple
+#include <vector>                    // for vector, vector<>::reference, __v...
+
+/data/data/com.termux/files/home/github/bairstow-cpp/source/aberth.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/source/aberth.cpp:
+#include <bairstow/ThreadPool.h>     // for ThreadPool
+#include <__bit_reference>           // for __bit_reference
+#include <algorithm>                 // for max
+#include <bairstow/rootfinding.hpp>  // for Options
+#include <cmath>                     // for acos, cos, sin
+#include <complex>                   // for complex, operator*, operator+
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <tuple>                     // for tuple
+#include <vector>                    // for vector, vector<>::reference, __v...
+---
+
+[8/17] Linking CXX static library libBairstow.a
+[9/17] Building CXX object bench/CMakeFiles/Bench_BM_autocorr.dir/BM_autocorr.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/bench/BM_autocorr.cpp should add these lines:
+#include <vector>                    // for vector
+
+/data/data/com.termux/files/home/github/bairstow-cpp/bench/BM_autocorr.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/bench/BM_autocorr.cpp:
+#include <bairstow/autocorr.hpp>     // for initial_autocorr, pbairstow_auto...
+#include <bairstow/rootfinding.hpp>  // for Options, initial_guess, pbairsto...
+#include <vector>                    // for vector
+#include "benchmark/benchmark.h"     // for BENCHMARK, State, BENCHMARK_MAIN
+---
+
+[10/17] Building CXX object test/CMakeFiles/BairstowTests.dir/source/test_rootfinding.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_rootfinding.cpp should add these lines:
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+#include "bairstow/vector2.hpp"      // for vector2
+#include "format.h"                  // for print
+
+/data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_rootfinding.cpp should remove these lines:
+- #include <fmt/ranges.h>  // lines 4-4
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/test/source/test_rootfinding.cpp:
+#include <doctest/doctest.h>         // for ResultBuilder, CHECK, TEST_CASE
+#include <bairstow/rootfinding.hpp>  // for horner, initial_guess, pbairstow...
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+#include "bairstow/vector2.hpp"      // for vector2
+#include "format.h"                  // for print
+---
+
+[11/17] Building CXX object bench/CMakeFiles/Bench_BM_fir.dir/BM_fir.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/bench/BM_fir.cpp should add these lines:
+#include <vector>                    // for vector
+
+/data/data/com.termux/files/home/github/bairstow-cpp/bench/BM_fir.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/bench/BM_fir.cpp:
+#include <bairstow/autocorr.hpp>     // for initial_autocorr, pbairstow_auto...
+#include <bairstow/rootfinding.hpp>  // for Options, initial_guess, pbairsto...
+#include <vector>                    // for vector
+#include "benchmark/benchmark.h"     // for BENCHMARK, State, BENCHMARK_MAIN
+---
+
+[12/17] Linking CXX executable bench/BM_autocorr
+[13/17] Linking CXX executable bench/BM_fir
+[14/17] Building CXX object test/CMakeFiles/BairstowTests.dir/source/main.cpp.o
+[15/17] Linking CXX executable test/BairstowTests
+[16/17] Building CXX object standalone/CMakeFiles/BairstowStandalone.dir/source/main.cpp.o
+Warning: include-what-you-use reported diagnostics:
+
+/data/data/com.termux/files/home/github/bairstow-cpp/standalone/source/main.cpp should add these lines:
+#include <memory>              // for shared_ptr
+#include <utility>             // for pair
+
+/data/data/com.termux/files/home/github/bairstow-cpp/standalone/source/main.cpp should remove these lines:
+
+The full include-list for /data/data/com.termux/files/home/github/bairstow-cpp/standalone/source/main.cpp:
+#include <bairstow/greeter.h>  // for LanguageCode, Bairstow, LanguageCode::DE
+#include <bairstow/version.h>  // for BAIRSTOW_VERSION
+#include <cxxopts.hpp>         // for value, OptionAdder, Options, OptionValue
+#include <iostream>            // for string, operator<<, endl, basic_ostream
+#include <memory>              // for shared_ptr
+#include <string>              // for char_traits, hash, operator==
+#include <unordered_map>       // for operator==, unordered_map, __hash_map_...
+#include <utility>             // for pair
+---
+
+[17/17] Linking CXX executable standalone/Bairstow
