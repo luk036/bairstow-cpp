@@ -1,10 +1,13 @@
 // import numpy as np
 // -*- coding: utf-8 -*-
-#include <doctest/doctest.h>
-#include <fmt/ranges.h>
+#include <doctest/doctest.h>  // for ResultBuilder, CHECK, TEST_CASE
 
-#include <bairstow/aberth.hpp>
-#include <bairstow/rootfinding.hpp>
+#include <bairstow/aberth.hpp>       // for aberth, initial_aberth
+#include <bairstow/rootfinding.hpp>  // for Options
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+
+#include "fmt/format.h"  // for print
 
 TEST_CASE("test aberth 1") {
     auto h = std::vector<double>{5., 2., 9., 6., 2.};

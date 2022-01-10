@@ -1,10 +1,16 @@
-#include <bairstow/ThreadPool.h>
+#include <bairstow/ThreadPool.h>  // for ThreadPool
 
-#include <bairstow/autocorr.hpp>
-#include <bairstow/matrix2.hpp>
-#include <bairstow/rootfinding.hpp>
-#include <bairstow/vector2.hpp>
-#include <cmath>  // import pow, cos, sqrt
+#include <algorithm>                 // for max
+#include <bairstow/autocorr.hpp>     // for extract_autocorr, initial_autocorr
+#include <bairstow/rootfinding.hpp>  // for vec2, delta, horner, Options
+#include <bairstow/vector2.hpp>      // for vector2, operator-, operator/
+#include <cmath>                     // for abs, sqrt, acos, cos, pow
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <tuple>                     // for tuple
+#include <type_traits>               // for move
+#include <vector>                    // for vector, vector<>::reference, __v...
 
 /**
  * @brief initial guess (specific for auto-correlation function)

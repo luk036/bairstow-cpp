@@ -1,7 +1,8 @@
-#include <bairstow/autocorr.hpp>     // import pbairstow_autocorr, initial_autocorr
-#include <bairstow/rootfinding.hpp>  // import horner
+#include <bairstow/autocorr.hpp>     // for initial_autocorr, pbairstow_auto...
+#include <bairstow/rootfinding.hpp>  // for Options, initial_guess, pbairsto...
+#include <vector>                    // for vector
 
-#include "benchmark/benchmark.h"
+#include "benchmark/benchmark.h"  // for BENCHMARK, State, BENCHMARK_MAIN
 
 auto run_fir_autocorr() {
     auto r = std::vector<double>{

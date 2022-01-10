@@ -1,10 +1,14 @@
 // import numpy as np
 // -*- coding: utf-8 -*-
-#include <doctest/doctest.h>
-#include <fmt/ranges.h>
+#include <doctest/doctest.h>  // for ResultBuilder, CHECK, TEST_CASE
 
-#include <bairstow/autocorr.hpp>     // import pbairstow_autocorr, initial_autocorr
-#include <bairstow/rootfinding.hpp>  // import horner
+#include <bairstow/autocorr.hpp>     // for extract_autocorr, initial_autocorr
+#include <bairstow/rootfinding.hpp>  // for horner, Options
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+
+#include "bairstow/vector2.hpp"  // for vector2
+#include "fmt/format.h"          // for print
 
 TEST_CASE("test auto-corr 1") {
     // auto vA = vec2{0.1, 1.2};

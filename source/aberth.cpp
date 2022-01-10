@@ -1,8 +1,14 @@
-#include <bairstow/ThreadPool.h>
+#include <bairstow/ThreadPool.h>  // for ThreadPool
 
-#include <bairstow/rootfinding.hpp>
-#include <cmath>    // import pow, cos, sqrt
-#include <complex>  // import pow, exp
+#include <algorithm>                 // for max
+#include <bairstow/rootfinding.hpp>  // for Options
+#include <cmath>                     // for acos, cos, sin
+#include <complex>                   // for complex, operator*, operator+
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <tuple>                     // for tuple
+#include <vector>                    // for vector, vector<>::reference, __v...
 
 /**
  * @brief

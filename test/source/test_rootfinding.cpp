@@ -1,9 +1,13 @@
 // import numpy as np
 // -*- coding: utf-8 -*-
-#include <doctest/doctest.h>
-#include <fmt/ranges.h>
+#include <doctest/doctest.h>  // for ResultBuilder, CHECK, TEST_CASE
 
-#include <bairstow/rootfinding.hpp>
+#include <bairstow/rootfinding.hpp>  // for horner, initial_guess, pbairstow...
+#include <tuple>                     // for get
+#include <vector>                    // for vector
+
+#include "bairstow/vector2.hpp"  // for vector2
+#include "fmt/format.h"          // for print
 
 TEST_CASE("test root-finding 1") {
     // auto vA = vec2{0.1, 1.2};

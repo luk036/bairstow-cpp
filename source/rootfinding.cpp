@@ -1,7 +1,17 @@
-#include <bairstow/ThreadPool.h>
+#include <bairstow/ThreadPool.h>  // for ThreadPool
+#include <stddef.h>               // for size_t
 
-#include <bairstow/rootfinding.hpp>
-#include <cmath>  // import pow, cos, sqrt
+#include <algorithm>                 // for max
+#include <bairstow/rootfinding.hpp>  // for vec2, delta, Options, horner_eval
+#include <cmath>                     // for abs, acos, cos, pow
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <tuple>                     // for tuple
+#include <type_traits>               // for move
+#include <vector>                    // for vector, vector<>::reference, __v...
+
+#include "bairstow/vector2.hpp"  // for operator-, vector2
 
 // using vec2 = numeric::vector2<double>;
 // using mat2 = numeric::matrix2<vec2>;

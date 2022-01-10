@@ -1,5 +1,7 @@
 #include <bairstow/greeter.h>
-#include <fmt/format.h>
+#include <fmt/format.h>  // for format
+
+#include <type_traits>  // for move
 
 using namespace bairstow;
 using namespace std;
