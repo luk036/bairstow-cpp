@@ -1,5 +1,6 @@
 #include <bairstow/ThreadPool.h>  // for ThreadPool
 
+#include <__bit_reference>           // for __bit_reference
 #include <algorithm>                 // for max
 #include <bairstow/rootfinding.hpp>  // for Options
 #include <cmath>                     // for acos, cos, sin

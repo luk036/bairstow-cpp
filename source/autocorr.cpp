@@ -1,5 +1,6 @@
 #include <bairstow/ThreadPool.h>  // for ThreadPool
 
+#include <__bit_reference>           // for __bit_reference
 #include <algorithm>                 // for max
 #include <bairstow/autocorr.hpp>     // for extract_autocorr, initial_autocorr
 #include <bairstow/rootfinding.hpp>  // for vec2, delta, horner, Options

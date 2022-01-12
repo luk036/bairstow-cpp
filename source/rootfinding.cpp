@@ -1,6 +1,7 @@
 #include <bairstow/ThreadPool.h>  // for ThreadPool
 #include <stddef.h>               // for size_t
 
+#include <__bit_reference>           // for __bit_reference
 #include <algorithm>                 // for max
 #include <bairstow/rootfinding.hpp>  // for vec2, delta, Options, horner_eval
 #include <cmath>                     // for abs, acos, cos, pow
