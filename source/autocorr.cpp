@@ -1,7 +1,6 @@
 #include <bairstow/ThreadPool.h>  // for ThreadPool
 
-#include <__bit_reference>           // for __bit_reference
-#include <algorithm>                 // for max
+// #include <__bit_reference>           // for __bit_reference
 #include <bairstow/autocorr.hpp>     // for extract_autocorr, initial_autocorr
 #include <bairstow/rootfinding.hpp>  // for vec2, delta, horner, Options
 #include <bairstow/vector2.hpp>      // for vector2, operator-, operator/
@@ -86,7 +85,10 @@ auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
             }));
         }
         for (auto&& result : results) {
-            tol = std::max(tol, result.get());
+            auto&& res = result.get();
+            if (tol < res) {
+                tol = res;
+            }
         }
         // fmt::print("tol: {}\n", tol);
         if (tol < options.tol) {

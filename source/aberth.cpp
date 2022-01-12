@@ -1,7 +1,6 @@
 #include <bairstow/ThreadPool.h>  // for ThreadPool
 
-#include <__bit_reference>           // for __bit_reference
-#include <algorithm>                 // for max
+// #include <__bit_reference>           // for __bit_reference
 #include <bairstow/rootfinding.hpp>  // for Options
 #include <cmath>                     // for acos, cos, sin
 #include <complex>                   // for complex, operator*, operator+
@@ -100,7 +99,10 @@ auto aberth(const std::vector<double>& pa, std::vector<std::complex<double>>& zs
             }));
         }
         for (auto&& result : results) {
-            tol = std::max(tol, result.get());
+            auto&& res = result.get();
+            if (tol < res) {
+                tol = res;
+            }
         }
         if (tol < options.tol) {
             found = true;
