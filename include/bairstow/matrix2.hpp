@@ -1,6 +1,5 @@
 #pragma once
 
-#include <tuple>    // import std::tie()
 #include <utility>  // import std::move
 
 #include "vector2.hpp"

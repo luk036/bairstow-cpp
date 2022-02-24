@@ -4,7 +4,7 @@
 
 #include <bairstow/aberth.hpp>       // for aberth, initial_aberth
 #include <bairstow/rootfinding.hpp>  // for Options
-#include <tuple>                     // for get
+#include <utility>                   // for pair
 #include <vector>                    // for vector
 
 #include "fmt/format.h"  // for print
@@ -13,8 +13,8 @@ TEST_CASE("test aberth 1") {
     auto h = std::vector<double>{5., 2., 9., 6., 2.};
     auto zs = initial_aberth(h);
     auto result = aberth(h, zs, Options());
-    auto niter = std::get<0>(result);
-    auto found = std::get<1>(result);
+    auto niter = result.first;
+    auto found = result.second;
     fmt::print("{}, {}\n", niter, found);
 
     CHECK(niter <= 11);
@@ -27,8 +27,8 @@ TEST_CASE("test aberth 2") {
     auto options = Options();
     options.tol = 1e-12;
     auto result = aberth(h, zs, options);
-    auto niter = std::get<0>(result);
-    auto found = std::get<1>(result);
+    auto niter = result.first;
+    auto found = result.second;
     fmt::print("{}, {}\n", niter, found);
 
     CHECK(niter <= 12);
@@ -49,8 +49,8 @@ TEST_CASE("test aberth FIR") {
     auto options = Options();
     options.tol = 1e-8;
     auto result = aberth(r, zs, options);
-    auto niter = std::get<0>(result);
-    auto found = std::get<1>(result);
+    auto niter = result.first;
+    auto found = result.second;
     fmt::print("{}, {}\n", niter, found);
 
     CHECK(niter <= 12);

@@ -3,7 +3,7 @@
 #include <doctest/doctest.h>  // for ResultBuilder, CHECK, TEST_CASE
 
 #include <bairstow/rootfinding.hpp>  // for horner, initial_guess, pbairstow...
-#include <tuple>                     // for get
+#include <utility>                   // for pair
 #include <vector>                    // for vector
 
 #include "bairstow/vector2.hpp"  // for vector2
@@ -29,8 +29,8 @@ TEST_CASE("test root-finding 1") {
     fmt::print("{}, {}\n", vA1h.x(), vA1h.y());
 
     auto result = pbairstow_even(h, vrs, Options());
-    auto niter = std::get<0>(result);
-    auto found = std::get<1>(result);
+    auto niter = result.first;
+    auto found = result.second;
     fmt::print("{}, {}\n", niter, found);
 
     CHECK(niter <= 11);
@@ -59,8 +59,8 @@ TEST_CASE("test root-finding 2") {
     auto options = Options();
     options.tol = 1e-12;
     auto result = pbairstow_even(h, vrs, options);
-    auto niter = std::get<0>(result);
-    auto found = std::get<1>(result);
+    auto niter = result.first;
+    auto found = result.second;
     fmt::print("{}, {}\n", niter, found);
 
     CHECK(niter <= 13);
@@ -89,8 +89,8 @@ TEST_CASE("test root-finding FIR") {
     auto options = Options();
     options.tol = 1e-12;
     auto result = pbairstow_even(h, vrs, options);
-    auto niter = std::get<0>(result);
-    auto found = std::get<1>(result);
+    auto niter = result.first;
+    auto found = result.second;
     fmt::print("{}, {}\n", niter, found);
 
     CHECK(niter <= 14);

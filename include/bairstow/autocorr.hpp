@@ -1,7 +1,7 @@
 #pragma once
 
 // import numpy as np
-#include <tuple>
+#include <utility>
 #include <vector>
 
 #include "matrix2.hpp"
@@ -14,5 +14,5 @@ class Options;
 
 extern auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2>;
 extern auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
-                               const Options& options) -> std::tuple<unsigned int, bool>;
+                               const Options& options) -> std::pair<unsigned int, bool>;
 extern void extract_autocorr(vec2& vr);

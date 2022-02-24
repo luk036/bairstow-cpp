@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cmath>
-#include <tuple>    // import std::tie()
 #include <utility>  // import std::move
 
 namespace numeric {

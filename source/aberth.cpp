@@ -7,7 +7,7 @@
 #include <functional>                // for __base
 #include <future>                    // for future
 #include <thread>                    // for thread
-#include <tuple>                     // for tuple
+#include <utility>                   // for pair
 #include <vector>                    // for vector, vector<>::reference, __v...
 
 /**
@@ -55,10 +55,10 @@ auto initial_aberth(const std::vector<double>& pa) -> std::vector<std::complex<d
  * @param[in] pa polynomial
  * @param[in,out] zs vector of iterates
  * @param[in] options maximum iterations and tolorance
- * @return std::tuple<unsigned int, bool>
+ * @return std::pair<unsigned int, bool>
  */
 auto aberth(const std::vector<double>& pa, std::vector<std::complex<double>>& zs,
-            const Options& options = Options()) -> std::tuple<unsigned int, bool> {
+            const Options& options = Options()) -> std::pair<unsigned int, bool> {
     const auto M = zs.size();
     const auto N = int(pa.size()) - 1;  // degree, assume even
     auto found = false;

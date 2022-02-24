@@ -4,7 +4,7 @@
 
 #include <bairstow/autocorr.hpp>     // for extract_autocorr, initial_autocorr
 #include <bairstow/rootfinding.hpp>  // for horner, Options
-#include <tuple>                     // for get
+#include <utility>                   // for pair
 #include <vector>                    // for vector
 
 #include "bairstow/vector2.hpp"  // for vector2
@@ -32,8 +32,8 @@ TEST_CASE("test auto-corr 1") {
     auto options = Options();
     options.tol = 1e-12;
     auto result = pbairstow_autocorr(r, vrs, options);
-    auto niter = std::get<0>(result);
-    auto found = std::get<1>(result);
+    auto niter = result.first;
+    auto found = result.second;
     fmt::print("{}, {}\n", niter, found);
 
     for (auto& vr : vrs) {
@@ -75,8 +75,8 @@ TEST_CASE("test autocorr FIR") {
     auto options = Options();
     options.tol = 1e-2;
     auto result = pbairstow_autocorr(r, vrs, options);
-    auto niter = std::get<0>(result);
-    auto found = std::get<1>(result);
+    auto niter = result.first;
+    auto found = result.second;
     fmt::print("{}, {}\n", niter, found);
 
     for (auto& vr : vrs) {

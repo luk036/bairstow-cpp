@@ -8,7 +8,7 @@
 #include <functional>                // for __base
 #include <future>                    // for future
 #include <thread>                    // for thread
-#include <tuple>                     // for tuple
+#include <utility>                   // for pair
 #include <type_traits>               // for move
 #include <vector>                    // for vector, vector<>::reference, __v...
 
@@ -40,10 +40,10 @@ auto initial_autocorr(const std::vector<double>& pa) -> std::vector<vec2> {
  * @param[in] pa polynomial
  * @param[in,out] vrs vector of iterates
  * @param[in] options maximum iterations and tolorance
- * @return std::tuple<unsigned int, bool>
+ * @return std::pair<unsigned int, bool>
  */
 auto pbairstow_autocorr(const std::vector<double>& pa, std::vector<vec2>& vrs,
-                        const Options& options = Options()) -> std::tuple<unsigned int, bool> {
+                        const Options& options = Options()) -> std::pair<unsigned int, bool> {
     const auto N = pa.size() - 1;  // degree, assume even
     const auto M = vrs.size();
     auto found = false;
