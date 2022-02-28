@@ -10,6 +10,7 @@
 #include <utility>                   // for pair
 #include <type_traits>               // for move
 #include <vector>                    // for vector, vector<>::reference, __v...
+#include <py2cpp/range.hpp>          // for range
 
 #include "bairstow/vector2.hpp"  // for operator-, vector2
 
@@ -28,7 +29,7 @@ auto horner(std::vector<double>& pb, size_t n, const vec2& vr) -> vec2 {
     const auto& r = vr.x();
     const auto& t = vr.y();
     pb[1] -= pb[0] * r;
-    for (auto i = 2U; i != n; ++i) {
+    for (auto i : py::range(2, n)) {
         pb[i] -= pb[i - 1] * r + pb[i - 2] * t;
     }
     pb[n] -= pb[n - 2] * t;
@@ -84,7 +85,7 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
         auto tol = 0.0;
         std::vector<std::future<double>> results;
 
-        for (auto i = 0U; i != M; ++i) {
+        for (auto i : py::range(M)) {
             if (converged[i]) {
                 continue;
             }
@@ -99,7 +100,7 @@ auto pbairstow_even(const std::vector<double>& pa, std::vector<vec2>& vrs,
                     return tol_i;
                 }
                 auto vA1 = horner(pb, N - 2, vri);
-                for (auto j = 0U; j != M; ++j) {  // exclude i
+                for (auto j : py::range(M)) {  // exclude i
                     if (j == i) {
                         continue;
                     }
