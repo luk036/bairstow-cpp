@@ -6,11 +6,11 @@
 #include <cmath>                     // for abs, acos, cos, pow
 #include <functional>                // for __base
 #include <future>                    // for future
-#include <thread>                    // for thread
-#include <utility>                   // for pair
-#include <type_traits>               // for move
-#include <vector>                    // for vector, vector<>::reference, __v...
 #include <py2cpp/range.hpp>          // for range
+#include <thread>                    // for thread
+#include <type_traits>               // for move
+#include <utility>                   // for pair
+#include <vector>                    // for vector, vector<>::reference, __v...
 
 #include "bairstow/vector2.hpp"  // for operator-, vector2
 

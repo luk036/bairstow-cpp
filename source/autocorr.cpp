@@ -8,8 +8,8 @@
 #include <functional>                // for __base
 #include <future>                    // for future
 #include <thread>                    // for thread
-#include <utility>                   // for pair
 #include <type_traits>               // for move
+#include <utility>                   // for pair
 #include <vector>                    // for vector, vector<>::reference, __v...
 
 /**
