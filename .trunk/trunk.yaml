@@ -1,14 +1,14 @@
 version: 0.1
 cli:
-  version: 0.5.0-beta
+  version: 0.12.1-beta
 lint:
   enabled:
-    - actionlint@1.6.4
-    - black-py@21.10b0
-    - clang-format@13.0.0
-    - clang-tidy@13.0.0
-    - flake8@3.9.2
-    - gitleaks@7.6.1
+    - actionlint@1.6.9
+    - black@22.3.0
+    - clang-format@14.0.0
+    - clang-tidy@14.0.0
+    - flake8@4.0.1
+    - gitleaks@8.3.0
     - isort@5.9.3
-    - markdownlint@0.29.0
-    - prettier@2.4.1
+    - markdownlint@0.31.1
+    - prettier@2.5.1
