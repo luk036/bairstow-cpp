@@ -48,7 +48,7 @@ auto initial_guess(const std::vector<double>& pa) -> std::vector<vec2> {
     auto N = int(pa.size()) - 1;
     const auto c = -pa[1] / (N * pa[0]);
     auto pb = pa;
-    const auto Pc = horner_eval(pb, N, c);  // ???
+    const auto Pc = horner_eval(pb, N, c);  // TODO
     const auto re = std::pow(std::abs(Pc), 1. / N);
     N /= 2;
     N *= 2;  // make even
