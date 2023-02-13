@@ -7,7 +7,7 @@
 using namespace bairstow;
 using namespace std;
 
-Bairstow::Bairstow(string _name) : name(move(_name)) {}
+Bairstow::Bairstow(string _name) : name(_name) {}
 
 auto Bairstow::greet(LanguageCode lang) const -> std::string {
     switch (lang) {
