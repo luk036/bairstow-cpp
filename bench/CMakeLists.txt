@@ -8,7 +8,8 @@ cpmaddpackage(
   VERSION
   1.5.2
   OPTIONS
-  "BENCHMARK_ENABLE_TESTING Off")
+  "BENCHMARK_ENABLE_TESTING Off"
+)
 
 if(benchmark_ADDED)
   # enable c++11 to avoid compilation errors
@@ -32,8 +33,9 @@ foreach(ONE_BENCH_CPP ${ALL_BENCH_CPP})
   set_target_properties(${TARGET_NAME} PROPERTIES OUTPUT_NAME ${ONE_BENCH_EXEC})
   set_target_properties(${TARGET_NAME} PROPERTIES CXX_STANDARD 14)
 
-  target_link_libraries(${TARGET_NAME} benchmark::benchmark
-                        ${PROJECT_NAME}::${PROJECT_NAME} ${SPECIFIC_LIBS})
+  target_link_libraries(
+    ${TARGET_NAME} benchmark::benchmark ${PROJECT_NAME}::${PROJECT_NAME} ${SPECIFIC_LIBS}
+  )
 
   # add_test(${TARGET_NAME} ${ONE_BENCH_EXEC})
   add_test(NAME ${ONE_BENCH_EXEC} COMMAND ${TARGET_NAME})
@@ -44,6 +46,5 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   target_compile_options(Bairstow PUBLIC -Wall -Wextra)
 elseif(MSVC)
   target_compile_options(Bairstow PUBLIC /W4 /WX /wd4819 /wd4146 /wd4127)
-  # target_compile_definitions(EllAlgoTests PUBLIC
-  # DOCTEST_CONFIG_USE_STD_HEADERS)
+  # target_compile_definitions(EllAlgoTests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
 endif()

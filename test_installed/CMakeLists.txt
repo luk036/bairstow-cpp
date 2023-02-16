@@ -35,5 +35,4 @@ find_package(Threads REQUIRED)
 
 find_package(${PROJECT_NAME} REQUIRED)
 
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../standalone
-                 ${CMAKE_BINARY_DIR}/test_installed)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../standalone ${CMAKE_BINARY_DIR}/test_installed)
