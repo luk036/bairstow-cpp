@@ -6,17 +6,8 @@ add_requires("microsoft-gsl", {alias = "ms-gsl"})
 add_requires("doctest", {alias = "doctest"})
 
 if is_plat("linux") then
-    -- add system link libraries
-    add_syslinks("pthread")
-    -- add compilation and link flags
-    add_ldflags("-lpthread", {force = true})
-elseif is_plat("windows") then 
-    if is_mode("release") then
-        add_cxflags("-MT")
-    elseif is_mode("debug") then
-        add_cxflags("-MTd")
-    end
-    add_ldflags("-nodefaultlib:msvcrt.lib")
+    set_warnings("all", "error")
+    add_cxflags("-Wconversion", {force = true})
 end
 
 if is_mode("coverage") then
