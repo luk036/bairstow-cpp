@@ -7,7 +7,7 @@ option(ENABLE_TEST_COVERAGE "Enable test coverage" OFF)
 
 cpmaddpackage("gh:doctest/doctest#v2.4.9")
 cpmaddpackage("gh:TheLartians/Format.cmake@1.7.0")
-
+include(../specific.cmake)
 # if(TEST_INSTALLED_VERSION) find_package(${PROJECT_NAME} REQUIRED) else() CPMAddPackage(NAME
 # ${PROJECT_NAME} SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..) endif()
 
@@ -16,7 +16,7 @@ cpmaddpackage("gh:TheLartians/Format.cmake@1.7.0")
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(${PROJECT_NAME}Tests ${sources})
 target_link_libraries(
-  ${PROJECT_NAME}Tests doctest::doctest ${PROJECT_NAME}::${PROJECT_NAME} Threads::Threads fmt::fmt
+  ${PROJECT_NAME}Tests doctest::doctest ${PROJECT_NAME}::${PROJECT_NAME} ${SPECIFIC_LIBS}
 )
 set_target_properties(${PROJECT_NAME}Tests PROPERTIES CXX_STANDARD 14)
 
