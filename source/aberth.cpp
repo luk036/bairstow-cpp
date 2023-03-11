@@ -5,7 +5,6 @@
 #include <complex>                  // for complex, operator*, operator+
 #include <functional>               // for __base
 #include <future>                   // for future
-#include <py2cpp/range.hpp>         // for range
 #include <thread>                   // for thread
 #include <utility>                  // for pair
 #include <vector>                   // for vector, vector<>::reference, __v...
@@ -26,7 +25,7 @@ using Complex = std::complex<double>;
 template <typename C, typename Tp>
 inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
   Tp res = coeffs[0];
-  for (auto i : py::range(1, coeffs.size())) {
+  for (auto i = 1U, i != coeffs.size(); ++i) {
     res = res * z + coeffs[i];
   }
   return res;
@@ -47,7 +46,7 @@ auto initial_aberth(const vector<double> &pa) -> vector<Complex> {
   const auto re = std::pow(Complex(-Pc), 1.0 / double(n));
   const auto k = TWO_PI / double(n);
   auto z0s = vector<Complex>{};
-  for (auto i : py::range(n)) {
+  for (auto i = 0U; i != n; ++i) {
     auto theta = k * (0.25 + double(i));
     auto z0 = c + re * Complex{std::cos(theta), std::sin(theta)};
     z0s.emplace_back(z0);
@@ -70,16 +69,16 @@ auto aberth(const vector<double> &pa, vector<Complex> &zs,
   const auto n = pa.size() - 1; // degree, assume even
   auto converged = vector<bool>(m, false);
   auto coeffs = vector<double>(n);
-  for (auto i : py::range(n)) {
+  for (auto i = 0U; i != n; ++i) {
     coeffs[i] = double(n - i) * pa[i];
   }
   ThreadPool pool(std::thread::hardware_concurrency());
 
-  for (auto niter : py::range(options.max_iter)) {
+  for (auto niter = 0U; niter != options.max_iter; ++niter) {
     auto tol = 0.0;
     vector<std::future<double>> results;
 
-    for (auto i : py::range(m)) {
+    for (auto i = 0U; i != m; ++i) {
       if (converged[i]) {
         continue;
       }

@@ -6,7 +6,6 @@
 #include <cmath>                    // for abs, acos, cos, pow
 #include <functional>               // for __base
 #include <future>                   // for future
-#include <py2cpp/range.hpp>         // for range
 #include <thread>                   // for thread
 #include <type_traits>              // for move
 #include <utility>                  // for pair
@@ -29,7 +28,7 @@ auto horner(std::vector<double> &pb, size_t n, const Vec2 &vr) -> Vec2 {
   const auto &r = vr.x();
   const auto &t = vr.y();
   pb[1] -= pb[0] * r;
-  for (auto i : py::range(2, n)) {
+  for (auto i = 2U; i != n; ++i) {
     pb[i] -= pb[i - 1] * r + pb[i - 2] * t;
   }
   pb[n] -= pb[n - 2] * t;
@@ -45,17 +44,17 @@ auto horner(std::vector<double> &pb, size_t n, const Vec2 &vr) -> Vec2 {
 auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
   static const auto PI = std::acos(-1.);
 
-  auto N = int(pa.size()) - 1;
-  const auto c = -pa[1] / (N * pa[0]);
+  auto N = pa.size() - 1;
+  const auto c = -pa[1] / (double(N) * pa[0]);
   auto pb = pa;
   const auto Pc = horner_eval(pb, N, c); // TODO
-  const auto re = std::pow(std::abs(Pc), 1. / N);
+  const auto re = std::pow(std::abs(Pc), 1.0 / double(N));
   N /= 2;
   N *= 2; // make even
-  const auto k = PI / N;
+  const auto k = PI / double(N);
   const auto m = c * c + re * re;
   auto vr0s = std::vector<Vec2>{};
-  for (auto i = 1; i < N; i += 2) {
+  for (auto i = 1U; i < N; i += 2) {
     const auto temp = re * std::cos(k * i);
     auto r0 = -2 * (c + temp);
     auto t0 = m + 2 * c * temp;
@@ -79,14 +78,14 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
   const auto M = vrs.size();
   auto found = false;
   auto converged = std::vector<bool>(M, false);
-  auto niter = 1U;
   ThreadPool pool(std::thread::hardware_concurrency());
 
+  auto niter = 1U;
   for (; niter != options.max_iter; ++niter) {
     auto tol = 0.0;
     std::vector<std::future<double>> results;
 
-    for (auto i : py::range(M)) {
+    for (auto i = 0U; i != M; ++i) {
       if (converged[i]) {
         continue;
       }
@@ -101,8 +100,8 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
           return tol_i;
         }
         auto vA1 = horner(pb, N - 2, vri);
-        for (auto j : py::range(M)) { // exclude i
-          if (j == i) {
+        for (auto j = 0U; j != M; ++j) {
+          if (j == i) { // exclude i
             continue;
           }
           const auto vrj = vrs[j]; // make a copy, don't reference!
