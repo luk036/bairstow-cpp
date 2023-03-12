@@ -25,7 +25,7 @@ using Complex = std::complex<double>;
 template <typename C, typename Tp>
 inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
   Tp res = coeffs[0];
-  for (auto i = 1U, i != coeffs.size(); ++i) {
+  for (auto i = 1U; i != coeffs.size(); ++i) {
     res = res * z + coeffs[i];
   }
   return res;
