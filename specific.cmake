@@ -1,18 +1,14 @@
-cpmaddpackage(
-  NAME
-  fmt
-  GIT_TAG
-  8.1.1
-  GITHUB_REPOSITORY
-  fmtlib/fmt
-  OPTIONS
-  "FMT_INSTALL YES" # create an installable target
+CPMAddPackage(
+  NAME fmt
+  GIT_TAG 8.1.1
+  GITHUB_REPOSITORY fmtlib/fmt
+  OPTIONS "FMT_INSTALL YES" # create an installable target
 )
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-cpmaddpackage("gh:microsoft/GSL@3.1.0")
+CPMAddPackage("gh:microsoft/GSL@3.1.0")
 set(SPECIFIC_LIBS Threads::Threads fmt::fmt GSL)
 
 # cpmaddpackage( NAME GSL GITHUB_REPOSITORY "microsoft/GSL" GIT_TAG "v4.0.0" GIT_SHALLOW ON )

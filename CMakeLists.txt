@@ -37,7 +37,7 @@ include(cmake/tools.cmake)
 include(cmake/CPM.cmake)
 
 # PackageProject.cmake will be used to make our target installable
-cpmaddpackage("gh:TheLartians/PackageProject.cmake@1.6.0")
+CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.6.0")
 include(specific.cmake)
 
 # ---- Add source files ----
@@ -73,25 +73,16 @@ target_include_directories(
 # header paths
 string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
 
-packageproject(
-  NAME
-  ${PROJECT_NAME}
-  VERSION
-  ${PROJECT_VERSION}
-  NAMESPACE
-  ${PROJECT_NAME}
-  BINARY_DIR
-  ${PROJECT_BINARY_DIR}
-  INCLUDE_DIR
-  ${PROJECT_SOURCE_DIR}/include
-  INCLUDE_DESTINATION
-  include/${PROJECT_NAME}-${PROJECT_VERSION}
-  VERSION_HEADER
-  "${VERSION_HEADER_LOCATION}"
-  COMPATIBILITY
-  SameMajorVersion
-  DEPENDENCIES
-  "fmt 7.1.3"
+packageProject(
+  NAME ${PROJECT_NAME}
+  VERSION ${PROJECT_VERSION}
+  NAMESPACE ${PROJECT_NAME}
+  BINARY_DIR ${PROJECT_BINARY_DIR}
+  INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
+  INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
+  VERSION_HEADER "${VERSION_HEADER_LOCATION}"
+  COMPATIBILITY SameMajorVersion
+  DEPENDENCIES "fmt 7.1.3"
 )
 
 if(NOT INSTALL_ONLY)

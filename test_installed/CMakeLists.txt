@@ -20,19 +20,10 @@ include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
 
 include(../specific.cmake)
-# cpmaddpackage(
-#   NAME
-#   fmt
-#   GIT_TAG
-#   8.1.1
-#   GITHUB_REPOSITORY
-#   fmtlib/fmt
-#   OPTIONS
-#   "FMT_INSTALL YES" # create an installable target
-# )
+# cpmaddpackage( NAME fmt GIT_TAG 8.1.1 GITHUB_REPOSITORY fmtlib/fmt OPTIONS "FMT_INSTALL YES" #
+# create an installable target )
 #
-# set(THREADS_PREFER_PTHREAD_FLAG ON)
-# find_package(Threads REQUIRED)
+# set(THREADS_PREFER_PTHREAD_FLAG ON) find_package(Threads REQUIRED)
 #
 # cpmaddpackage("gh:microsoft/GSL@3.1.0")
 #

@@ -1,14 +1,10 @@
 # ---- Dependencies ----
 
-cpmaddpackage(
-  NAME
-  benchmark
-  GITHUB_REPOSITORY
-  google/benchmark
-  VERSION
-  1.5.2
-  OPTIONS
-  "BENCHMARK_ENABLE_TESTING Off"
+CPMAddPackage(
+  NAME benchmark
+  GITHUB_REPOSITORY google/benchmark
+  VERSION 1.5.2
+  OPTIONS "BENCHMARK_ENABLE_TESTING Off"
 )
 
 if(benchmark_ADDED)
