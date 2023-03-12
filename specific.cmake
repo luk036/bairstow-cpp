@@ -2,7 +2,7 @@ cpmaddpackage(
   NAME
   fmt
   GIT_TAG
-  7.1.3
+  8.1.1
   GITHUB_REPOSITORY
   fmtlib/fmt
   OPTIONS
