@@ -53,6 +53,17 @@ extern auto horner(std::vector<double> &pb, std::size_t n, const Vec2 &vr)
     -> Vec2;
 
 /**
+ * @brief zero suppression
+ *
+ * @param[in,out] vA
+ * @param[in,out] vA1
+ * @param[in] vri
+ * @param[in] vrj
+ */
+extern auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj)
+    -> void;
+
+/**
  * @brief
  *
  * @param[in] vr
@@ -63,11 +74,11 @@ inline auto makeadjoint(const Vec2 &vr, Vec2 &&vp) -> Mat2 {
   // auto &&[r, t] = vr;
   // auto &&[p, m] = vp;
   auto &&r = vr.x();
-  auto &&t = vr.y();
+  auto &&q = vr.y();
   auto &&p = vp.x();
-  auto &&m = vp.y();
+  auto &&s = vp.y();
 
-  return {Vec2{-m, p}, Vec2{-p * t, p * r - m}};
+  return {Vec2{s, -p}, Vec2{-p * q, p * r + s}};
 }
 
 /**
@@ -81,32 +92,6 @@ inline auto makeadjoint(const Vec2 &vr, Vec2 &&vp) -> Mat2 {
 inline auto delta(const Vec2 &vA, const Vec2 &vr, Vec2 &&vp) -> Vec2 {
   const auto mp = makeadjoint(vr, std::move(vp)); // 2 mul's
   return mp.mdot(vA) / mp.det();                  // 6 mul's + 2 div's
-}
-
-/**
- * @brief zero suppression
- *
- * @param[in,out] vA
- * @param[in,out] vA1
- * @param[in] vri
- * @param[in] vrj
- */
-inline auto suppress2(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj)
-    -> void {
-  // const auto [r, q] = vri;
-  // const auto [p, s] = vri - vrj;
-  const auto vp = vri - vrj;
-  auto &&r = vri.x();
-  auto &&q = vri.y();
-  auto &&p = vp.x();
-  auto &&s = vp.y();
-  const auto M = Mat2{Vec2{-s, -p}, Vec2{p * q, p * r - s}};
-  const auto e = M.det();
-  vA = M.mdot(vA) / e;
-
-  const auto vd = vA1 - vA;
-  const auto vc = Vec2{vd.x(), vd.y() - vA.x() * p};
-  vA1 = M.mdot(vc) / e;
 }
 
 /**

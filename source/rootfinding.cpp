@@ -25,14 +25,36 @@
  * @return Vec2
  */
 auto horner(std::vector<double> &pb, size_t n, const Vec2 &vr) -> Vec2 {
-  const auto &r = vr.x();
-  const auto &t = vr.y();
-  pb[1] -= pb[0] * r;
-  for (auto i = 2U; i != n; ++i) {
-    pb[i] -= pb[i - 1] * r + pb[i - 2] * t;
+  for (auto i = 0U; i != n - 1; ++i) {
+    pb[i + 1] += pb[i] * vr.x();
+    pb[i + 2] += pb[i] * vr.y();
   }
-  pb[n] -= pb[n - 2] * t;
   return Vec2{pb[n - 1], pb[n]};
+}
+
+/**
+ * @brief zero suppression
+ *
+ * @param[in,out] vA
+ * @param[in,out] vA1
+ * @param[in] vri
+ * @param[in] vrj
+ */
+auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void {
+  // const auto [r, q] = vri;
+  // const auto [p, s] = vri - vrj;
+  const auto vp = vri - vrj;
+  auto &&r = vri.x();
+  auto &&q = vri.y();
+  auto &&p = vp.x();
+  auto &&s = vp.y();
+  const auto M = Mat2{Vec2{s, -p}, Vec2{-p * q, p * r + s}};
+  const auto e = M.det();
+  vA = M.mdot(vA) / e;
+
+  const auto vd = vA1 - vA;
+  const auto vc = Vec2{vd.x(), vd.y() - vA.x() * p};
+  vA1 = M.mdot(vc) / e;
 }
 
 /**
@@ -56,8 +78,8 @@ auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
   auto vr0s = std::vector<Vec2>{};
   for (auto i = 1U; i < N; i += 2) {
     const auto temp = re * std::cos(k * i);
-    auto r0 = -2 * (c + temp);
-    auto t0 = m + 2 * c * temp;
+    auto r0 = 2 * (c + temp);
+    auto t0 = -(m + 2 * c * temp);
     vr0s.emplace_back(Vec2{std::move(r0), std::move(t0)});
   }
   return vr0s;
@@ -76,12 +98,10 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
     -> std::pair<unsigned int, bool> {
   const auto N = pa.size() - 1; // degree, assume even
   const auto M = vrs.size();
-  auto found = false;
   auto converged = std::vector<bool>(M, false);
   ThreadPool pool(std::thread::hardware_concurrency());
 
-  auto niter = 1U;
-  for (; niter != options.max_iter; ++niter) {
+  for (auto niter = 0U; niter != options.max_iter; ++niter) {
     auto tol = 0.0;
     std::vector<std::future<double>> results;
 
@@ -93,7 +113,7 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
         auto pb = pa;
         // auto n = pa.size() - 1;
         const auto &vri = vrs[i];
-        const auto vA = horner(pb, N, vri);
+        auto vA = horner(pb, N, vri);
         const auto tol_i = std::max(std::abs(vA.x()), std::abs(vA.y()));
         if (tol_i < 1e-15) {
           converged[i] = true;
@@ -105,7 +125,7 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
             continue;
           }
           const auto vrj = vrs[j]; // make a copy, don't reference!
-          vA1 -= delta(vA, vrj, vri - vrj);
+          suppress(vA, vA1, vri, vrj);
         }
         vrs[i] -= delta(vA, vri, std::move(vA1)); // Gauss-Seidel fashion
         return tol_i;
@@ -118,11 +138,10 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
       }
     }
     if (tol < options.tol) {
-      found = true;
-      break;
+      return {niter, true};
     }
   }
-  return {niter, found};
+  return {options.max_iter, false};
 }
 
 // auto find_rootq(const Vec2& r) {

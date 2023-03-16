@@ -20,6 +20,14 @@ public:
    * @param x
    * @param y
    */
+  constexpr Vector2() noexcept : _x{0}, _y{0} {}
+
+  /**
+   * @brief Construct a new Vector2 object
+   *
+   * @param x
+   * @param y
+   */
   constexpr Vector2(T1 &&x, T2 &&y) noexcept
       : _x{std::move(x)}, _y{std::move(y)} {}
 

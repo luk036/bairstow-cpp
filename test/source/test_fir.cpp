@@ -40,7 +40,7 @@ TEST_CASE("test FIR") {
   fmt::print("{}, {}\n", vA1h.x(), vA1h.y());
 
   auto options = Options();
-  options.tol = 1e-2;
+  options.tol = 1e-7;
   auto result = pbairstow_autocorr(r, vrs, options);
   auto niter = result.first;
   auto found = result.second;
@@ -51,7 +51,5 @@ TEST_CASE("test FIR") {
     fmt::print("{}, {}\n", vr.x(), vr.y());
   }
 
-  CHECK(niter <= 13);
-
-  // fmt::print([find_rootq(-r[0], -r[1]) for r : vrs]);
+  CHECK(niter <= 631);
 }

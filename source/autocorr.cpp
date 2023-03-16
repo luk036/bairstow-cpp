@@ -29,7 +29,7 @@ auto initial_autocorr(const std::vector<double> &pa) -> std::vector<Vec2> {
   const auto m = re * re;
   auto vr0s = std::vector<Vec2>{};
   for (auto i = 1U; i < n; i += 2) {
-    vr0s.emplace_back(Vec2{-2 * re * std::cos(k * double(i)), m});
+    vr0s.emplace_back(Vec2{2 * re * std::cos(k * double(i)), -m});
   }
   return vr0s;
 }
@@ -48,12 +48,10 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
     -> std::pair<unsigned int, bool> {
   const auto N = pa.size() - 1; // degree, assume even
   const auto M = vrs.size();
-  auto found = false;
   auto converged = std::vector<bool>(M, false);
-  auto niter = 1U;
   ThreadPool pool(std::thread::hardware_concurrency());
 
-  for (; niter != options.max_iter; ++niter) {
+  for (auto niter = 0U; niter != options.max_iter; ++niter) {
     auto tol = 0.0;
     std::vector<std::future<double>> results;
     for (auto i = 0U; i != M; ++i) {
@@ -63,7 +61,7 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
       results.emplace_back(pool.enqueue([&, i]() {
         auto pb = pa;
         const auto &vri = vrs[i];
-        const auto vA = horner(pb, N, vri);
+        auto vA = horner(pb, N, vri);
         const auto tol_i = std::max(std::abs(vA.x()), std::abs(vA.y()));
         if (tol_i < 1e-15) {
           converged[i] = true;
@@ -75,12 +73,12 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
             continue;
           }
           const auto vrj = vrs[j]; // make a copy, don't reference!
-          vA1 -= delta(vA, vrj, vri - vrj);
-          const auto vrjn = numeric::Vector2<double>(vrj.x(), 1.0) / vrj.y();
-          vA1 -= delta(vA, vrjn, vri - vrjn);
+          suppress(vA, vA1, vri, vrj);
+          const auto vrjn = numeric::Vector2<double>(-vrj.x(), 1.0) / vrj.y();
+          suppress(vA, vA1, vri, vrjn);
         }
-        const auto vrin = numeric::Vector2<double>(vri.x(), 1.0) / vri.y();
-        vA1 -= delta(vA, vrin, vri - vrin);
+        const auto vrin = numeric::Vector2<double>(-vri.x(), 1.0) / vri.y();
+        suppress(vA, vA1, vri, vrin);
 
         vrs[i] -= delta(vA, vri, std::move(vA1)); // Gauss-Seidel fashion
         return tol_i;
@@ -94,16 +92,18 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
     }
     // fmt::print("tol: {}\n", tol);
     if (tol < options.tol) {
-      found = true;
-      break;
+      return {niter, true};
     }
   }
-  return {niter, found};
+  return {options.max_iter, false};
 }
 
 /**
  * @brief Extract the quadratic function where its roots are within a unit
  * circle
+ *
+ *   x^2 - r*x - q  or (-1/q) + (r/q) * x + x^2
+ *   (x - a1)(x - a2) = x^2 - (a1 + a2) x + a1 * a2
  *
  *   x^2 + r*x + t or x^2 + (r/t) * x + (1/t)
  *   (x + a1)(x + a2) = x^2 + (a1 + a2) x + a1 * a2
@@ -112,26 +112,26 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
  */
 void extract_autocorr(Vec2 &vr) {
   const auto &r = vr.x();
-  const auto &t = vr.y();
+  const auto &q = vr.y();
   const auto hr = r / 2.0;
-  const auto d = hr * hr - t;
+  const auto d = hr * hr + q;
   if (d < 0.0) { // complex conjugate root
-    if (t > 1.0) {
-      vr = Vec2{r, 1.0} / t;
+    if (q < -1.0) {
+      vr = Vec2{-r, 1.0} / q;
     }
     // else no need to change
   } else { // two real roots
     auto a1 = hr + (hr >= 0.0 ? sqrt(d) : -sqrt(d));
-    auto a2 = t / a1;
+    auto a2 = -q / a1;
     if (std::abs(a1) > 1.0) {
       if (std::abs(a2) > 1.0) {
         a2 = 1.0 / a2;
       }
       a1 = 1.0 / a1;
-      vr = Vec2{a1 + a2, a1 * a2};
+      vr = Vec2{a1 + a2, -a1 * a2};
     } else if (std::abs(a2) > 1.0) {
       a2 = 1.0 / a2;
-      vr = Vec2{a1 + a2, a1 * a2};
+      vr = Vec2{a1 + a2, -a1 * a2};
     }
     // else no need to change
   }
