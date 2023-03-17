@@ -2,6 +2,7 @@
 
 // #include <__bit_reference>           // for __bit_reference
 #include <bairstow/autocorr.hpp>    // for extract_autocorr, initial_autocorr
+#include <bairstow/robin.hpp>       // for Robin
 #include <bairstow/rootfinding.hpp> // for Vec2, delta, horner, Options
 #include <bairstow/vector2.hpp>     // for Vector2, operator-, operator/
 #include <cmath>                    // for abs, sqrt, acos, cos, pow
@@ -21,14 +22,14 @@
 auto initial_autocorr(const std::vector<double> &pa) -> std::vector<Vec2> {
   static const auto PI = std::acos(-1.);
 
-  auto n = pa.size() - 1;
-  const auto re = std::pow(std::abs(pa[n]), 1.0 / double(n));
+  auto degree = pa.size() - 1;
+  const auto re = std::pow(std::abs(pa[degree]), 1.0 / double(degree));
 
-  n /= 2;
-  const auto k = PI / double(n);
+  degree /= 2;
+  const auto k = PI / double(degree);
   const auto m = re * re;
   auto vr0s = std::vector<Vec2>{};
-  for (auto i = 1U; i < n; i += 2) {
+  for (auto i = 1U; i < degree; i += 2) {
     vr0s.emplace_back(Vec2{2 * re * std::cos(k * double(i)), -m});
   }
   return vr0s;
@@ -46,33 +47,24 @@ auto initial_autocorr(const std::vector<double> &pa) -> std::vector<Vec2> {
 auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
                         const Options &options = Options())
     -> std::pair<unsigned int, bool> {
+  ThreadPool pool(std::thread::hardware_concurrency());
+
   const auto N = pa.size() - 1; // degree, assume even
   const auto M = vrs.size();
-  auto converged = std::vector<bool>(M, false);
-  ThreadPool pool(std::thread::hardware_concurrency());
+  const auto rr = fun::Robin<size_t>(M);
 
   for (auto niter = 0U; niter != options.max_iter; ++niter) {
     auto tol = 0.0;
     std::vector<std::future<double>> results;
     for (auto i = 0U; i != M; ++i) {
-      if (converged[i]) {
-        continue;
-      }
       results.emplace_back(pool.enqueue([&, i]() {
         auto pb = pa;
         const auto &vri = vrs[i];
         auto vA = horner(pb, N, vri);
         const auto tol_i = std::max(std::abs(vA.x()), std::abs(vA.y()));
-        if (tol_i < 1e-15) {
-          converged[i] = true;
-          return tol_i;
-        }
         auto vA1 = horner(pb, N - 2, vri);
-        for (auto j = 0U; j != M; ++j) { // exclude i
-          if (j == i) {
-            continue;
-          }
-          const auto vrj = vrs[j]; // make a copy, don't reference!
+        for (auto j : rr.exclude(i)) { // exclude i
+          const auto vrj = vrs[j];     // make a copy, don't reference!
           suppress(vA, vA1, vri, vrj);
           const auto vrjn = numeric::Vector2<double>(-vrj.x(), 1.0) / vrj.y();
           suppress(vA, vA1, vri, vrjn);

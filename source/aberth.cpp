@@ -1,5 +1,6 @@
 #include <bairstow/ThreadPool.h> // for ThreadPool
 
+#include <bairstow/robin.hpp>       // for Robin
 #include <bairstow/rootfinding.hpp> // for Options
 #include <cmath>                    // for acos, cos, sin
 #include <complex>                  // for complex, operator*, operator+
@@ -65,38 +66,28 @@ auto initial_aberth(const vector<double> &pa) -> vector<Complex> {
 auto aberth(const vector<double> &pa, vector<Complex> &zs,
             const Options &options = Options())
     -> std::pair<unsigned int, bool> {
-  const auto m = zs.size();
-  const auto n = pa.size() - 1; // degree, assume even
-  auto converged = vector<bool>(m, false);
-  auto coeffs = vector<double>(n);
-  for (auto i = 0U; i != n; ++i) {
-    coeffs[i] = double(n - i) * pa[i];
-  }
   ThreadPool pool(std::thread::hardware_concurrency());
+
+  const auto m = zs.size();
+  const auto degree = pa.size() - 1; // degree, assume even
+  const auto rr = fun::Robin<size_t>(m);
+  auto coeffs = vector<double>(degree);
+  for (auto i = 0U; i != degree; ++i) {
+    coeffs[i] = double(degree - i) * pa[i];
+  }
 
   for (auto niter = 0U; niter != options.max_iter; ++niter) {
     auto tol = 0.0;
     vector<std::future<double>> results;
 
     for (auto i = 0U; i != m; ++i) {
-      if (converged[i]) {
-        continue;
-      }
       results.emplace_back(pool.enqueue([&, i]() {
         const auto &zi = zs[i];
         const auto P = horner_eval_g(pa, zi);
         const auto tol_i = std::abs(P);
-        if (tol_i < 1e-15) { // tunable
-          converged[i] = true;
-          return tol_i;
-        }
         auto P1 = horner_eval_g(coeffs, zi);
-        size_t j = 0;
-        for (const auto &zj : zs) {
-          if (j != i) {
-            P1 -= P / (zi - zj);
-          }
-          ++j;
+        for (auto j : rr.exclude(i)) {
+          P1 -= P / (zi - zs[j]);
         }
         zs[i] -= P / P1; // Gauss-Seidel fashion
         return tol_i;

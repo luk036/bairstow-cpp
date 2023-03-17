@@ -2,6 +2,7 @@
 
 #include <cstddef> // for size_t
 
+#include <bairstow/robin.hpp>       // for Robin
 #include <bairstow/rootfinding.hpp> // for Vec2, delta, Options, horner_eval
 #include <cmath>                    // for abs, acos, cos, pow
 #include <functional>               // for __base
@@ -44,11 +45,9 @@ auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void {
   // const auto [r, q] = vri;
   // const auto [p, s] = vri - vrj;
   const auto vp = vri - vrj;
-  auto &&r = vri.x();
-  auto &&q = vri.y();
   auto &&p = vp.x();
   auto &&s = vp.y();
-  const auto M = Mat2{Vec2{s, -p}, Vec2{-p * q, p * r + s}};
+  const auto M = Mat2{Vec2{s, -p}, Vec2{-p * vri.y(), p * vri.x() + s}};
   const auto e = M.det();
   vA = M.mdot(vA) / e;
 
@@ -96,34 +95,24 @@ auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
 auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
                     const Options &options = Options())
     -> std::pair<unsigned int, bool> {
-  const auto N = pa.size() - 1; // degree, assume even
-  const auto M = vrs.size();
-  auto converged = std::vector<bool>(M, false);
   ThreadPool pool(std::thread::hardware_concurrency());
+
+  const auto degree = pa.size() - 1; // degree, assume even
+  const auto M = vrs.size();
+  const auto rr = fun::Robin<size_t>(M);
 
   for (auto niter = 0U; niter != options.max_iter; ++niter) {
     auto tol = 0.0;
     std::vector<std::future<double>> results;
 
     for (auto i = 0U; i != M; ++i) {
-      if (converged[i]) {
-        continue;
-      }
       results.emplace_back(pool.enqueue([&, i]() {
-        auto pb = pa;
-        // auto n = pa.size() - 1;
         const auto &vri = vrs[i];
-        auto vA = horner(pb, N, vri);
+        auto pb = pa;
+        auto vA = horner(pb, degree, vri);
+        auto vA1 = horner(pb, degree - 2, vri);
         const auto tol_i = std::max(std::abs(vA.x()), std::abs(vA.y()));
-        if (tol_i < 1e-15) {
-          converged[i] = true;
-          return tol_i;
-        }
-        auto vA1 = horner(pb, N - 2, vri);
-        for (auto j = 0U; j != M; ++j) {
-          if (j == i) { // exclude i
-            continue;
-          }
+        for (auto j : rr.exclude(i)) {
           const auto vrj = vrs[j]; // make a copy, don't reference!
           suppress(vA, vA1, vri, vrj);
         }

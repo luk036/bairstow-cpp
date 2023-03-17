@@ -73,12 +73,9 @@ extern auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj)
 inline auto makeadjoint(const Vec2 &vr, Vec2 &&vp) -> Mat2 {
   // auto &&[r, t] = vr;
   // auto &&[p, m] = vp;
-  auto &&r = vr.x();
-  auto &&q = vr.y();
   auto &&p = vp.x();
   auto &&s = vp.y();
-
-  return {Vec2{s, -p}, Vec2{-p * q, p * r + s}};
+  return {Vec2{s, -p}, Vec2{-p * vr.y(), p * vr.x() + s}};
 }
 
 /**
