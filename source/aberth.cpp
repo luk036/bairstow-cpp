@@ -81,7 +81,7 @@ auto aberth(const vector<double> &pa, vector<Complex> &zs,
     vector<std::future<double>> results;
 
     for (auto i = 0U; i != m; ++i) {
-      results.emplace_back(pool.enqueue([&, i]() {
+      results.emplace_back(pool.enqueue([&, i]() -> double {
         const auto &zi = zs[i];
         const auto P = horner_eval_g(pa, zi);
         const auto tol_i = std::abs(P);

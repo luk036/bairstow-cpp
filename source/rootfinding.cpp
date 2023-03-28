@@ -97,7 +97,7 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
     -> std::pair<unsigned int, bool> {
   ThreadPool pool(std::thread::hardware_concurrency());
 
-  const auto degree = pa.size() - 1; // degree, assume even
+  // const auto degree = pa.size() - 1; // degree, assume even
   const auto M = vrs.size();
   const auto rr = fun::Robin<size_t>(M);
 
@@ -106,7 +106,8 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
     std::vector<std::future<double>> results;
 
     for (auto i = 0U; i != M; ++i) {
-      results.emplace_back(pool.enqueue([&, i]() {
+      results.emplace_back(pool.enqueue([&, i]() -> double {
+        const auto degree = pa.size() - 1; // degree, assume even
         const auto &vri = vrs[i];
         auto pb = pa;
         auto vA = horner(pb, degree, vri);

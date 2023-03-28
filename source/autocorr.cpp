@@ -49,7 +49,6 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
     -> std::pair<unsigned int, bool> {
   ThreadPool pool(std::thread::hardware_concurrency());
 
-  const auto N = pa.size() - 1; // degree, assume even
   const auto M = vrs.size();
   const auto rr = fun::Robin<size_t>(M);
 
@@ -57,8 +56,9 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
     auto tol = 0.0;
     std::vector<std::future<double>> results;
     for (auto i = 0U; i != M; ++i) {
-      results.emplace_back(pool.enqueue([&, i]() {
+      results.emplace_back(pool.enqueue([&, i]() -> double {
         auto pb = pa;
+        const auto N = pa.size() - 1; // degree, assume even
         const auto &vri = vrs[i];
         auto vA = horner(pb, N, vri);
         const auto tol_i = std::max(std::abs(vA.x()), std::abs(vA.y()));
