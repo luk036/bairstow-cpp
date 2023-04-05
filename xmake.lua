@@ -1,8 +1,8 @@
-set_languages("c++20")
+set_languages("c++11")
 
 add_rules("mode.debug", "mode.release", "mode.coverage")
 add_requires("fmt", {alias = "fmt"})
-add_requires("microsoft-gsl", {alias = "ms-gsl"})
+-- add_requires("microsoft-gsl", {alias = "ms-gsl"})
 add_requires("doctest", {alias = "doctest"})
 
 if is_plat("linux") then
@@ -18,14 +18,14 @@ target("Bairstow")
     set_kind("static")
     add_includedirs("include", {public = true})
     add_files("source/*.cpp")
-    add_packages("ms-gsl")
+    -- add_packages("ms-gsl")
 
 target("test_bairstow")
     set_kind("binary")
     add_deps("Bairstow")
     add_includedirs("include", {public = true})
     add_files("test/source/*.cpp")
-    add_packages("fmt", "ms-gsl", "doctest")
+    add_packages("fmt", "doctest")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

@@ -1,7 +1,7 @@
 #pragma once
 
 // import numpy as np
-#include <gsl/gsl>
+// #include <gsl/gsl>
 #include <utility>
 #include <vector>
 
@@ -99,7 +99,7 @@ inline auto delta(const Vec2 &vA, const Vec2 &vr, Vec2 &&vp) -> Vec2 {
  * @param[in] r
  * @return double
  */
-inline auto horner_eval(gsl::span<double> pb, std::size_t n, const double &z)
+inline auto horner_eval(std::vector<double> pb, std::size_t n, const double &z)
     -> double {
   for (auto i = 0U; i != n; ++i) {
     pb[i + 1] += pb[i] * z;
