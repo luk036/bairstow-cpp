@@ -1,7 +1,7 @@
-set_languages("c++11")
+set_languages("c++23")
 
 add_rules("mode.debug", "mode.release", "mode.coverage")
-add_requires("fmt", {alias = "fmt"})
+add_requires("fmt 7.1.3", {alias = "fmt"})
 -- add_requires("microsoft-gsl", {alias = "ms-gsl"})
 add_requires("doctest", {alias = "doctest"})
 
@@ -18,6 +18,8 @@ target("Bairstow")
     set_kind("static")
     add_includedirs("include", {public = true})
     add_files("source/*.cpp")
+    -- add_packages("fmt")
+    -- add_syslinks("pthread")
     -- add_packages("ms-gsl")
 
 target("test_bairstow")
@@ -25,7 +27,8 @@ target("test_bairstow")
     add_deps("Bairstow")
     add_includedirs("include", {public = true})
     add_files("test/source/*.cpp")
-    add_packages("fmt", "doctest")
+    add_packages("doctest", "fmt")
+    add_syslinks("pthread")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
