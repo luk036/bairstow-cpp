@@ -1,4 +1,4 @@
-set_languages("c++23")
+set_languages("c++20")
 
 add_rules("mode.debug", "mode.release", "mode.coverage")
 add_requires("fmt 7.1.3", {alias = "fmt"})

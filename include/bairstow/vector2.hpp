@@ -127,7 +127,8 @@ public:
    * @return Vector2&
    */
   template <typename U1, typename U2>
-  CONSTEXPR14 auto operator+=(const Vector2<U1, U2> &other) -> Vector2<T1, T2> & {
+  CONSTEXPR14 auto operator+=(const Vector2<U1, U2> &other)
+      -> Vector2<T1, T2> & {
     this->_x += other.x();
     this->_y += other.y();
     return *this;
@@ -142,7 +143,8 @@ public:
    * @return Vector2&
    */
   template <typename U1, typename U2> //
-  CONSTEXPR14 auto operator-=(const Vector2<U1, U2> &other) -> Vector2<T1, T2> & {
+  CONSTEXPR14 auto operator-=(const Vector2<U1, U2> &other)
+      -> Vector2<T1, T2> & {
     this->_x -= other.x();
     this->_y -= other.y();
     return *this;
