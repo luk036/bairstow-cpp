@@ -26,7 +26,7 @@ public:
    * @param x
    * @param y
    */
-  constexpr Vector2() noexcept : _x{0}, _y{0} {}
+  constexpr Vector2() : _x{0}, _y{0} {}
 
   /**
    * @brief Construct a new Vector2 object

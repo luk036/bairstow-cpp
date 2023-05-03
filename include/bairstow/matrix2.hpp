@@ -17,8 +17,11 @@ namespace numeric {
  * @tparam T1
  * @tparam T2
  */
-template <typename T1, typename T2 = T1>
-class Matrix2 : public Vector2<T1, T2> {
+template <typename T1, typename T2 = T1> class Matrix2 {
+private:
+  T1 _x;
+  T2 _y;
+
 public:
   /**
    * @brief Construct a new Matrix2 object
@@ -27,7 +30,21 @@ public:
    * @param y
    */
   constexpr Matrix2(T1 &&x, T2 &&y) noexcept
-      : Vector2<T1, T2>{std::move(x), std::move(y)} {}
+      : _x{std::move(x)}, _y{std::move(y)} {}
+
+  /**
+   * @brief
+   *
+   * @return constexpr const T1&
+   */
+  constexpr auto x() const -> const T1 & { return this->_x; }
+
+  /**
+   * @brief
+   *
+   * @return constexpr const T2&
+   */
+  constexpr auto y() const -> const T2 & { return this->_y; }
 
   // /**
   //  * @brief Construct a new Matrix2 object
