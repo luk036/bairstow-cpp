@@ -76,7 +76,7 @@ auto aberth(const vector<double> &pa, vector<Complex> &zs,
     coeffs[i] = double(degree - i) * pa[i];
   }
 
-  for (auto niter = 0U; niter != options.max_iter; ++niter) {
+  for (auto niter = 0U; niter != options.max_iters; ++niter) {
     auto tol = 0.0;
     vector<std::future<double>> results;
 
@@ -103,5 +103,5 @@ auto aberth(const vector<double> &pa, vector<Complex> &zs,
       return {niter, true};
     }
   }
-  return {options.max_iter, false};
+  return {options.max_iters, false};
 }

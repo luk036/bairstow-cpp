@@ -17,7 +17,7 @@ using Mat2 = numeric::Matrix2<Vec2>;
  */
 class Options {
 public:
-  unsigned int max_iter = 2000U;
+  unsigned int max_iters = 2000U;
   double tol = 1e-14;
 };
 

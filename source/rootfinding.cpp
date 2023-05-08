@@ -101,7 +101,7 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
   const auto M = vrs.size();
   const auto rr = fun::Robin<size_t>(M);
 
-  for (auto niter = 0U; niter != options.max_iter; ++niter) {
+  for (auto niter = 0U; niter != options.max_iters; ++niter) {
     auto tol = 0.0;
     std::vector<std::future<double>> results;
 
@@ -131,7 +131,7 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
       return {niter, true};
     }
   }
-  return {options.max_iter, false};
+  return {options.max_iters, false};
 }
 
 // auto find_rootq(const Vec2& r) {
