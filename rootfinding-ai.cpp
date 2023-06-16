@@ -48,11 +48,11 @@ class Matrix2 {
     double det() const { return rows[0].x * rows[1].y - rows[0].y * rows[1].x; }
 };
 
-class Vdcorput {
+class VdCorput {
    public:
     int base;
     int seed;
-    Vdcorput(int base = 2, int seed = 0) : base(base), seed(seed) {}
+    VdCorput(int base = 2, int seed = 0) : base(base), seed(seed) {}
     void reseed(int seed) { this->seed = seed; }
     double pop() {
         double r = 0.0;
@@ -162,7 +162,7 @@ std::vector<Vector2> initial_guess(const std::vector<double>& coeffs) {
     degree /= 2;
     degree *= 2;
 
-    Vdcorput vgen(2);
+    VdCorput vgen(2);
     vgen.reseed(1);
     for (int i = 1; i < degree; i += 2) {
         double temp = reff * std::cos(PI * vgen.pop());
