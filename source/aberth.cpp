@@ -56,7 +56,10 @@ auto initial_aberth(const vector<double> &pa) -> vector<Complex> {
 }
 
 /**
- * @brief Multi-threading Bairstow's method (even degree only)
+ * @brief Multi-threading Aberth's method
+ *
+ * The `aberth` function is an implementation of Aberth's method for finding the
+ * roots of a polynomial.
  *
  * @param[in] pa polynomial
  * @param[in,out] zs vector of iterates

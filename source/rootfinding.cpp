@@ -87,6 +87,9 @@ auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
 /**
  * @brief Multi-threading Bairstow's method (even degree only)
  *
+ * The function `pbairstow_even` is implementing the Bairstow's method for
+ * finding the roots of a polynomial with an even degree.
+ *
  * @param[in] pa polynomial
  * @param[in,out] vrs vector of iterates
  * @param[in] options maximum iterations and tolorance
