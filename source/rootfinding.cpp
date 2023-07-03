@@ -1,29 +1,34 @@
-#include <bairstow/ThreadPool.h> // for ThreadPool
-
-#include <cstddef> // for size_t
-
+#include <bairstow/ThreadPool.h>    // for ThreadPool
 #include <bairstow/robin.hpp>       // for Robin
 #include <bairstow/rootfinding.hpp> // for Vec2, delta, Options, horner_eval
-#include <cmath>                    // for abs, acos, cos, pow
-#include <functional>               // for __base
-#include <future>                   // for future
-#include <thread>                   // for thread
-#include <type_traits>              // for move
-#include <utility>                  // for pair
-#include <vector>                   // for vector, vector<>::reference, __v...
+#include <bairstow/vector2.hpp>     // for operator-, Vector2
 
-#include "bairstow/vector2.hpp" // for operator-, Vector2
+#include <cmath>       // for abs, acos, cos, pow
+#include <cstddef>     // for size_t
+#include <functional>  // for __base
+#include <future>      // for future
+#include <thread>      // for thread
+#include <type_traits> // for move
+#include <utility>     // for pair
+#include <vector>      // for vector, vector<>::reference, __v...
 
-// using Vec2 = numeric::Vector2<double>;
-// using Mat2 = numeric::Matrix2<Vec2>;
+#ifndef M_PI
+#define M_PI 3.14159265358979323846264338327950288
+#endif
 
 /**
- * @brief
+ * The function `horner` implements the Horner's method for evaluating a
+ * polynomial at a given point.
  *
- * @param[in,out] pb
- * @param[in] n
- * @param[in] vr
- * @return Vec2
+ * @param[in, out] pb pb is a reference to a vector of doubles. It is used to
+ * store the coefficients of a polynomial.
+ * @param[in] n The parameter `n` represents the size of the vector `pb`. It
+ * indicates the number of elements in the vector `pb`.
+ * @param[in] vr vr is a Vec2 object, which represents a 2D vector. It has two
+ * components, vr.x() and vr.y(), which are used in the calculations inside the
+ * horner function.
+ *
+ * @return a Vec2 object.
  */
 auto horner(std::vector<double> &pb, size_t n, const Vec2 &vr) -> Vec2 {
   for (auto i = 0U; i != n - 1; ++i) {
@@ -34,12 +39,13 @@ auto horner(std::vector<double> &pb, size_t n, const Vec2 &vr) -> Vec2 {
 }
 
 /**
- * @brief zero suppression
+ * The function `suppress` calculates and updates the values of `vA` and `vA1`
+ * based on the given input vectors `vri` and `vrj`.
  *
- * @param[in,out] vA
- * @param[in,out] vA1
- * @param[in] vri
- * @param[in] vrj
+ * @param[in, out] vA A reference to a Vec2 object representing vector A.
+ * @param[in, out] vA1 vA1 is a reference to a Vec2 object.
+ * @param[in] vri A vector representing the position of point i.
+ * @param[in] vrj The parameter `vrj` represents a `Vec2` object.
  */
 auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void {
   // const auto [r, q] = vri;
@@ -57,14 +63,14 @@ auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void {
 }
 
 /**
- * @brief
- *
- * @param[in] pa
- * @return std::vector<Vec2>
+ * The function calculates the initial values for the parallel Bairstow method for
+ * finding the roots of a real polynomial.
+ * 
+ * @param[in] pa pa is a vector of doubles that represents the coefficients of a polynomial.
+ * 
+ * @return The function `initial_guess` returns a vector of `Vec2` objects.
  */
 auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
-  static const auto PI = std::acos(-1.);
-
   auto N = pa.size() - 1;
   const auto c = -pa[1] / (double(N) * pa[0]);
   auto pb = pa;
@@ -72,7 +78,7 @@ auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
   const auto re = std::pow(std::abs(Pc), 1.0 / double(N));
   N /= 2;
   N *= 2; // make even
-  const auto k = PI / double(N);
+  const auto k = M_PI / double(N);
   const auto m = c * c + re * re;
   auto vr0s = std::vector<Vec2>{};
   for (auto i = 1U; i < N; i += 2) {
@@ -88,7 +94,7 @@ auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
  * @brief Multi-threading Bairstow's method (even degree only)
  *
  * The function `pbairstow_even` is implementing the Bairstow's method for
- * finding the roots of a polynomial with an even degree.
+ * finding the roots of a real polynomial with an even degree.
  *
  * @param[in] pa polynomial
  * @param[in,out] vrs vector of iterates

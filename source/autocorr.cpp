@@ -1,32 +1,34 @@
-#include <bairstow/ThreadPool.h> // for ThreadPool
-
-// #include <__bit_reference>           // for __bit_reference
-#include <bairstow/autocorr.hpp>    // for extract_autocorr, initial_autocorr
+#include <bairstow/ThreadPool.h>    // for ThreadPool
 #include <bairstow/robin.hpp>       // for Robin
-#include <bairstow/rootfinding.hpp> // for Vec2, delta, horner, Options
-#include <bairstow/vector2.hpp>     // for Vector2, operator-, operator/
-#include <cmath>                    // for abs, sqrt, acos, cos, pow
-#include <functional>               // for __base
-#include <future>                   // for future
-#include <thread>                   // for thread
-#include <type_traits>              // for move
-#include <utility>                  // for pair
-#include <vector>                   // for vector, vector<>::reference, __v...
+#include <bairstow/rootfinding.hpp> // for Vec2, delta, Options, horner_eval
+#include <bairstow/vector2.hpp>     // for operator-, Vector2
+
+#include <cmath>       // for abs, acos, cos, pow
+#include <cstddef>     // for size_t
+#include <functional>  // for __base
+#include <future>      // for future
+#include <thread>      // for thread
+#include <type_traits> // for move
+#include <utility>     // for pair
+#include <vector>      // for vector, vector<>::reference, __v...
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846264338327950288
+#endif
 
 /**
- * @brief initial guess (specific for auto-correlation function)
- *
- * @param[in] pa
- * @return std::vector<Vec2>
+ * The function calculates the initial autocorrelation values (specific for auto-correlation function)
+ * 
+ * @param[in] pa The parameter `pa` is a vector of doubles.
+ * 
+ * @return The function `initial_autocorr` returns a vector of `Vec2` objects.
  */
 auto initial_autocorr(const std::vector<double> &pa) -> std::vector<Vec2> {
-  static const auto PI = std::acos(-1.);
-
   auto degree = pa.size() - 1;
   const auto re = std::pow(std::abs(pa[degree]), 1.0 / double(degree));
 
   degree /= 2;
-  const auto k = PI / double(degree);
+  const auto k = M_PI / double(degree);
   const auto m = re * re;
   auto vr0s = std::vector<Vec2>{};
   for (auto i = 1U; i < degree; i += 2) {
@@ -37,6 +39,10 @@ auto initial_autocorr(const std::vector<double> &pa) -> std::vector<Vec2> {
 
 /**
  * @brief Multi-threading Bairstow's method (specific for auto-correlation
+ * function)
+ *
+ * The function `pbairstow_even` is implementing the Bairstow's method for
+ * finding the roots of a real polynomial (specific for auto-correlation
  * function)
  *
  * @param[in] pa polynomial
@@ -91,16 +97,17 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
 }
 
 /**
- * @brief Extract the quadratic function where its roots are within a unit
- * circle
- *
+ * The function extracts the autocorrelation values from a given vector.
+ * 
  *   x^2 - r*x - q  or (-1/q) + (r/q) * x + x^2
  *   (x - a1)(x - a2) = x^2 - (a1 + a2) x + a1 * a2
  *
  *   x^2 + r*x + t or x^2 + (r/t) * x + (1/t)
  *   (x + a1)(x + a2) = x^2 + (a1 + a2) x + a1 * a2
  *
- * @param[in,out] vr
+ * @param[in,out] vr The parameter `vr` is of type `Vec2`, which is a custom class representing a 2D vector. It
+ * contains two components, `x` and `y`, which are accessed using the `x()` and `y()` member functions
+ * respectively.
  */
 void extract_autocorr(Vec2 &vr) {
   const auto &r = vr.x();

@@ -16,7 +16,8 @@ using std::vector;
 using Complex = std::complex<double>;
 
 /**
- * @brief
+ * The function `horner_eval_g` is implementing the Horner's method for
+ * evaluating a polynomial at a given point.
  *
  * @param[in,out] coeffs
  * @param[in] n
@@ -33,10 +34,12 @@ inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
 }
 
 /**
- * @brief
+ * The function calculates the initial values for the Aberth-Ehrlich method for
+ * finding the roots of a polynomial.
  *
- * @param pa
- * @return vector<Complex>
+ * @param[in] pa The parameter `pa` is a vector of doubles.
+ *
+ * @return The function `initial_aberth` returns a vector of Complex numbers.
  */
 auto initial_aberth(const vector<double> &pa) -> vector<Complex> {
   static const auto TWO_PI = 2.0 * std::acos(-1.0);
@@ -56,10 +59,10 @@ auto initial_aberth(const vector<double> &pa) -> vector<Complex> {
 }
 
 /**
- * @brief Multi-threading Aberth's method
+ * @brief Multi-threading Aberth-Ehrlich method
  *
- * The `aberth` function is an implementation of Aberth's method for finding the
- * roots of a polynomial.
+ * The `aberth` function is an implementation of the Aberth-Ehrlich method for
+ * finding the roots of a polynomial.
  *
  * @param[in] pa polynomial
  * @param[in,out] zs vector of iterates
