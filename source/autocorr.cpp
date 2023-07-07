@@ -17,10 +17,11 @@
 #endif
 
 /**
- * The function calculates the initial autocorrelation values (specific for auto-correlation function)
- * 
+ * The function calculates the initial autocorrelation values (specific for
+ * auto-correlation function)
+ *
  * @param[in] pa The parameter `pa` is a vector of doubles.
- * 
+ *
  * @return The function `initial_autocorr` returns a vector of `Vec2` objects.
  */
 auto initial_autocorr(const std::vector<double> &pa) -> std::vector<Vec2> {
@@ -98,16 +99,16 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
 
 /**
  * The function extracts the autocorrelation values from a given vector.
- * 
+ *
  *   x^2 - r*x - q  or (-1/q) + (r/q) * x + x^2
  *   (x - a1)(x - a2) = x^2 - (a1 + a2) x + a1 * a2
  *
  *   x^2 + r*x + t or x^2 + (r/t) * x + (1/t)
  *   (x + a1)(x + a2) = x^2 + (a1 + a2) x + a1 * a2
  *
- * @param[in,out] vr The parameter `vr` is of type `Vec2`, which is a custom class representing a 2D vector. It
- * contains two components, `x` and `y`, which are accessed using the `x()` and `y()` member functions
- * respectively.
+ * @param[in,out] vr The parameter `vr` is of type `Vec2`, which is a custom
+ * class representing a 2D vector. It contains two components, `x` and `y`,
+ * which are accessed using the `x()` and `y()` member functions respectively.
  */
 void extract_autocorr(Vec2 &vr) {
   const auto &r = vr.x();
