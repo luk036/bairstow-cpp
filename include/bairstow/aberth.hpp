@@ -19,6 +19,10 @@ extern auto initial_aberth(const std::vector<double> &pa)
 /**
  * @brief
  *
+ * Aberth's method is a method for finding the roots of a polynomial that is
+ * robust but requires complex arithmetic even if the polynomial is real. This
+ * is because it starts with complex initial approximations.
+ *
  * @param pa
  * @param zs
  * @param options
