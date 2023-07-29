@@ -16,9 +16,9 @@ using Mat2 = numeric::Matrix2<Vec2>;
  *
  */
 class Options {
-public:
-  unsigned int max_iters = 2000U;
-  double tol = 1e-14;
+  public:
+    unsigned int max_iters = 2000U;
+    double tol = 1e-14;
 };
 
 /**
@@ -90,11 +90,11 @@ extern auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj)
  * @return Mat2
  */
 inline auto makeadjoint(const Vec2 &vr, Vec2 &&vp) -> Mat2 {
-  // auto &&[r, t] = vr;
-  // auto &&[p, m] = vp;
-  auto &&p = vp.x();
-  auto &&s = vp.y();
-  return {Vec2{s, -p}, Vec2{-p * vr.y(), p * vr.x() + s}};
+    // auto &&[r, t] = vr;
+    // auto &&[p, m] = vp;
+    auto &&p = vp.x();
+    auto &&s = vp.y();
+    return {Vec2{s, -p}, Vec2{-p * vr.y(), p * vr.x() + s}};
 }
 
 /**
@@ -106,8 +106,8 @@ inline auto makeadjoint(const Vec2 &vr, Vec2 &&vp) -> Mat2 {
  * @return Mat2
  */
 inline auto delta(const Vec2 &vA, const Vec2 &vr, Vec2 &&vp) -> Vec2 {
-  const auto mp = makeadjoint(vr, std::move(vp)); // 2 mul's
-  return mp.mdot(vA) / mp.det();                  // 6 mul's + 2 div's
+    const auto mp = makeadjoint(vr, std::move(vp)); // 2 mul's
+    return mp.mdot(vA) / mp.det();                  // 6 mul's + 2 div's
 }
 
 /**
@@ -120,8 +120,8 @@ inline auto delta(const Vec2 &vA, const Vec2 &vr, Vec2 &&vp) -> Vec2 {
  */
 inline auto horner_eval(std::vector<double> pb, std::size_t n, const double &z)
     -> double {
-  for (auto i = 0U; i != n; ++i) {
-    pb[i + 1] += pb[i] * z;
-  }
-  return pb[n];
+    for (auto i = 0U; i != n; ++i) {
+        pb[i + 1] += pb[i] * z;
+    }
+    return pb[n];
 }

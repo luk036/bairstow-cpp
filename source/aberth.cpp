@@ -26,11 +26,11 @@ using Complex = std::complex<double>;
  */
 template <typename C, typename Tp>
 inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
-  Tp res = coeffs[0];
-  for (auto i = 1U; i != coeffs.size(); ++i) {
-    res = res * z + coeffs[i];
-  }
-  return res;
+    Tp res = coeffs[0];
+    for (auto i = 1U; i != coeffs.size(); ++i) {
+        res = res * z + coeffs[i];
+    }
+    return res;
 }
 
 /**
@@ -42,20 +42,20 @@ inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
  * @return The function `initial_aberth` returns a vector of Complex numbers.
  */
 auto initial_aberth(const vector<double> &pa) -> vector<Complex> {
-  static const auto TWO_PI = 2.0 * std::acos(-1.0);
+    static const auto TWO_PI = 2.0 * std::acos(-1.0);
 
-  const auto n = pa.size() - 1;
-  const auto c = -pa[1] / (double(n) * pa[0]);
-  const auto Pc = horner_eval_g(pa, c);
-  const auto re = std::pow(Complex(-Pc), 1.0 / double(n));
-  const auto k = TWO_PI / double(n);
-  auto z0s = vector<Complex>{};
-  for (auto i = 0U; i != n; ++i) {
-    auto theta = k * (0.25 + double(i));
-    auto z0 = c + re * Complex{std::cos(theta), std::sin(theta)};
-    z0s.emplace_back(z0);
-  }
-  return z0s;
+    const auto n = pa.size() - 1;
+    const auto c = -pa[1] / (double(n) * pa[0]);
+    const auto Pc = horner_eval_g(pa, c);
+    const auto re = std::pow(Complex(-Pc), 1.0 / double(n));
+    const auto k = TWO_PI / double(n);
+    auto z0s = vector<Complex>{};
+    for (auto i = 0U; i != n; ++i) {
+        auto theta = k * (0.25 + double(i));
+        auto z0 = c + re * Complex{std::cos(theta), std::sin(theta)};
+        z0s.emplace_back(z0);
+    }
+    return z0s;
 }
 
 /**
@@ -72,42 +72,42 @@ auto initial_aberth(const vector<double> &pa) -> vector<Complex> {
 auto aberth(const vector<double> &pa, vector<Complex> &zs,
             const Options &options = Options())
     -> std::pair<unsigned int, bool> {
-  ThreadPool pool(std::thread::hardware_concurrency());
+    ThreadPool pool(std::thread::hardware_concurrency());
 
-  const auto m = zs.size();
-  const auto degree = pa.size() - 1; // degree, assume even
-  const auto rr = fun::Robin<size_t>(m);
-  auto coeffs = vector<double>(degree);
-  for (auto i = 0U; i != degree; ++i) {
-    coeffs[i] = double(degree - i) * pa[i];
-  }
+    const auto m = zs.size();
+    const auto degree = pa.size() - 1; // degree, assume even
+    const auto rr = fun::Robin<size_t>(m);
+    auto coeffs = vector<double>(degree);
+    for (auto i = 0U; i != degree; ++i) {
+        coeffs[i] = double(degree - i) * pa[i];
+    }
 
-  for (auto niter = 0U; niter != options.max_iters; ++niter) {
-    auto tol = 0.0;
-    vector<std::future<double>> results;
+    for (auto niter = 0U; niter != options.max_iters; ++niter) {
+        auto tol = 0.0;
+        vector<std::future<double>> results;
 
-    for (auto i = 0U; i != m; ++i) {
-      results.emplace_back(pool.enqueue([&, i]() -> double {
-        const auto &zi = zs[i];
-        const auto P = horner_eval_g(pa, zi);
-        const auto tol_i = std::abs(P);
-        auto P1 = horner_eval_g(coeffs, zi);
-        for (auto j : rr.exclude(i)) {
-          P1 -= P / (zi - zs[j]);
+        for (auto i = 0U; i != m; ++i) {
+            results.emplace_back(pool.enqueue([&, i]() -> double {
+                const auto &zi = zs[i];
+                const auto P = horner_eval_g(pa, zi);
+                const auto tol_i = std::abs(P);
+                auto P1 = horner_eval_g(coeffs, zi);
+                for (auto j : rr.exclude(i)) {
+                    P1 -= P / (zi - zs[j]);
+                }
+                zs[i] -= P / P1; // Gauss-Seidel fashion
+                return tol_i;
+            }));
         }
-        zs[i] -= P / P1; // Gauss-Seidel fashion
-        return tol_i;
-      }));
+        for (auto &&result : results) {
+            auto &&res = result.get();
+            if (tol < res) {
+                tol = res;
+            }
+        }
+        if (tol < options.tol) {
+            return {niter, true};
+        }
     }
-    for (auto &&result : results) {
-      auto &&res = result.get();
-      if (tol < res) {
-        tol = res;
-      }
-    }
-    if (tol < options.tol) {
-      return {niter, true};
-    }
-  }
-  return {options.max_iters, false};
+    return {options.max_iters, false};
 }

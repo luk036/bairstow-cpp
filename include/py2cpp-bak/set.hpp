@@ -16,75 +16,75 @@ namespace py {
  * @tparam Key
  */
 template <typename Key> class set : public std::unordered_set<Key> {
-  using Self = set<Key>;
-  using Base = std::unordered_set<Key>;
+    using Self = set<Key>;
+    using Base = std::unordered_set<Key>;
 
-public:
-  /**
-   * @brief Construct a new set object
-   *
-   */
-  set() : Base{} {}
+  public:
+    /**
+     * @brief Construct a new set object
+     *
+     */
+    set() : Base{} {}
 
-  /**
-   * @brief Construct a new set object
-   *
-   */
-  template <typename FwdIter>
-  set(const FwdIter &start, const FwdIter &stop) : Base(start, stop) {}
+    /**
+     * @brief Construct a new set object
+     *
+     */
+    template <typename FwdIter>
+    set(const FwdIter &start, const FwdIter &stop) : Base(start, stop) {}
 
-  /**
-   * @brief Construct a new set object
-   *
-   * @param[in] init
-   */
-  set(std::initializer_list<Key> init) : Base{init} {}
+    /**
+     * @brief Construct a new set object
+     *
+     * @param[in] init
+     */
+    set(std::initializer_list<Key> init) : Base{init} {}
 
-  /**
-   * @brief
-   *
-   * @param[in] key
-   * @return true
-   * @return false
-   */
-  auto contains(const Key &key) const -> bool {
-    return this->find(key) != this->end();
-  }
+    /**
+     * @brief
+     *
+     * @param[in] key
+     * @return true
+     * @return false
+     */
+    auto contains(const Key &key) const -> bool {
+        return this->find(key) != this->end();
+    }
 
-  /**
-   * @brief
-   *
-   * @return _Self
-   */
-  auto copy() const -> set { return *this; }
+    /**
+     * @brief
+     *
+     * @return _Self
+     */
+    auto copy() const -> set { return *this; }
 
-  /**
-   * @brief
-   *
-   * @return _Self&
-   */
-  auto operator=(const set &) -> set & = delete;
+    /**
+     * @brief
+     *
+     * @return _Self&
+     */
+    auto operator=(const set &) -> set & = delete;
 
-  /**
-   * @brief
-   *
-   * @return _Self&
-   */
-  auto operator=(set &&) noexcept -> set & = default;
+    /**
+     * @brief
+     *
+     * @return _Self&
+     */
+    auto operator=(set &&) noexcept -> set & = default;
 
-  /**
-   * @brief Move Constructor (default)
-   *
-   */
-  set(set<Key> &&) noexcept = default;
+    /**
+     * @brief Move Constructor (default)
+     *
+     */
+    set(set<Key> &&) noexcept = default;
 
-  // private:
-  /**
-   * @brief Copy Constructor (deleted)
-   *
-   * Copy through explicitly the public copy() function!!!
-   */
-  set(const set<Key> &) = default;
+    // private:
+    /**
+     * @brief Copy Constructor (deleted)
+     *
+     * Copy through explicitly the public copy() function!!!
+     */
+    set(const set<Key> &) = default;
 };
 
 /**
@@ -98,7 +98,7 @@ public:
  */
 template <typename Key>
 inline auto operator<(const Key &key, const set<Key> &m) -> bool {
-  return m.contains(key);
+    return m.contains(key);
 }
 
 /**
@@ -109,7 +109,7 @@ inline auto operator<(const Key &key, const set<Key> &m) -> bool {
  * @return size_t
  */
 template <typename Key> inline auto len(const set<Key> &m) -> size_t {
-  return m.size();
+    return m.size();
 }
 
 /**
