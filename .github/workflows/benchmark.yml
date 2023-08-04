@@ -1,16 +1,12 @@
-name: Standalone
+name: Benchmark
 
 on:
   push:
-    branches:
-      - master
-      - main
-  pull_request:
-    branches:
-      - master
-      - main
+    tags:
+      - "*"
 
 env:
+  CTEST_OUTPUT_ON_FAILURE: 1
   CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
 
 jobs:
@@ -26,10 +22,12 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        run: cmake -Sstandalone -Bbuild -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -Sbench -Bbuild/bench -DCMAKE_BUILD_TYPE=Release
 
       - name: build
-        run: cmake --build build -j4
+        run: cmake --build build/bench -j4
 
-      - name: run
-        run: ./build/Bairstow
+      - name: benchmark
+        run: |
+          cd build/bench
+          ctest -V --build-config Release

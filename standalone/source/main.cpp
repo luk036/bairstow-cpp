@@ -1,12 +1,10 @@
-#include <bairstow/greeter.h> // for LanguageCode, Bairstow, LanguageCode::DE
-#include <bairstow/version.h> // for BAIRSTOW_VERSION
+#include <bairstow/greeter.h>
+#include <bairstow/version.h>
 
-#include <cxxopts.hpp>   // for value, OptionAdder, Options, OptionValue
-#include <iostream>      // for string, operator<<, endl, basic_ostream
-#include <memory>        // for shared_ptr
-#include <string>        // for char_traits, hash, operator==
-#include <unordered_map> // for operator==, unordered_map, __hash_map_...
-#include <utility>       // for pair
+#include <cxxopts.hpp>
+#include <iostream>
+#include <string>
+#include <unordered_map>
 
 auto main(int argc, char **argv) -> int {
     const std::unordered_map<std::string, bairstow::LanguageCode> languages{

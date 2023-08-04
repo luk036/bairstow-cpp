@@ -1,15 +1,11 @@
 #include <bairstow/greeter.h>
-#include <fmt/format.h> // for format
-
-// #include <__config>     // for std
-#include <type_traits> // for move
+#include <fmt/format.h>
 
 using namespace bairstow;
-using namespace std;
 
-Bairstow::Bairstow(string _name) : name(_name) {}
+Bairstow::Bairstow(std::string _name) : name(std::move(_name)) {}
 
-auto Bairstow::greet(LanguageCode lang) const -> std::string {
+std::string Bairstow::greet(LanguageCode lang) const {
     switch (lang) {
     default:
     case LanguageCode::EN:

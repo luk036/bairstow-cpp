@@ -1,36 +1,47 @@
-set_languages("c++20")
+set_languages("c++17")
 
 add_rules("mode.debug", "mode.release", "mode.coverage")
-add_requires("fmt 7.1.3", {alias = "fmt"})
--- add_requires("microsoft-gsl", {alias = "ms-gsl"})
 add_requires("doctest", {alias = "doctest"})
+add_requires("fmt 7.1.3", {alias = "fmt"})
+add_requires("benchmark", {alias = "benchmark"})
+
+if is_mode("coverage") then
+    add_cxflags("-ftest-coverage", "-fprofile-arcs", {force = true})
+end
 
 if is_plat("linux") then
     set_warnings("all", "error")
     add_cxflags("-Wconversion", {force = true})
 end
 
-if is_mode("coverage") then
-    add_cxflags("-ftest-coverage", "-fprofile-arcs", {force = true})
-end
-
 target("Bairstow")
     set_kind("static")
     add_includedirs("include", {public = true})
     add_files("source/*.cpp")
-    -- add_packages("fmt")
-    -- add_syslinks("pthread")
-    -- add_packages("ms-gsl")
+    add_packages("fmt")
 
 target("test_bairstow")
     set_kind("binary")
     add_deps("Bairstow")
-    add_includedirs("include", {public = true})
     add_files("test/source/*.cpp")
     add_packages("doctest", "fmt")
-    add_syslinks("pthread")
+    -- add_syslinks("pthread")
 
---
+target("test_fir")
+    set_kind("binary")
+    add_deps("Bairstow")
+    add_files("bench/BM_fir.cpp")
+    add_packages("benchmark", "fmt")
+    -- add_syslinks("pthread")
+
+target("test_autocorr")
+    set_kind("binary")
+    add_deps("Bairstow")
+    add_files("bench/BM_autocorr.cpp")
+    add_packages("benchmark", "fmt")
+    -- add_syslinks("pthread")
+
+
 -- If you want to known more usage about xmake, please see https://xmake.io
 --
 -- ## FAQ
