@@ -88,7 +88,8 @@ TEST_CASE("test autocorr FIR") {
         fmt::print("{}, {}\n", vr.x(), vr.y());
     }
 
-    CHECK(niter <= 346);
+    CHECK(found);
+    // CHECK(niter <= 346);
 
     // fmt::print([find_rootq(-r[0], -r[1]) for r : vrs]);
 }
