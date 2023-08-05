@@ -52,7 +52,7 @@
           <span class="m-breadcrumb"><a href="dir_a3a39ecf17a9ba8619bd35131284472d.html">bairstow</a>/</span>autocorr.hpp <span class="m-thin">file</span>
         </h1>
         <p><span></span></p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -63,16 +63,16 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
         <section id="typedef-members">
           <h2><a href="#typedef-members">Typedefs</a></h2>
           <dl class="m-doc">
-            <dt id="aadcf53f4f28c826e2a27291c182a3a36">
-              using <a href="#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc-self">vec2</a> = <a href="classnumeric_1_1vector2.html" class="m-doc">numeric::<wbr />vector2</a>&lt;double&gt;
+            <dt id="a361bdeffc33f8976a1a9652bcf480edc">
+              using <a href="#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc-self">Vec2</a> = <a href="classnumeric_1_1_vector2.html" class="m-doc">numeric::<wbr />Vector2</a>&lt;double&gt;
             </dt>
             <dd><span></span></dd>
-            <dt id="aa9f007a3d27150ff836f2789fc878c67">
-              using <a href="#aa9f007a3d27150ff836f2789fc878c67" class="m-doc-self">mat2</a> = <a href="classnumeric_1_1matrix2.html" class="m-doc">numeric::<wbr />matrix2</a>&lt;<a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&gt;
+            <dt id="a2bbca40cbb62889bf8f52d848133fba7">
+              using <a href="#a2bbca40cbb62889bf8f52d848133fba7" class="m-doc-self">Mat2</a> = <a href="classnumeric_1_1_matrix2.html" class="m-doc">numeric::<wbr />Matrix2</a>&lt;<a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&gt;
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -80,21 +80,94 @@
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
-            <dt id="a24fc88f765d7991236caf74712bef1a5">
-              <span class="m-doc-wrap-bumper">auto <a href="#a24fc88f765d7991236caf74712bef1a5" class="m-doc-self">initial_autocorr</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa) -&gt; std::vector&lt; vec2 &gt; -&gt; auto</span>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a757205f15907b9ce3821e2161d212477" class="m-doc">initial_autocorr</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa) -&gt; std::vector&lt; Vec2 &gt; -&gt; auto</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="ad1daa50d7fd0524d3354237fcd06b7a5">
-              <span class="m-doc-wrap-bumper">auto <a href="#ad1daa50d7fd0524d3354237fcd06b7a5" class="m-doc-self">pbairstow_autocorr</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa,
-              std::vector&lt;<a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&gt;&amp; vrs,
-              const <a href="classOptions.html" class="m-doc">Options</a>&amp; options) -&gt; std::tuple&lt; unsigned int, bool &gt; -&gt; auto</span>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2ae70867ee900f6bb77c65610b1d8989" class="m-doc">pbairstow_autocorr</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa,
+              std::vector&lt;<a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&gt;&amp; vrs,
+              const <a href="class_options.html" class="m-doc">Options</a>&amp; options) -&gt; std::pair&lt; unsigned int, bool &gt; -&gt; auto</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a9c014098bca8b210cd496fe2d8e5775a">
-              <span class="m-doc-wrap-bumper">void <a href="#a9c014098bca8b210cd496fe2d8e5775a" class="m-doc-self">extract_autocorr</a>(</span><span class="m-doc-wrap"><a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp; vr)</span>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a270fcfedf802909b6740868b334c5497" class="m-doc">extract_autocorr</a>(</span><span class="m-doc-wrap"><a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vr)</span>
             </dt>
-            <dd><span></span></dd>
+            <dd></dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a757205f15907b9ce3821e2161d212477"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a757205f15907b9ce3821e2161d212477" class="m-doc-self">initial_autocorr</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa) -&gt; std::vector&lt; Vec2 &gt;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pa</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::vector&lt;Vec2&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2ae70867ee900f6bb77c65610b1d8989"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2ae70867ee900f6bb77c65610b1d8989" class="m-doc-self">pbairstow_autocorr</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa,
+              std::vector&lt;<a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&gt;&amp; vrs,
+              const <a href="class_options.html" class="m-doc">Options</a>&amp; options) -&gt; std::pair&lt; unsigned int, bool &gt;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pa</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>vrs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>options</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::pair&lt;unsigned int, bool&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a270fcfedf802909b6740868b334c5497"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a270fcfedf802909b6740868b334c5497" class="m-doc-self">extract_autocorr</a>(</span><span class="m-doc-wrap"><a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vr)</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">vr</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
@@ -134,13 +207,13 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Bairstow. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Bairstow. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

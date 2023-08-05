@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>numeric::matrix2 class | Bairstow</title>
+  <title>numeric::Matrix2 class | Bairstow</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -51,40 +51,58 @@
         <h1>
           <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="matrix2_8hpp.html">&lt;bairstow/matrix2.hpp&gt;</a></div>
           <div class="m-doc-template">template&lt;typename T1, typename T2 = T1&gt;</div>
-          <span class="m-breadcrumb"><a href="namespacenumeric.html">numeric</a>::<wbr/></span>matrix2 <span class="m-thin">class</span>
+          <span class="m-breadcrumb"><a href="namespacenumeric.html">numeric</a>::<wbr/></span>Matrix2 <span class="m-thin">class</span>
         </h1>
-        <p><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a></p>
-        <div class="m-block m-default">
+        <p><a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>.</p>
+        <table class="m-table m-fullwidth m-flat">
+          <thead>
+            <tr><th colspan="2">Template parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 1%">T1</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>T2</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
                 <li><a href="#arithmetic-operators">Arithmetic operators</a></li>
               </ul>
             </li>
           </ul>
-        </div>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;typename T1, typename T2 = T1&gt;</div>
-              class <a href="classnumeric_1_1vector2.html" class="m-doc">vector2&lt;T1, T1&gt;</a>
-            </dt>
-            <dd><a href="classnumeric_1_1vector2.html" class="m-doc">vector2</a></dd>
-          </dl>
-        </section>
+        </nav>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper"><a href="#aa7d0a9e422e839bcf59dc8eca9edbef4" class="m-doc">matrix2</a>(</span><span class="m-doc-wrap">T1&amp;&amp; x,
+              <span class="m-doc-wrap-bumper"><a href="#af5f76aa498419d622a7e652ae81ab94a" class="m-doc">Matrix2</a>(</span><span class="m-doc-wrap">T1&amp;&amp; x,
               T2&amp;&amp; y) <span class="m-label m-flat m-primary">constexpr</span> <span class="m-label m-flat m-success">noexcept</span></span>
             </dt>
-            <dd>Construct a new <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a> object.</dd>
+            <dd>Construct a new <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a> object.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a41ca52cbc9de4ebe3a14e3c856b8cb08" class="m-doc">x</a>(</span><span class="m-doc-wrap">) const -&gt; const T1 &amp; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3bf83f64c0441e6e982a836329ba5e5f" class="m-doc">y</a>(</span><span class="m-doc-wrap">) const -&gt; const T2 &amp; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
+            </dt>
+            <dd></dd>
           </dl>
         </section>
         <section id="arithmetic-operators">
@@ -92,81 +110,81 @@
 <p>definie +, -, *, /, +=, -=, *=, /=, etc.</p>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5ab3b31159c124081f4201529543c680" class="m-doc">operator-</a>(</span><span class="m-doc-wrap">) const -&gt; matrix2&lt; T1, T2 &gt; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a332b6a193d213886c2424f4fc78e273f" class="m-doc">operator-</a>(</span><span class="m-doc-wrap">) const -&gt; Matrix2&lt; T1, T2 &gt; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Negate.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename U1, typename U2&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#afc5ddfd13d4f1f8e6747b9537da767ae" class="m-doc">operator+=</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;U1, U2&gt;&amp; other) -&gt; matrix2&lt; T1, T2 &gt; &amp; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#adac7a504c5400a44ef7df8aa6edf52f3" class="m-doc">operator+=</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;U1, U2&gt;&amp; other) -&gt; Matrix2&lt; T1, T2 &gt; &amp; -&gt; <a href="matrix2_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto</span>
             </dt>
             <dd>Add.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename U1, typename U2&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae9279a62e763016874a2501f5376880b" class="m-doc">operator-=</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;U1, U2&gt;&amp; other) -&gt; matrix2&lt; T1, T2 &gt; &amp; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a628ed0c433c8cf320a7d76ffbd1f6c68" class="m-doc">operator-=</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;U1, U2&gt;&amp; other) -&gt; Matrix2&lt; T1, T2 &gt; &amp; -&gt; <a href="matrix2_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto</span>
             </dt>
             <dd>Substract.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename R&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a1b3b06ebd613b6a2b7e6cb7215aa1a92" class="m-doc">operator*=</a>(</span><span class="m-doc-wrap">const R&amp; alpha) -&gt; matrix2&lt; T1, T2 &gt; &amp; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0df6a934c47a57f1a228ddc4c3c7c09f" class="m-doc">operator*=</a>(</span><span class="m-doc-wrap">const R&amp; alpha) -&gt; Matrix2&lt; T1, T2 &gt; &amp; -&gt; <a href="matrix2_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto</span>
             </dt>
             <dd>Multiply.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename R&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae097a2f7c26b8ef27d8126863a51340c" class="m-doc">operator/=</a>(</span><span class="m-doc-wrap">const R&amp; alpha) -&gt; matrix2&lt; T1, T2 &gt; &amp; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac6e1ff4116b563657679a4161e7c0c78" class="m-doc">operator/=</a>(</span><span class="m-doc-wrap">const R&amp; alpha) -&gt; Matrix2&lt; T1, T2 &gt; &amp; -&gt; <a href="matrix2_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto</span>
             </dt>
             <dd>Divide.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename U1, typename U2&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2263f1973107414f66d47951719ef47d" class="m-doc">mdot</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1vector2.html" class="m-doc">vector2</a>&lt;U1, U2&gt;&amp; other) const -&gt; vector2&lt; U1, U2 &gt; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a82a146307a8f13e6258eeba96007c67c" class="m-doc">mdot</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1_vector2.html" class="m-doc">Vector2</a>&lt;U1, U2&gt;&amp; other) const -&gt; Vector2&lt; U1, U2 &gt; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
-            <dd></dd>
+            <dd>Multiply with <a href="classnumeric_1_1_vector2.html" class="m-doc">Vector2</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2b14c08d76b1b407e15d86cbd8418162" class="m-doc">det</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a20061d238c90826ad9e6a822037c707c" class="m-doc">det</a>(</span><span class="m-doc-wrap">) const -&gt; double -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
-            <dd></dd>
+            <dd>Det.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename U1, typename U2&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a77766d238a34a8a7d3f3b283feb6bfb6" class="m-doc">operator+</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;T1, T2&gt; x,
-              const <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;U1, U2&gt;&amp; y) -&gt; matrix2&lt; T1, T2 &gt; -&gt; friend auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3ba4b0a8e419cbcb89c6c4229399f6b1" class="m-doc">operator+</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;T1, T2&gt; x,
+              const <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;U1, U2&gt;&amp; y) -&gt; Matrix2&lt; T1, T2 &gt; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Add.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename U1, typename U2&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7e88df674e09178e0e63b92ff4365261" class="m-doc">operator-</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;T1, T2&gt; x,
-              const <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;U1, U2&gt;&amp; y) -&gt; matrix2&lt; T1, T2 &gt; -&gt; friend auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9bc932cd09d8f43bb7a42be01768663a" class="m-doc">operator-</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;T1, T2&gt; x,
+              const <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;U1, U2&gt;&amp; y) -&gt; Matrix2&lt; T1, T2 &gt; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Substract.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename R&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7f017e4a18a8836994a4caff1d11d492" class="m-doc">operator*</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;T1, T2&gt; x,
-              const R&amp; alpha) -&gt; matrix2&lt; T1, T2 &gt; -&gt; friend auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4ab5e106faddbc6d024d8f2593f34de5" class="m-doc">operator*</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;T1, T2&gt; x,
+              const R&amp; alpha) -&gt; Matrix2&lt; T1, T2 &gt; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Multiply by a scalar.</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename R&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa6bc35bfe8fe23530c069a9f02dd50fc" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">const R&amp; alpha,
-              <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;T1, T2&gt; x) -&gt; matrix2&lt; T1, T2 &gt; -&gt; friend auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a63bb4a62a730165c1b09819cf6c54345" class="m-doc">operator*</a>(</span><span class="m-doc-wrap">const R&amp; alpha,
+              <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;T1, T2&gt; x) -&gt; Matrix2&lt; T1, T2 &gt; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Multiply (by a scalar)</dd>
             <dt>
               <div class="m-doc-template">template&lt;typename R&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad19a4629a1ca684ff02b26c8dfe6e752" class="m-doc">operator/</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;T1, T2&gt; x,
-              const R&amp; alpha) -&gt; matrix2&lt; T1, T2 &gt; -&gt; friend auto <span class="m-label m-flat m-primary">constexpr</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a34297bc199c66eacdbca6567beeda54f" class="m-doc">operator/</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;T1, T2&gt; x,
+              const R&amp; alpha) -&gt; Matrix2&lt; T1, T2 &gt; -&gt; auto <span class="m-label m-flat m-primary">constexpr</span></span>
             </dt>
             <dd>Divide (by a scalar)</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="aa7d0a9e422e839bcf59dc8eca9edbef4"><div>
+          <section class="m-doc-details" id="af5f76aa498419d622a7e652ae81ab94a"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
               </div>
-              <span class="m-doc-wrap-bumper"> numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa7d0a9e422e839bcf59dc8eca9edbef4" class="m-doc-self">matrix2</a>(</span><span class="m-doc-wrap">T1&amp;&amp; x,
+              <span class="m-doc-wrap-bumper"> numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af5f76aa498419d622a7e652ae81ab94a" class="m-doc-self">Matrix2</a>(</span><span class="m-doc-wrap">T1&amp;&amp; x,
               T2&amp;&amp; y) <span class="m-label m-primary">constexpr</span> <span class="m-label m-success">noexcept</span></span></span>
             </h3>
-            <p>Construct a new <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a> object.</p>
+            <p>Construct a new <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a> object.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -183,30 +201,62 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a5ab3b31159c124081f4201529543c680"><div>
+          <section class="m-doc-details" id="a41ca52cbc9de4ebe3a14e3c856b8cb08"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ab3b31159c124081f4201529543c680" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap">) const -&gt; matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a41ca52cbc9de4ebe3a14e3c856b8cb08" class="m-doc-self">x</a>(</span><span class="m-doc-wrap">) const -&gt; const T1 &amp; <span class="m-label m-primary">constexpr</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>constexpr const T1&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3bf83f64c0441e6e982a836329ba5e5f"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T1, typename T2&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3bf83f64c0441e6e982a836329ba5e5f" class="m-doc-self">y</a>(</span><span class="m-doc-wrap">) const -&gt; const T2 &amp; <span class="m-label m-primary">constexpr</span></span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>constexpr const T2&amp;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a332b6a193d213886c2424f4fc78e273f"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T1, typename T2&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a332b6a193d213886c2424f4fc78e273f" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap">) const -&gt; Matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Negate.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a></td>
+                  <td>Matrix2&lt;T1, T2&gt;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="afc5ddfd13d4f1f8e6747b9537da767ae"><div>
+          <section class="m-doc-details" id="adac7a504c5400a44ef7df8aa6edf52f3"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
                 template&lt;typename U1, typename U2&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afc5ddfd13d4f1f8e6747b9537da767ae" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;U1, U2&gt;&amp; other) -&gt; matrix2&lt; T1, T2 &gt; &amp; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="matrix2_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adac7a504c5400a44ef7df8aa6edf52f3" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;U1, U2&gt;&amp; other) -&gt; Matrix2&lt; T1, T2 &gt; &amp;</span></span>
             </h3>
             <p>Add.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -228,25 +278,25 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>other&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>other</td>
                   <td></td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&amp;</td>
+                  <td>Matrix2&lt;T1, T2&gt;&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ae9279a62e763016874a2501f5376880b"><div>
+          <section class="m-doc-details" id="a628ed0c433c8cf320a7d76ffbd1f6c68"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
                 template&lt;typename U1, typename U2&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae9279a62e763016874a2501f5376880b" class="m-doc-self">operator-=</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;U1, U2&gt;&amp; other) -&gt; matrix2&lt; T1, T2 &gt; &amp; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="matrix2_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a628ed0c433c8cf320a7d76ffbd1f6c68" class="m-doc-self">operator-=</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;U1, U2&gt;&amp; other) -&gt; Matrix2&lt; T1, T2 &gt; &amp;</span></span>
             </h3>
             <p>Substract.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -268,25 +318,25 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>other&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>other</td>
                   <td></td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&amp;</td>
+                  <td>Matrix2&lt;T1, T2&gt;&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a1b3b06ebd613b6a2b7e6cb7215aa1a92"><div>
+          <section class="m-doc-details" id="a0df6a934c47a57f1a228ddc4c3c7c09f"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
                 template&lt;typename R&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b3b06ebd613b6a2b7e6cb7215aa1a92" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap">const R&amp; alpha) -&gt; matrix2&lt; T1, T2 &gt; &amp; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="matrix2_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0df6a934c47a57f1a228ddc4c3c7c09f" class="m-doc-self">operator*=</a>(</span><span class="m-doc-wrap">const R&amp; alpha) -&gt; Matrix2&lt; T1, T2 &gt; &amp;</span></span>
             </h3>
             <p>Multiply.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -304,25 +354,25 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>alpha&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>alpha</td>
                   <td></td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&amp;</td>
+                  <td>Matrix2&lt;T1, T2&gt;&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ae097a2f7c26b8ef27d8126863a51340c"><div>
+          <section class="m-doc-details" id="ac6e1ff4116b563657679a4161e7c0c78"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
                 template&lt;typename R&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae097a2f7c26b8ef27d8126863a51340c" class="m-doc-self">operator/=</a>(</span><span class="m-doc-wrap">const R&amp; alpha) -&gt; matrix2&lt; T1, T2 &gt; &amp; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="matrix2_8hpp.html#a46d983a6cf6b8e418426de1b7e33dc46" class="m-doc">CONSTEXPR14</a> auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac6e1ff4116b563657679a4161e7c0c78" class="m-doc-self">operator/=</a>(</span><span class="m-doc-wrap">const R&amp; alpha) -&gt; Matrix2&lt; T1, T2 &gt; &amp;</span></span>
             </h3>
             <p>Divide.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -340,26 +390,27 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>alpha&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>alpha</td>
                   <td></td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&amp;</td>
+                  <td>Matrix2&lt;T1, T2&gt;&amp;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a2263f1973107414f66d47951719ef47d"><div>
+          <section class="m-doc-details" id="a82a146307a8f13e6258eeba96007c67c"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
                 template&lt;typename U1, typename U2&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2263f1973107414f66d47951719ef47d" class="m-doc-self">mdot</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1vector2.html" class="m-doc">vector2</a>&lt;U1, U2&gt;&amp; other) const -&gt; vector2&lt; U1, U2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a82a146307a8f13e6258eeba96007c67c" class="m-doc-self">mdot</a>(</span><span class="m-doc-wrap">const <a href="classnumeric_1_1_vector2.html" class="m-doc">Vector2</a>&lt;U1, U2&gt;&amp; other) const -&gt; Vector2&lt; U1, U2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
+            <p>Multiply with <a href="classnumeric_1_1_vector2.html" class="m-doc">Vector2</a>.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Template parameters</th></tr>
@@ -386,35 +437,36 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>constexpr auto</td>
+                  <td>Vector2&lt;U1, U2&gt;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a2b14c08d76b1b407e15d86cbd8418162"><div>
+          <section class="m-doc-details" id="a20061d238c90826ad9e6a822037c707c"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
               </div>
-              <span class="m-doc-wrap-bumper">auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b14c08d76b1b407e15d86cbd8418162" class="m-doc-self">det</a>(</span><span class="m-doc-wrap">) const -&gt; double <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a20061d238c90826ad9e6a822037c707c" class="m-doc-self">det</a>(</span><span class="m-doc-wrap">) const -&gt; double <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
+            <p>Det.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
                   <th style="width: 1%">Returns</th>
-                  <td>constexpr auto</td>
+                  <td>double</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a77766d238a34a8a7d3f3b283feb6bfb6"><div>
+          <section class="m-doc-details" id="a3ba4b0a8e419cbcb89c6c4229399f6b1"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
                 template&lt;typename U1, typename U2&gt;
               </div>
-              <span class="m-doc-wrap-bumper">friend auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a77766d238a34a8a7d3f3b283feb6bfb6" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;T1, T2&gt; x,
-              const <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;U1, U2&gt;&amp; y) -&gt; matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3ba4b0a8e419cbcb89c6c4229399f6b1" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;T1, T2&gt; x,
+              const <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;U1, U2&gt;&amp; y) -&gt; Matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Add.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -436,30 +488,30 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>x&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>x</td>
                   <td></td>
                 </tr>
                 <tr>
-                  <td>y&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>y</td>
                   <td></td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a></td>
+                  <td>Matrix2&lt;T1, T2&gt;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a7e88df674e09178e0e63b92ff4365261"><div>
+          <section class="m-doc-details" id="a9bc932cd09d8f43bb7a42be01768663a"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
                 template&lt;typename U1, typename U2&gt;
               </div>
-              <span class="m-doc-wrap-bumper">friend auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7e88df674e09178e0e63b92ff4365261" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;T1, T2&gt; x,
-              const <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;U1, U2&gt;&amp; y) -&gt; matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9bc932cd09d8f43bb7a42be01768663a" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;T1, T2&gt; x,
+              const <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;U1, U2&gt;&amp; y) -&gt; Matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Substract.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -492,19 +544,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a></td>
+                  <td>Matrix2&lt;T1, T2&gt;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a7f017e4a18a8836994a4caff1d11d492"><div>
+          <section class="m-doc-details" id="a4ab5e106faddbc6d024d8f2593f34de5"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
                 template&lt;typename R&gt;
               </div>
-              <span class="m-doc-wrap-bumper">friend auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7f017e4a18a8836994a4caff1d11d492" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;T1, T2&gt; x,
-              const R&amp; alpha) -&gt; matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4ab5e106faddbc6d024d8f2593f34de5" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;T1, T2&gt; x,
+              const R&amp; alpha) -&gt; Matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Multiply by a scalar.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -533,19 +585,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a></td>
+                  <td>Matrix2&lt;T1, T2&gt;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="aa6bc35bfe8fe23530c069a9f02dd50fc"><div>
+          <section class="m-doc-details" id="a63bb4a62a730165c1b09819cf6c54345"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
                 template&lt;typename R&gt;
               </div>
-              <span class="m-doc-wrap-bumper">friend auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa6bc35bfe8fe23530c069a9f02dd50fc" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">const R&amp; alpha,
-              <a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;T1, T2&gt; x) -&gt; matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a63bb4a62a730165c1b09819cf6c54345" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">const R&amp; alpha,
+              <a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;T1, T2&gt; x) -&gt; Matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Multiply (by a scalar)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -574,19 +626,19 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a></td>
+                  <td>Matrix2&lt;T1, T2&gt;</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad19a4629a1ca684ff02b26c8dfe6e752"><div>
+          <section class="m-doc-details" id="a34297bc199c66eacdbca6567beeda54f"><div>
             <h3>
               <div class="m-doc-template">
                 template&lt;typename T1, typename T2&gt;
                 template&lt;typename R&gt;
               </div>
-              <span class="m-doc-wrap-bumper">friend auto numeric::<wbr />matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad19a4629a1ca684ff02b26c8dfe6e752" class="m-doc-self">operator/</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a>&lt;T1, T2&gt; x,
-              const R&amp; alpha) -&gt; matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
+              <span class="m-doc-wrap-bumper">auto numeric::<wbr />Matrix2&lt;T1, T2&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a34297bc199c66eacdbca6567beeda54f" class="m-doc-self">operator/</a>(</span><span class="m-doc-wrap"><a href="classnumeric_1_1_matrix2.html" class="m-doc">Matrix2</a>&lt;T1, T2&gt; x,
+              const R&amp; alpha) -&gt; Matrix2&lt; T1, T2 &gt; <span class="m-label m-primary">constexpr</span></span></span>
             </h3>
             <p>Divide (by a scalar)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -615,7 +667,7 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td><a href="classnumeric_1_1matrix2.html" class="m-doc">matrix2</a></td>
+                  <td>Matrix2&lt;T1, T2&gt;</td>
                 </tr>
               </tfoot>
             </table>
@@ -659,13 +711,13 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Bairstow. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Bairstow. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

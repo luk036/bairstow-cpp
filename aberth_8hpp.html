@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Options class | Bairstow</title>
+  <title>bairstow/aberth.hpp file | Bairstow</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -49,33 +49,92 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          Options <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="rootfinding_8hpp.html">&lt;bairstow/rootfinding.hpp&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_a3a39ecf17a9ba8619bd35131284472d.html">bairstow</a>/</span>aberth.hpp <span class="m-thin">file</span>
         </h1>
         <p><span></span></p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#pub-attribs">Public variables</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
-        </div>
-        <section id="pub-attribs">
-          <h2><a href="#pub-attribs">Public variables</a></h2>
+        </nav>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
-            <dt id="a972ef40b590fdba7980fe96a98acad03">
-              unsigned int <a href="#a972ef40b590fdba7980fe96a98acad03" class="m-doc-self">max_iter</a>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa54ea859798d86a055026776208848af" class="m-doc">initial_aberth</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa) -&gt; std::vector&lt; std::complex&lt; double &gt; &gt; -&gt; auto</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="adb8eeba4465a9fd9f049386980d38dec">
-              double <a href="#adb8eeba4465a9fd9f049386980d38dec" class="m-doc-self">tol</a>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a09fcc886796048935b16a35403318d01" class="m-doc">aberth</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa,
+              std::vector&lt;std::complex&lt;double&gt;&gt;&amp; zs,
+              const <a href="class_options.html" class="m-doc">Options</a>&amp; options) -&gt; std::pair&lt; unsigned int, bool &gt; -&gt; auto</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Aberth&#x27;s method is a method for finding the roots of a polynomial that is robust but requires complex arithmetic even if the polynomial is real. This is because it starts with complex initial approximations.</dd>
           </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aa54ea859798d86a055026776208848af"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa54ea859798d86a055026776208848af" class="m-doc-self">initial_aberth</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa) -&gt; std::vector&lt; std::complex&lt; double &gt; &gt;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pa</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::vector&lt;std::complex&lt;double&gt;&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a09fcc886796048935b16a35403318d01"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a09fcc886796048935b16a35403318d01" class="m-doc-self">aberth</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa,
+              std::vector&lt;std::complex&lt;double&gt;&gt;&amp; zs,
+              const <a href="class_options.html" class="m-doc">Options</a>&amp; options) -&gt; std::pair&lt; unsigned int, bool &gt;</span></span>
+            </h3>
+            <p>Aberth&#x27;s method is a method for finding the roots of a polynomial that is robust but requires complex arithmetic even if the polynomial is real. This is because it starts with complex initial approximations.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pa</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>zs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>options</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::pair&lt;unsigned int, bool&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>
@@ -115,13 +174,13 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Bairstow. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Bairstow. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>

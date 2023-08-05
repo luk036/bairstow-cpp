@@ -52,7 +52,7 @@
           <span class="m-breadcrumb"><a href="dir_a3a39ecf17a9ba8619bd35131284472d.html">bairstow</a>/</span>rootfinding.hpp <span class="m-thin">file</span>
         </h1>
         <p><span></span></p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -64,12 +64,12 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
         <section id="nested-classes">
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classOptions.html" class="m-doc">Options</a>
+              class <a href="class_options.html" class="m-doc">Options</a>
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -77,12 +77,12 @@
         <section id="typedef-members">
           <h2><a href="#typedef-members">Typedefs</a></h2>
           <dl class="m-doc">
-            <dt id="aadcf53f4f28c826e2a27291c182a3a36">
-              using <a href="#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc-self">vec2</a> = <a href="classnumeric_1_1vector2.html" class="m-doc">numeric::<wbr />vector2</a>&lt;double&gt;
+            <dt id="a361bdeffc33f8976a1a9652bcf480edc">
+              using <a href="#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc-self">Vec2</a> = <a href="classnumeric_1_1_vector2.html" class="m-doc">numeric::<wbr />Vector2</a>&lt;double&gt;
             </dt>
             <dd><span></span></dd>
-            <dt id="aa9f007a3d27150ff836f2789fc878c67">
-              using <a href="#aa9f007a3d27150ff836f2789fc878c67" class="m-doc-self">mat2</a> = <a href="classnumeric_1_1matrix2.html" class="m-doc">numeric::<wbr />matrix2</a>&lt;<a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&gt;
+            <dt id="a2bbca40cbb62889bf8f52d848133fba7">
+              using <a href="#a2bbca40cbb62889bf8f52d848133fba7" class="m-doc-self">Mat2</a> = <a href="classnumeric_1_1_matrix2.html" class="m-doc">numeric::<wbr />Matrix2</a>&lt;<a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&gt;
             </dt>
             <dd><span></span></dd>
           </dl>
@@ -91,40 +91,174 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad2382a6be87cc46e3035dbad6e69cc24" class="m-doc">makeadjoint</a>(</span><span class="m-doc-wrap">const <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp; vr,
-              <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp;&amp; vp) -&gt; mat2 -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a63f5287bdb35b5fc148634dd825f9a1b" class="m-doc">initial_guess</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa) -&gt; std::vector&lt; Vec2 &gt; -&gt; auto</span>
             </dt>
             <dd></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac323cd05a94b53a34a340d4bd660ae24" class="m-doc">delta</a>(</span><span class="m-doc-wrap">const <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp; vA,
-              const <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp; vr,
-              <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp;&amp; vp) -&gt; vec2 -&gt; auto</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa1e5d372b8afb3a0598a2543dd5981a7" class="m-doc">pbairstow_even</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa,
+              std::vector&lt;<a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&gt;&amp; vrs,
+              const <a href="class_options.html" class="m-doc">Options</a>&amp; options) -&gt; std::pair&lt; unsigned int, bool &gt; -&gt; auto</span>
             </dt>
             <dd></dd>
-            <dt id="aef130f8837cf42bbe6ee102e11c97338">
-              <span class="m-doc-wrap-bumper">auto <a href="#aef130f8837cf42bbe6ee102e11c97338" class="m-doc-self">horner</a>(</span><span class="m-doc-wrap">std::vector&lt;double&gt;&amp; pb,
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6d260fd747e113c8e5288b9079950cf1" class="m-doc">horner</a>(</span><span class="m-doc-wrap">std::vector&lt;double&gt;&amp; pb,
               std::size_t n,
-              const <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp; vr) -&gt; vec2 -&gt; auto</span>
+              const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vr) -&gt; Vec2 -&gt; auto</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a0ac8f0f624bbe36af7849be92a9d77fd">
-              <span class="m-doc-wrap-bumper">auto <a href="#a0ac8f0f624bbe36af7849be92a9d77fd" class="m-doc-self">initial_guess</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa) -&gt; std::vector&lt; vec2 &gt; -&gt; auto</span>
+            <dd>Horner&#x27;s rule.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0a241f80ca028f09e7510fae9ab148b7" class="m-doc">suppress</a>(</span><span class="m-doc-wrap"><a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vA,
+              <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vA1,
+              const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vri,
+              const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vrj) -&gt; void -&gt; auto</span>
             </dt>
-            <dd><span></span></dd>
-            <dt id="a02d1261874bdaa3842512045fe54b266">
-              <span class="m-doc-wrap-bumper">auto <a href="#a02d1261874bdaa3842512045fe54b266" class="m-doc-self">pbairstow_even</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa,
-              std::vector&lt;<a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&gt;&amp; vrs,
-              const <a href="classOptions.html" class="m-doc">Options</a>&amp; options) -&gt; std::tuple&lt; unsigned int, bool &gt; -&gt; auto</span>
+            <dd>zero suppression</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#acdd4a75637c06b2016662da6c28c59fe" class="m-doc">makeadjoint</a>(</span><span class="m-doc-wrap">const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vr,
+              <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp;&amp; vp) -&gt; Mat2 -&gt; auto</span>
             </dt>
-            <dd><span></span></dd>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ace54b464cea5d7e37b159746011ffcbc" class="m-doc">delta</a>(</span><span class="m-doc-wrap">const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vA,
+              const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vr,
+              <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp;&amp; vp) -&gt; Vec2 -&gt; auto</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a436861614fc608762211106f7e518c8c" class="m-doc">horner_eval</a>(</span><span class="m-doc-wrap">std::vector&lt;double&gt; pb,
+              std::size_t n,
+              const double&amp; z) -&gt; double -&gt; auto</span>
+            </dt>
+            <dd></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ad2382a6be87cc46e3035dbad6e69cc24"><div>
+          <section class="m-doc-details" id="a63f5287bdb35b5fc148634dd825f9a1b"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad2382a6be87cc46e3035dbad6e69cc24" class="m-doc-self">makeadjoint</a>(</span><span class="m-doc-wrap">const <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp; vr,
-              <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp;&amp; vp) -&gt; mat2</span></span>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a63f5287bdb35b5fc148634dd825f9a1b" class="m-doc-self">initial_guess</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa) -&gt; std::vector&lt; Vec2 &gt;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pa</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::vector&lt;Vec2&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa1e5d372b8afb3a0598a2543dd5981a7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa1e5d372b8afb3a0598a2543dd5981a7" class="m-doc-self">pbairstow_even</a>(</span><span class="m-doc-wrap">const std::vector&lt;double&gt;&amp; pa,
+              std::vector&lt;<a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&gt;&amp; vrs,
+              const <a href="class_options.html" class="m-doc">Options</a>&amp; options) -&gt; std::pair&lt; unsigned int, bool &gt;</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pa</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>vrs</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>options</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>std::pair&lt;unsigned int, bool&gt;</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6d260fd747e113c8e5288b9079950cf1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6d260fd747e113c8e5288b9079950cf1" class="m-doc-self">horner</a>(</span><span class="m-doc-wrap">std::vector&lt;double&gt;&amp; pb,
+              std::size_t n,
+              const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vr) -&gt; Vec2</span></span>
+            </h3>
+            <p>Horner&#x27;s rule.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pb</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>vr</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Vec2</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Horner&#x27;s rule is a method for evaluating a polynomial of degree n at a given point x. It involves rewriting the polynomial as a nested multiplication and addition of the form:</p><p>P(x) = a_0 + x(a_1 + x(a_2 + ... + x(a_{n-1} + x(a_n))...))</p><p>This form allows for efficient evaluation of the polynomial at a given point x using only n multiplications and n additions. Horner&#x27;s rule is commonly used in numerical methods for polynomial evaluation and interpolation.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0a241f80ca028f09e7510fae9ab148b7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a241f80ca028f09e7510fae9ab148b7" class="m-doc-self">suppress</a>(</span><span class="m-doc-wrap"><a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vA,
+              <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vA1,
+              const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vri,
+              const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vrj) -&gt; void</span></span>
+            </h3>
+            <p>zero suppression</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">vA&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>vA1&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>vri&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>vrj&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+<p>zero suppression is a technique used in the Bairstow method to find the coefficients of the linear remainder of a deflated polynomial without explicitly constructing the deflated polynomial. The goal of zero suppression is to perform the Bairstow process without the need for complex arithmetic within iterations. The technique involves finding the coefficients of the linear remainder of the deflated polynomial using the coefficients of the linear remainder of the original polynomial and the known factor of the original polynomial.</p>
+          </div></section>
+          <section class="m-doc-details" id="acdd4a75637c06b2016662da6c28c59fe"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acdd4a75637c06b2016662da6c28c59fe" class="m-doc-self">makeadjoint</a>(</span><span class="m-doc-wrap">const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vr,
+              <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp;&amp; vp) -&gt; Mat2</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -143,16 +277,16 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>mat2</td>
+                  <td>Mat2</td>
                 </tr>
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ac323cd05a94b53a34a340d4bd660ae24"><div>
+          <section class="m-doc-details" id="ace54b464cea5d7e37b159746011ffcbc"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac323cd05a94b53a34a340d4bd660ae24" class="m-doc-self">delta</a>(</span><span class="m-doc-wrap">const <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp; vA,
-              const <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp; vr,
-              <a href="autocorr_8hpp.html#aadcf53f4f28c826e2a27291c182a3a36" class="m-doc">vec2</a>&amp;&amp; vp) -&gt; vec2</span></span>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ace54b464cea5d7e37b159746011ffcbc" class="m-doc-self">delta</a>(</span><span class="m-doc-wrap">const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vA,
+              const <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp; vr,
+              <a href="autocorr_8hpp.html#a361bdeffc33f8976a1a9652bcf480edc" class="m-doc">Vec2</a>&amp;&amp; vp) -&gt; Vec2</span></span>
             </h3>
             <table class="m-table m-fullwidth m-flat">
               <thead>
@@ -175,7 +309,39 @@
               <tfoot>
                 <tr>
                   <th>Returns</th>
-                  <td>mat2</td>
+                  <td>Mat2</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a436861614fc608762211106f7e518c8c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">auto </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a436861614fc608762211106f7e518c8c" class="m-doc-self">horner_eval</a>(</span><span class="m-doc-wrap">std::vector&lt;double&gt; pb,
+              std::size_t n,
+              const double&amp; z) -&gt; double</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pb&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>n&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>z</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>double</td>
                 </tr>
               </tfoot>
             </table>
@@ -219,13 +385,13 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
-        <p>Bairstow. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+        <p>Bairstow. Created with <a href="https://doxygen.org/">Doxygen</a> 1.9.7 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
       </div>
     </div>
   </div>
