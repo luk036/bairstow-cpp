@@ -1,7 +1,6 @@
 [![Actions Status](https://github.com/luk036/bairstow-cpp/workflows/MacOS/badge.svg)](https://github.com/luk036/bairstow-cpp/actions)
 [![Actions Status](https://github.com/luk036/bairstow-cpp/workflows/Windows/badge.svg)](https://github.com/luk036/bairstow-cpp/actions)
 [![Actions Status](https://github.com/luk036/bairstow-cpp/workflows/Ubuntu/badge.svg)](https://github.com/luk036/bairstow-cpp/actions)
-[![Actions Status](https://github.com/luk036/bairstow-cpp/workflows/Style/badge.svg)](https://github.com/luk036/bairstow-cpp/actions)
 [![Actions Status](https://github.com/luk036/bairstow-cpp/workflows/Install/badge.svg)](https://github.com/luk036/bairstow-cpp/actions)
 [![codecov](https://codecov.io/gh/luk036/bairstow-cpp/branch/master/graph/badge.svg)](https://codecov.io/gh/luk036/bairstow-cpp)
 

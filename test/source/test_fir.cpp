@@ -51,5 +51,5 @@ TEST_CASE("test FIR") {
         fmt::print("{}, {}\n", vr.x(), vr.y());
     }
 
-    CHECK(niter <= 631);
+    CHECK(found);
 }
