@@ -1,10 +1,12 @@
-#include "Options.h"
+#include <rayon/iter/par_iter.h>
+
 #include <algorithm>
 #include <cmath>
 #include <complex>
 #include <numeric>
-#include <rayon/iter/par_iter.h>
 #include <vector>
+
+#include "Options.h"
 
 const double TWO_PI = 2 * M_PI;
 
@@ -18,8 +20,7 @@ std::complex<double> horner_eval_c(const std::vector<double> &coeffs,
 }
 
 std::pair<size_t, bool> aberth_mt(const std::vector<double> &coeffs,
-                                  std::vector<std::complex<double>> &zs,
-                                  const Options &options) {
+                                  std::vector<std::complex<double>> &zs, const Options &options) {
     size_t m_rs = zs.size();
     size_t degree = coeffs.size() - 1;
     std::vector<double> pb(degree);

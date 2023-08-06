@@ -1,14 +1,14 @@
-#include <bairstow/ThreadPool.h>    // for ThreadPool
-#include <bairstow/robin.hpp>       // for Robin
-#include <bairstow/rootfinding.hpp> // for Options
+#include <bairstow/ThreadPool.h>  // for ThreadPool
 
-#include <cmath>      // for acos, cos, sin
-#include <complex>    // for complex, operator*, operator+
-#include <functional> // for __base
-#include <future>     // for future
-#include <thread>     // for thread
-#include <utility>    // for pair
-#include <vector>     // for vector, vector<>::reference, __v...
+#include <bairstow/robin.hpp>        // for Robin
+#include <bairstow/rootfinding.hpp>  // for Options
+#include <cmath>                     // for acos, cos, sin
+#include <complex>                   // for complex, operator*, operator+
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <utility>                   // for pair
+#include <vector>                    // for vector, vector<>::reference, __v...
 
 using std::cos;
 using std::sin;
@@ -24,8 +24,7 @@ using Complex = std::complex<double>;
  * @param[in] r
  * @return double
  */
-template <typename C, typename Tp>
-inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
+template <typename C, typename Tp> inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
     Tp res = coeffs[0];
     for (auto i = 1U; i != coeffs.size(); ++i) {
         res = res * z + coeffs[i];
@@ -69,13 +68,12 @@ auto initial_aberth(const vector<double> &pa) -> vector<Complex> {
  * @param[in] options maximum iterations and tolorance
  * @return std::pair<unsigned int, bool>
  */
-auto aberth(const vector<double> &pa, vector<Complex> &zs,
-            const Options &options = Options())
+auto aberth(const vector<double> &pa, vector<Complex> &zs, const Options &options = Options())
     -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
 
     const auto m = zs.size();
-    const auto degree = pa.size() - 1; // degree, assume even
+    const auto degree = pa.size() - 1;  // degree, assume even
     const auto rr = fun::Robin<size_t>(m);
     auto coeffs = vector<double>(degree);
     for (auto i = 0U; i != degree; ++i) {
@@ -95,7 +93,7 @@ auto aberth(const vector<double> &pa, vector<Complex> &zs,
                 for (auto j : rr.exclude(i)) {
                     P1 -= P / (zi - zs[j]);
                 }
-                zs[i] -= P / P1; // Gauss-Seidel fashion
+                zs[i] -= P / P1;  // Gauss-Seidel fashion
                 return tol_i;
             }));
         }

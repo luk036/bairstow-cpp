@@ -1,19 +1,19 @@
-#include <bairstow/ThreadPool.h>    // for ThreadPool
-#include <bairstow/robin.hpp>       // for Robin
-#include <bairstow/rootfinding.hpp> // for Vec2, delta, Options, horner_eval
-#include <bairstow/vector2.hpp>     // for operator-, Vector2
+#include <bairstow/ThreadPool.h>  // for ThreadPool
 
-#include <cmath>       // for abs, acos, cos, pow
-#include <cstddef>     // for size_t
-#include <functional>  // for __base
-#include <future>      // for future
-#include <thread>      // for thread
-#include <type_traits> // for move
-#include <utility>     // for pair
-#include <vector>      // for vector, vector<>::reference, __v...
+#include <bairstow/robin.hpp>        // for Robin
+#include <bairstow/rootfinding.hpp>  // for Vec2, delta, Options, horner_eval
+#include <bairstow/vector2.hpp>      // for operator-, Vector2
+#include <cmath>                     // for abs, acos, cos, pow
+#include <cstddef>                   // for size_t
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <type_traits>               // for move
+#include <utility>                   // for pair
+#include <vector>                    // for vector, vector<>::reference, __v...
 
 #ifndef M_PI
-#define M_PI 3.14159265358979323846264338327950288
+#    define M_PI 3.14159265358979323846264338327950288
 #endif
 
 /**
@@ -52,8 +52,7 @@ auto initial_autocorr(const std::vector<double> &pa) -> std::vector<Vec2> {
  * @return std::pair<unsigned int, bool>
  */
 auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
-                        const Options &options = Options())
-    -> std::pair<unsigned int, bool> {
+                        const Options &options = Options()) -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
 
     const auto M = vrs.size();
@@ -65,24 +64,21 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
         for (auto i = 0U; i != M; ++i) {
             results.emplace_back(pool.enqueue([&, i]() -> double {
                 auto pb = pa;
-                const auto N = pa.size() - 1; // degree, assume even
+                const auto N = pa.size() - 1;  // degree, assume even
                 const auto &vri = vrs[i];
                 auto vA = horner(pb, N, vri);
                 const auto tol_i = std::max(std::abs(vA.x()), std::abs(vA.y()));
                 auto vA1 = horner(pb, N - 2, vri);
-                for (auto j : rr.exclude(i)) { // exclude i
-                    const auto vrj = vrs[j];   // make a copy, don't reference!
+                for (auto j : rr.exclude(i)) {  // exclude i
+                    const auto vrj = vrs[j];    // make a copy, don't reference!
                     suppress(vA, vA1, vri, vrj);
-                    const auto vrjn =
-                        numeric::Vector2<double>(-vrj.x(), 1.0) / vrj.y();
+                    const auto vrjn = numeric::Vector2<double>(-vrj.x(), 1.0) / vrj.y();
                     suppress(vA, vA1, vri, vrjn);
                 }
-                const auto vrin =
-                    numeric::Vector2<double>(-vri.x(), 1.0) / vri.y();
+                const auto vrin = numeric::Vector2<double>(-vri.x(), 1.0) / vri.y();
                 suppress(vA, vA1, vri, vrin);
 
-                vrs[i] -=
-                    delta(vA, vri, std::move(vA1)); // Gauss-Seidel fashion
+                vrs[i] -= delta(vA, vri, std::move(vA1));  // Gauss-Seidel fashion
                 return tol_i;
             }));
         }
@@ -118,12 +114,12 @@ void extract_autocorr(Vec2 &vr) {
     const auto &q = vr.y();
     const auto hr = r / 2.0;
     const auto d = hr * hr + q;
-    if (d < 0.0) { // complex conjugate root
+    if (d < 0.0) {  // complex conjugate root
         if (q < -1.0) {
             vr = Vec2{-r, 1.0} / q;
         }
         // else no need to change
-    } else { // two real roots
+    } else {  // two real roots
         auto a1 = hr + (hr >= 0.0 ? sqrt(d) : -sqrt(d));
         auto a2 = -q / a1;
         if (std::abs(a1) > 1.0) {

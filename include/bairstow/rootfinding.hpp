@@ -37,9 +37,8 @@ extern auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2>;
  * @param options
  * @return std::pair<unsigned int, bool>
  */
-extern auto pbairstow_even(const std::vector<double> &pa,
-                           std::vector<Vec2> &vrs, const Options &options)
-    -> std::pair<unsigned int, bool>;
+extern auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
+                           const Options &options) -> std::pair<unsigned int, bool>;
 
 /**
  * @brief Horner's rule
@@ -59,8 +58,7 @@ extern auto pbairstow_even(const std::vector<double> &pa,
  * @param vr
  * @return Vec2
  */
-extern auto horner(std::vector<double> &pb, std::size_t n, const Vec2 &vr)
-    -> Vec2;
+extern auto horner(std::vector<double> &pb, std::size_t n, const Vec2 &vr) -> Vec2;
 
 /**
  * @brief zero suppression
@@ -79,8 +77,7 @@ extern auto horner(std::vector<double> &pb, std::size_t n, const Vec2 &vr)
  * @param[in] vri
  * @param[in] vrj
  */
-extern auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj)
-    -> void;
+extern auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void;
 
 /**
  * @brief
@@ -106,8 +103,8 @@ inline auto makeadjoint(const Vec2 &vr, Vec2 &&vp) -> Mat2 {
  * @return Mat2
  */
 inline auto delta(const Vec2 &vA, const Vec2 &vr, Vec2 &&vp) -> Vec2 {
-    const auto mp = makeadjoint(vr, std::move(vp)); // 2 mul's
-    return mp.mdot(vA) / mp.det();                  // 6 mul's + 2 div's
+    const auto mp = makeadjoint(vr, std::move(vp));  // 2 mul's
+    return mp.mdot(vA) / mp.det();                   // 6 mul's + 2 div's
 }
 
 /**
@@ -118,8 +115,7 @@ inline auto delta(const Vec2 &vA, const Vec2 &vr, Vec2 &&vp) -> Vec2 {
  * @param[in] r
  * @return double
  */
-inline auto horner_eval(std::vector<double> pb, std::size_t n, const double &z)
-    -> double {
+inline auto horner_eval(std::vector<double> pb, std::size_t n, const double &z) -> double {
     for (auto i = 0U; i != n; ++i) {
         pb[i + 1] += pb[i] * z;
     }

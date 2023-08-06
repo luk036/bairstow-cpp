@@ -5,21 +5,11 @@ class Vector2 {
   public:
     double x, y;
     Vector2(double x = 0, double y = 0) : x(x), y(y) {}
-    Vector2 operator+(const Vector2 &other) const {
-        return Vector2(x + other.x, y + other.y);
-    }
-    Vector2 operator-(const Vector2 &other) const {
-        return Vector2(x - other.x, y - other.y);
-    }
-    Vector2 operator*(double scalar) const {
-        return Vector2(x * scalar, y * scalar);
-    }
-    Vector2 operator/(double scalar) const {
-        return Vector2(x / scalar, y / scalar);
-    }
-    double operator*(const Vector2 &other) const {
-        return x * other.x + y * other.y;
-    }
+    Vector2 operator+(const Vector2 &other) const { return Vector2(x + other.x, y + other.y); }
+    Vector2 operator-(const Vector2 &other) const { return Vector2(x - other.x, y - other.y); }
+    Vector2 operator*(double scalar) const { return Vector2(x * scalar, y * scalar); }
+    Vector2 operator/(double scalar) const { return Vector2(x / scalar, y / scalar); }
+    double operator*(const Vector2 &other) const { return x * other.x + y * other.y; }
     double length() const { return std::sqrt(x * x + y * y); }
     double length2() const { return x * x + y * y; }
     Vector2 normalize() const { return *this / length(); }
@@ -42,9 +32,7 @@ class Matrix2 {
         }
         return result;
     }
-    Vector2 mdot(const Vector2 &vec) const {
-        return Vector2(rows[0] * vec, rows[1] * vec);
-    }
+    Vector2 mdot(const Vector2 &vec) const { return Vector2(rows[0] * vec, rows[1] * vec); }
     double det() const { return rows[0].x * rows[1].y - rows[0].y * rows[1].x; }
 };
 
@@ -102,8 +90,7 @@ Vector2 delta(const Vector2 &vA, const Vector2 &vr, const Vector2 &vp) {
     return mp.mdot(vA) / mp.det();
 }
 
-void suppress_old(Vector2 &vA, Vector2 &vA1, const Vector2 &vri,
-                  const Vector2 &vrj) {
+void suppress_old(Vector2 &vA, Vector2 &vA1, const Vector2 &vri, const Vector2 &vrj) {
     double A = vA.x, B = vA.y;
     double A1 = vA1.x, B1 = vA1.y;
     Vector2 vp = vri - vrj;
@@ -122,8 +109,8 @@ void suppress_old(Vector2 &vA, Vector2 &vA1, const Vector2 &vri,
     vA1.y = d * f - c * qp;
 }
 
-std::pair<Vector2, Vector2> suppress(const Vector2 &vA, const Vector2 &vA1,
-                                     const Vector2 &vri, const Vector2 &vrj) {
+std::pair<Vector2, Vector2> suppress(const Vector2 &vA, const Vector2 &vA1, const Vector2 &vri,
+                                     const Vector2 &vrj) {
     Vector2 vp = vri - vrj;
     double r = vri.x, q = vri.y;
     double p = vp.x, s = vp.y;
@@ -144,8 +131,7 @@ double horner_eval(std::vector<double> coeffs, int degree, double zval) {
     return coeffs[degree];
 }
 
-Vector2 horner(const std::vector<double> &coeffs, int degree,
-               const Vector2 &vr) {
+Vector2 horner(const std::vector<double> &coeffs, int degree, const Vector2 &vr) {
     std::vector<double> temp_coeffs(coeffs);
     for (int i = 0; i < degree - 1; i++) {
         temp_coeffs[i + 1] += temp_coeffs[i] * vr.x;
@@ -176,9 +162,9 @@ std::vector<Vector2> initial_guess(const std::vector<double> &coeffs) {
     return vr0s;
 }
 
-std::pair<std::vector<Vector2>, int, bool>
-pbairstow_even(const std::vector<double> &pa, const std::vector<Vector2> &vrs,
-               const Options &options = Options()) {
+std::pair<std::vector<Vector2>, int, bool> pbairstow_even(const std::vector<double> &pa,
+                                                          const std::vector<Vector2> &vrs,
+                                                          const Options &options = Options()) {
     int M = vrs.size();
     int N = pa.size() - 1;
     std::vector<bool> converged(M, false);
@@ -213,8 +199,8 @@ pbairstow_even(const std::vector<double> &pa, const std::vector<Vector2> &vrs,
     return {vrs, options.max_iters, false};
 }
 
-std::pair<double | std::complex<double>, double | std::complex<double>>
-find_rootq(const Vector2 &vr) {
+std::pair<double | std::complex<double>, double | std::complex<double>> find_rootq(
+    const Vector2 &vr) {
     double hr = vr.x / 2;
     double d = hr * hr + vr.y;
     if (d < 0) {

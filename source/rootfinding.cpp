@@ -1,19 +1,19 @@
-#include <bairstow/ThreadPool.h>    // for ThreadPool
-#include <bairstow/robin.hpp>       // for Robin
-#include <bairstow/rootfinding.hpp> // for Vec2, delta, Options, horner_eval
-#include <bairstow/vector2.hpp>     // for operator-, Vector2
+#include <bairstow/ThreadPool.h>  // for ThreadPool
 
-#include <cmath>       // for abs, acos, cos, pow
-#include <cstddef>     // for size_t
-#include <functional>  // for __base
-#include <future>      // for future
-#include <thread>      // for thread
-#include <type_traits> // for move
-#include <utility>     // for pair
-#include <vector>      // for vector, vector<>::reference, __v...
+#include <bairstow/robin.hpp>        // for Robin
+#include <bairstow/rootfinding.hpp>  // for Vec2, delta, Options, horner_eval
+#include <bairstow/vector2.hpp>      // for operator-, Vector2
+#include <cmath>                     // for abs, acos, cos, pow
+#include <cstddef>                   // for size_t
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <type_traits>               // for move
+#include <utility>                   // for pair
+#include <vector>                    // for vector, vector<>::reference, __v...
 
 #ifndef M_PI
-#define M_PI 3.14159265358979323846264338327950288
+#    define M_PI 3.14159265358979323846264338327950288
 #endif
 
 /**
@@ -75,10 +75,10 @@ auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
     auto N = pa.size() - 1;
     const auto c = -pa[1] / (double(N) * pa[0]);
     auto pb = pa;
-    const auto Pc = horner_eval(pb, N, c); // TODO
+    const auto Pc = horner_eval(pb, N, c);  // TODO
     const auto re = std::pow(std::abs(Pc), 1.0 / double(N));
     N /= 2;
-    N *= 2; // make even
+    N *= 2;  // make even
     const auto k = M_PI / double(N);
     const auto m = c * c + re * re;
     auto vr0s = std::vector<Vec2>{};
@@ -103,8 +103,7 @@ auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
  * @return std::pair<unsigned int, bool>
  */
 auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
-                    const Options &options = Options())
-    -> std::pair<unsigned int, bool> {
+                    const Options &options = Options()) -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
 
     // const auto degree = pa.size() - 1; // degree, assume even
@@ -117,18 +116,17 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
 
         for (auto i = 0U; i != M; ++i) {
             results.emplace_back(pool.enqueue([&, i]() -> double {
-                const auto degree = pa.size() - 1; // degree, assume even
+                const auto degree = pa.size() - 1;  // degree, assume even
                 const auto &vri = vrs[i];
                 auto pb = pa;
                 auto vA = horner(pb, degree, vri);
                 auto vA1 = horner(pb, degree - 2, vri);
                 const auto tol_i = std::max(std::abs(vA.x()), std::abs(vA.y()));
                 for (auto j : rr.exclude(i)) {
-                    const auto vrj = vrs[j]; // make a copy, don't reference!
+                    const auto vrj = vrs[j];  // make a copy, don't reference!
                     suppress(vA, vA1, vri, vrj);
                 }
-                vrs[i] -=
-                    delta(vA, vri, std::move(vA1)); // Gauss-Seidel fashion
+                vrs[i] -= delta(vA, vri, std::move(vA1));  // Gauss-Seidel fashion
                 return tol_i;
             }));
         }
