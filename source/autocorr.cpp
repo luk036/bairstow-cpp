@@ -20,13 +20,13 @@
  * The function calculates the initial autocorrelation values (specific for
  * auto-correlation function)
  *
- * @param[in] pa The parameter `pa` is a vector of doubles.
+ * @param[in] coeffs The parameter `coeffs` is a vector of doubles.
  *
  * @return The function `initial_autocorr` returns a vector of `Vec2` objects.
  */
-auto initial_autocorr(const std::vector<double> &pa) -> std::vector<Vec2> {
-    auto degree = pa.size() - 1;
-    const auto re = std::pow(std::abs(pa[degree]), 1.0 / double(degree));
+auto initial_autocorr(const std::vector<double> &coeffs) -> std::vector<Vec2> {
+    auto degree = coeffs.size() - 1;
+    const auto re = std::pow(std::abs(coeffs[degree]), 1.0 / double(degree));
 
     degree /= 2;
     const auto k = M_PI / double(degree);
@@ -46,12 +46,12 @@ auto initial_autocorr(const std::vector<double> &pa) -> std::vector<Vec2> {
  * finding the roots of a real polynomial (specific for auto-correlation
  * function)
  *
- * @param[in] pa polynomial
+ * @param[in] coeffs polynomial
  * @param[in,out] vrs vector of iterates
  * @param[in] options maximum iterations and tolorance
  * @return std::pair<unsigned int, bool>
  */
-auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
+auto pbairstow_autocorr(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
                         const Options &options = Options())
     -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
@@ -64,12 +64,12 @@ auto pbairstow_autocorr(const std::vector<double> &pa, std::vector<Vec2> &vrs,
         std::vector<std::future<double>> results;
         for (auto i = 0U; i != M; ++i) {
             results.emplace_back(pool.enqueue([&, i]() -> double {
-                auto pb = pa;
-                const auto N = pa.size() - 1; // degree, assume even
+                auto coeffs1 = coeffs;
+                const auto N = coeffs.size() - 1; // degree, assume even
                 const auto &vri = vrs[i];
-                auto vA = horner(pb, N, vri);
+                auto vA = horner(coeffs1, N, vri);
                 const auto tol_i = std::max(std::abs(vA.x()), std::abs(vA.y()));
-                auto vA1 = horner(pb, N - 2, vri);
+                auto vA1 = horner(coeffs1, N - 2, vri);
                 for (auto j : rr.exclude(i)) { // exclude i
                     const auto vrj = vrs[j];   // make a copy, don't reference!
                     suppress(vA, vA1, vri, vrj);

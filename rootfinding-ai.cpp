@@ -177,10 +177,10 @@ std::vector<Vector2> initial_guess(const std::vector<double> &coeffs) {
 }
 
 std::pair<std::vector<Vector2>, int, bool>
-pbairstow_even(const std::vector<double> &pa, const std::vector<Vector2> &vrs,
+pbairstow_even(const std::vector<double> &coeffs, const std::vector<Vector2> &vrs,
                const Options &options = Options()) {
     int M = vrs.size();
-    int N = pa.size() - 1;
+    int N = coeffs.size() - 1;
     std::vector<bool> converged(M, false);
     Robin robin(M);
     for (int niter = 0; niter < options.max_iters; niter++) {
@@ -190,14 +190,14 @@ pbairstow_even(const std::vector<double> &pa, const std::vector<Vector2> &vrs,
             if (converged[i]) {
                 continue;
             }
-            std::vector<double> pb(pa);
-            Vector2 vA = horner(pb, N, vrs[i]);
+            std::vector<double> coeffs1(coeffs);
+            Vector2 vA = horner(coeffs1, N, vrs[i]);
             double tol_i = std::max(std::abs(vA.x), std::abs(vA.y));
             if (tol_i < options.tol_ind) {
                 converged[i] = true;
                 continue;
             }
-            Vector2 vA1 = horner(pb, N - 2, vrs[i]);
+            Vector2 vA1 = horner(coeffs1, N - 2, vrs[i]);
             tol = std::max(tol_i, tol);
 
             for (int j : robin.exclude_list) {

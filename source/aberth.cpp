@@ -20,7 +20,7 @@ using Complex = std::complex<double>;
  * evaluating a polynomial at a given point.
  *
  * @param[in,out] coeffs
- * @param[in] n
+ * @param[in] degree
  * @param[in] r
  * @return double
  */
@@ -37,20 +37,20 @@ inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
  * The function calculates the initial values for the Aberth-Ehrlich method for
  * finding the roots of a polynomial.
  *
- * @param[in] pa The parameter `pa` is a vector of doubles.
+ * @param[in] coeffs The parameter `coeffs` is a vector of doubles.
  *
  * @return The function `initial_aberth` returns a vector of Complex numbers.
  */
-auto initial_aberth(const vector<double> &pa) -> vector<Complex> {
+auto initial_aberth(const vector<double> &coeffs) -> vector<Complex> {
     static const auto TWO_PI = 2.0 * std::acos(-1.0);
 
-    const auto n = pa.size() - 1;
-    const auto c = -pa[1] / (double(n) * pa[0]);
-    const auto Pc = horner_eval_g(pa, c);
-    const auto re = std::pow(Complex(-Pc), 1.0 / double(n));
-    const auto k = TWO_PI / double(n);
+    const auto degree = coeffs.size() - 1;
+    const auto c = -coeffs[1] / (double(degree) * coeffs[0]);
+    const auto Pc = horner_eval_g(coeffs, c);
+    const auto re = std::pow(Complex(-Pc), 1.0 / double(degree));
+    const auto k = TWO_PI / double(degree);
     auto z0s = vector<Complex>{};
-    for (auto i = 0U; i != n; ++i) {
+    for (auto i = 0U; i != degree; ++i) {
         auto theta = k * (0.25 + double(i));
         auto z0 = c + re * Complex{std::cos(theta), std::sin(theta)};
         z0s.emplace_back(z0);
@@ -64,22 +64,22 @@ auto initial_aberth(const vector<double> &pa) -> vector<Complex> {
  * The `aberth` function is an implementation of the Aberth-Ehrlich method for
  * finding the roots of a polynomial.
  *
- * @param[in] pa polynomial
+ * @param[in] coeffs polynomial
  * @param[in,out] zs vector of iterates
  * @param[in] options maximum iterations and tolorance
  * @return std::pair<unsigned int, bool>
  */
-auto aberth(const vector<double> &pa, vector<Complex> &zs,
+auto aberth(const vector<double> &coeffs, vector<Complex> &zs,
             const Options &options = Options())
     -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
 
     const auto m = zs.size();
-    const auto degree = pa.size() - 1; // degree, assume even
+    const auto degree = coeffs.size() - 1; // degree, assume even
     const auto rr = fun::Robin<size_t>(m);
-    auto coeffs = vector<double>(degree);
+    auto coeffs1 = vector<double>(degree);
     for (auto i = 0U; i != degree; ++i) {
-        coeffs[i] = double(degree - i) * pa[i];
+        coeffs1[i] = double(degree - i) * coeffs[i];
     }
 
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
@@ -89,9 +89,9 @@ auto aberth(const vector<double> &pa, vector<Complex> &zs,
         for (auto i = 0U; i != m; ++i) {
             results.emplace_back(pool.enqueue([&, i]() -> double {
                 const auto &zi = zs[i];
-                const auto P = horner_eval_g(pa, zi);
+                const auto P = horner_eval_g(coeffs, zi);
                 const auto tol_i = std::abs(P);
-                auto P1 = horner_eval_g(coeffs, zi);
+                auto P1 = horner_eval_g(coeffs1, zi);
                 for (auto j : rr.exclude(i)) {
                     P1 -= P / (zi - zs[j]);
                 }

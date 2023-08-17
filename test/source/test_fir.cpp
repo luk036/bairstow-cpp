@@ -31,12 +31,12 @@ TEST_CASE("test FIR") {
     auto vrs = initial_autocorr(r);
     // fmt::print(vrs);
     fmt::print("vrs[1]: {}, {}\n", vrs[1].x(), vrs[1].y());
-    auto pb = r;
-    auto N = pb.size() - 1;
-    auto vAh = horner(pb, N, vrs[1]);
+    auto coeffs1 = r;
+    auto N = coeffs1.size() - 1;
+    auto vAh = horner(coeffs1, N, vrs[1]);
     fmt::print("{}, {}\n", vAh.x(), vAh.y());
-    // fmt::print(pb);
-    auto vA1h = horner(pb, N - 2, vrs[1]);
+    // fmt::print(coeffs1);
+    auto vA1h = horner(coeffs1, N - 2, vrs[1]);
     fmt::print("{}, {}\n", vA1h.x(), vA1h.y());
 
     auto options = Options();

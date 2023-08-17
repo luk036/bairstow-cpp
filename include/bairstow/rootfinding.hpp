@@ -24,42 +24,42 @@ class Options {
 /**
  * @brief
  *
- * @param pa
+ * @param coeffs
  * @return std::vector<Vec2>
  */
-extern auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2>;
+extern auto initial_guess(const std::vector<double> &coeffs) -> std::vector<Vec2>;
 
 /**
  * @brief
  *
- * @param pa
+ * @param coeffs
  * @param vrs
  * @param options
  * @return std::pair<unsigned int, bool>
  */
-extern auto pbairstow_even(const std::vector<double> &pa,
+extern auto pbairstow_even(const std::vector<double> &coeffs,
                            std::vector<Vec2> &vrs, const Options &options)
     -> std::pair<unsigned int, bool>;
 
 /**
  * @brief Horner's rule
  *
- * Horner's rule is a method for evaluating a polynomial of degree n at a given
+ * Horner's rule is a method for evaluating a polynomial of degree degree at a given
  * point x. It involves rewriting the polynomial as a nested multiplication and
  * addition of the form:
  *
- *  P(x) = a_0 + x(a_1 + x(a_2 + ... + x(a_{n-1} + x(a_n))...))
+ *  P(x) = a_0 + x(a_1 + x(a_2 + ... + x(a_{degree-1} + x(a_n))...))
  *
  * This form allows for efficient evaluation of the polynomial at a given point
- * x using only n multiplications and n additions. Horner's rule is commonly
+ * x using only degree multiplications and degree additions. Horner's rule is commonly
  * used in numerical methods for polynomial evaluation and interpolation.
  *
- * @param pb
- * @param n
+ * @param coeffs1
+ * @param degree
  * @param vr
  * @return Vec2
  */
-extern auto horner(std::vector<double> &pb, std::size_t n, const Vec2 &vr)
+extern auto horner(std::vector<double> &coeffs1, std::size_t degree, const Vec2 &vr)
     -> Vec2;
 
 /**
@@ -113,15 +113,15 @@ inline auto delta(const Vec2 &vA, const Vec2 &vr, Vec2 &&vp) -> Vec2 {
 /**
  * @brief
  *
- * @param[in,out] pb
- * @param[in] n
+ * @param[in,out] coeffs1
+ * @param[in] degree
  * @param[in] r
  * @return double
  */
-inline auto horner_eval(std::vector<double> pb, std::size_t n, const double &z)
+inline auto horner_eval(std::vector<double> coeffs1, std::size_t degree, const double &z)
     -> double {
-    for (auto i = 0U; i != n; ++i) {
-        pb[i + 1] += pb[i] * z;
+    for (auto i = 0U; i != degree; ++i) {
+        coeffs1[i + 1] += coeffs1[i] * z;
     }
-    return pb[n];
+    return coeffs1[degree];
 }

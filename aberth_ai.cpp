@@ -20,14 +20,14 @@ std::complex<double> horner_eval_c(const std::vector<double> &coeffs,
 std::pair<size_t, bool> aberth_mt(const std::vector<double> &coeffs,
                                   std::vector<std::complex<double>> &zs,
                                   const Options &options) {
-    size_t m_rs = zs.size();
+    size_t m_zs = zs.size();
     size_t degree = coeffs.size() - 1;
-    std::vector<double> pb(degree);
+    std::vector<double> coeffs1(degree);
     for (size_t i = 0; i < degree; i++) {
-        pb[i] = coeffs[i] * (degree - i);
+        coeffs1[i] = coeffs[i] * (degree - i);
     }
-    std::vector<std::complex<double>> zsc(m_rs);
-    std::vector<bool> converged(m_rs);
+    std::vector<std::complex<double>> zsc(m_zs);
+    std::vector<bool> converged(m_zs);
     for (size_t niter = 0; niter < options.max_iters; niter++) {
         double tol = 0.0;
         zsc = zs;
@@ -35,7 +35,7 @@ std::pair<size_t, bool> aberth_mt(const std::vector<double> &coeffs,
             zs.begin(), zs.end(), converged.begin(), 0.0,
             [](double x, double y) { return std::max(x, y); },
             [&](const std::complex<double> &zi, bool &converged) {
-                return aberth_job(coeffs, zi, converged, zsc, pb);
+                return aberth_job(coeffs, zi, converged, zsc, coeffs1);
             });
         if (tol < tol_i) {
             tol = tol_i;

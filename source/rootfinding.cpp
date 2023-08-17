@@ -20,22 +20,22 @@
  * The function `horner` implements the Horner's method for evaluating a
  * polynomial at a given point.
  *
- * @param[in, out] pb pb is a reference to a vector of doubles. It is used to
+ * @param[in, out] coeffs1 coeffs1 is a reference to a vector of doubles. It is used to
  * store the coefficients of a polynomial.
- * @param[in] n The parameter `n` represents the size of the vector `pb`. It
- * indicates the number of elements in the vector `pb`.
+ * @param[in] degree The parameter `degree` represents the size of the vector `coeffs1`. It
+ * indicates the number of elements in the vector `coeffs1`.
  * @param[in] vr vr is a Vec2 object, which represents a 2D vector. It has two
  * components, vr.x() and vr.y(), which are used in the calculations inside the
  * horner function.
  *
  * @return a Vec2 object.
  */
-auto horner(std::vector<double> &pb, size_t n, const Vec2 &vr) -> Vec2 {
-    for (auto i = 0U; i != n - 1; ++i) {
-        pb[i + 1] += pb[i] * vr.x();
-        pb[i + 2] += pb[i] * vr.y();
+auto horner(std::vector<double> &coeffs1, size_t degree, const Vec2 &vr) -> Vec2 {
+    for (auto i = 0U; i != degree - 1; ++i) {
+        coeffs1[i + 1] += coeffs1[i] * vr.x();
+        coeffs1[i + 2] += coeffs1[i] * vr.y();
     }
-    return Vec2{pb[n - 1], pb[n]};
+    return Vec2{coeffs1[degree - 1], coeffs1[degree]};
 }
 
 /**
@@ -66,16 +66,16 @@ auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void {
  * The function calculates the initial values for the parallel Bairstow method
  * for finding the roots of a real polynomial.
  *
- * @param[in] pa pa is a vector of doubles that represents the coefficients of a
+ * @param[in] coeffs coeffs is a vector of doubles that represents the coefficients of a
  * polynomial.
  *
  * @return The function `initial_guess` returns a vector of `Vec2` objects.
  */
-auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
-    auto N = pa.size() - 1;
-    const auto c = -pa[1] / (double(N) * pa[0]);
-    auto pb = pa;
-    const auto Pc = horner_eval(pb, N, c); // TODO
+auto initial_guess(const std::vector<double> &coeffs) -> std::vector<Vec2> {
+    auto N = coeffs.size() - 1;
+    const auto c = -coeffs[1] / (double(N) * coeffs[0]);
+    auto coeffs1 = coeffs;
+    const auto Pc = horner_eval(coeffs1, N, c); // TODO
     const auto re = std::pow(std::abs(Pc), 1.0 / double(N));
     N /= 2;
     N *= 2; // make even
@@ -97,17 +97,17 @@ auto initial_guess(const std::vector<double> &pa) -> std::vector<Vec2> {
  * The function `pbairstow_even` is implementing the Bairstow's method for
  * finding the roots of a real polynomial with an even degree.
  *
- * @param[in] pa polynomial
+ * @param[in] coeffs polynomial
  * @param[in,out] vrs vector of iterates
  * @param[in] options maximum iterations and tolorance
  * @return std::pair<unsigned int, bool>
  */
-auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
+auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
                     const Options &options = Options())
     -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
 
-    // const auto degree = pa.size() - 1; // degree, assume even
+    // const auto degree = coeffs.size() - 1; // degree, assume even
     const auto M = vrs.size();
     const auto rr = fun::Robin<size_t>(M);
 
@@ -117,11 +117,11 @@ auto pbairstow_even(const std::vector<double> &pa, std::vector<Vec2> &vrs,
 
         for (auto i = 0U; i != M; ++i) {
             results.emplace_back(pool.enqueue([&, i]() -> double {
-                const auto degree = pa.size() - 1; // degree, assume even
+                const auto degree = coeffs.size() - 1; // degree, assume even
                 const auto &vri = vrs[i];
-                auto pb = pa;
-                auto vA = horner(pb, degree, vri);
-                auto vA1 = horner(pb, degree - 2, vri);
+                auto coeffs1 = coeffs;
+                auto vA = horner(coeffs1, degree, vri);
+                auto vA1 = horner(coeffs1, degree - 2, vri);
                 const auto tol_i = std::max(std::abs(vA.x()), std::abs(vA.y()));
                 for (auto j : rr.exclude(i)) {
                     const auto vrj = vrs[j]; // make a copy, don't reference!
