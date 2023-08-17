@@ -1,12 +1,11 @@
-#include <bairstow/autocorr.hpp>    // for initial_autocorr, pbairstow_auto...
-#include <bairstow/rootfinding.hpp> // for Options, initial_guess, pbairsto...
-#include <vector>                   // for vector
+#include <bairstow/autocorr.hpp>     // for initial_autocorr, pbairstow_auto...
+#include <bairstow/rootfinding.hpp>  // for Options, initial_guess, pbairsto...
+#include <vector>                    // for vector
 
-#include "benchmark/benchmark.h" // for BENCHMARK, State, BENCHMARK_MAIN
+#include "benchmark/benchmark.h"  // for BENCHMARK, State, BENCHMARK_MAIN
 
 auto run_autocorr() {
-    auto r = std::vector<double>{10.0, 34.0, 75.0, 94.0, 150.0,
-                                 94.0, 75.0, 34.0, 10.0};
+    auto r = std::vector<double>{10.0, 34.0, 75.0, 94.0, 150.0, 94.0, 75.0, 34.0, 10.0};
     auto vrs = initial_autocorr(r);
     auto options = Options();
     options.tol = 1e-12;
@@ -15,8 +14,7 @@ auto run_autocorr() {
 }
 
 auto run_pbairstow() {
-    auto r = std::vector<double>{10.0, 34.0, 75.0, 94.0, 150.0,
-                                 94.0, 75.0, 34.0, 10.0};
+    auto r = std::vector<double>{10.0, 34.0, 75.0, 94.0, 150.0, 94.0, 75.0, 34.0, 10.0};
     auto vrs = initial_guess(r);
     auto options = Options();
     options.tol = 1e-12;

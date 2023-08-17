@@ -79,8 +79,7 @@ extern auto horner(std::vector<double> &coeffs1, std::size_t degree, const Vec2 
  * @param[in] vri
  * @param[in] vrj
  */
-extern auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj)
-    -> void;
+extern auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void;
 
 /**
  * @brief
@@ -106,8 +105,8 @@ inline auto makeadjoint(const Vec2 &vr, Vec2 &&vp) -> Mat2 {
  * @return Mat2
  */
 inline auto delta(const Vec2 &vA, const Vec2 &vr, Vec2 &&vp) -> Vec2 {
-    const auto mp = makeadjoint(vr, std::move(vp)); // 2 mul's
-    return mp.mdot(vA) / mp.det();                  // 6 mul's + 2 div's
+    const auto mp = makeadjoint(vr, std::move(vp));  // 2 mul's
+    return mp.mdot(vA) / mp.det();                   // 6 mul's + 2 div's
 }
 
 /**

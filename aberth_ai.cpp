@@ -1,10 +1,12 @@
-#include "Options.h"
+#include <rayon/iter/par_iter.h>
+
 #include <algorithm>
 #include <cmath>
 #include <complex>
 #include <numeric>
-#include <rayon/iter/par_iter.h>
 #include <vector>
+
+#include "Options.h"
 
 const double TWO_PI = 2 * M_PI;
 

@@ -1,14 +1,14 @@
-#include <bairstow/ThreadPool.h>    // for ThreadPool
-#include <bairstow/robin.hpp>       // for Robin
-#include <bairstow/rootfinding.hpp> // for Options
+#include <bairstow/ThreadPool.h>  // for ThreadPool
 
-#include <cmath>      // for acos, cos, sin
-#include <complex>    // for complex, operator*, operator+
-#include <functional> // for __base
-#include <future>     // for future
-#include <thread>     // for thread
-#include <utility>    // for pair
-#include <vector>     // for vector, vector<>::reference, __v...
+#include <bairstow/robin.hpp>        // for Robin
+#include <bairstow/rootfinding.hpp>  // for Options
+#include <cmath>                     // for acos, cos, sin
+#include <complex>                   // for complex, operator*, operator+
+#include <functional>                // for __base
+#include <future>                    // for future
+#include <thread>                    // for thread
+#include <utility>                   // for pair
+#include <vector>                    // for vector, vector<>::reference, __v...
 
 using std::cos;
 using std::sin;
@@ -24,8 +24,7 @@ using Complex = std::complex<double>;
  * @param[in] r
  * @return double
  */
-template <typename C, typename Tp>
-inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
+template <typename C, typename Tp> inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
     Tp res = coeffs[0];
     for (auto i = 1U; i != coeffs.size(); ++i) {
         res = res * z + coeffs[i];
@@ -95,7 +94,7 @@ auto aberth(const vector<double> &coeffs, vector<Complex> &zs,
                 for (auto j : rr.exclude(i)) {
                     P1 -= P / (zi - zs[j]);
                 }
-                zs[i] -= P / P1; // Gauss-Seidel fashion
+                zs[i] -= P / P1;  // Gauss-Seidel fashion
                 return tol_i;
             }));
         }
