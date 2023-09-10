@@ -63,7 +63,7 @@ auto pbairstow_autocorr(const std::vector<double> &coeffs, std::vector<Vec2> &vr
         auto tol = 0.0;
         std::vector<std::future<double>> results;
         for (auto i = 0U; i != M; ++i) {
-            results.emplace_back(pool.enqueue([&, i]() -> double {
+            results.emplace_back(pool.enqueue([&, i]() {
                 auto coeffs1 = coeffs;
                 const auto N = coeffs.size() - 1; // degree, assume even
                 const auto &vri = vrs[i];
@@ -89,7 +89,6 @@ auto pbairstow_autocorr(const std::vector<double> &coeffs, std::vector<Vec2> &vr
                 tol = res;
             }
         }
-        // fmt::print("tol: {}\n", tol);
         if (tol < options.tol) {
             return {niter, true};
         }

@@ -3,7 +3,8 @@
 
 class Vector2 {
   public:
-    double x, y;
+    double x
+    double y;
     Vector2(double x = 0, double y = 0) : x(x), y(y) {}
     Vector2 operator+(const Vector2 &other) const { return Vector2(x + other.x, y + other.y); }
     Vector2 operator-(const Vector2 &other) const { return Vector2(x - other.x, y - other.y); }
@@ -17,7 +18,8 @@ class Vector2 {
 
 class Matrix2 {
   public:
-    Vector2 rows[2];
+    std::array<Vector2, 2> rows;
+    
     Matrix2(Vector2 row1 = Vector2(), Vector2 row2 = Vector2()) {
         rows[0] = row1;
         rows[1] = row2;

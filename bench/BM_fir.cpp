@@ -2,7 +2,7 @@
 #include <bairstow/rootfinding.hpp>  // for Options, initial_guess, pbairsto...
 #include <vector>                    // for vector
 
-#include "benchmark/benchmark.h"  // for BENCHMARK, State, BENCHMARK_MAIN
+#include <benchmark/benchmark.h>  // for BENCHMARK, State, BENCHMARK_MAIN
 
 auto run_fir_autocorr() {
     auto r = std::vector<double>{
