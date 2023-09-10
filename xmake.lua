@@ -25,21 +25,30 @@ target("test_bairstow")
     add_deps("Bairstow")
     add_files("test/source/*.cpp")
     add_packages("doctest", "fmt")
-    add_syslinks("pthread")
+    if is_plat("linux", "macosx") then
+        add_syslinks("pthread")
+        -- target:add("links", "pthread", "m", "dl")
+    end
 
 target("test_fir")
     set_kind("binary")
     add_deps("Bairstow")
     add_files("bench/BM_fir.cpp")
     add_packages("benchmark", "fmt")
-    add_syslinks("pthread")
+    if is_plat("linux", "macosx") then
+        add_syslinks("pthread")
+        -- target:add("links", "pthread", "m", "dl")
+    end
 
 target("test_autocorr")
     set_kind("binary")
     add_deps("Bairstow")
     add_files("bench/BM_autocorr.cpp")
     add_packages("benchmark", "fmt")
-    add_syslinks("pthread")
+    if is_plat("linux", "macosx") then
+        add_syslinks("pthread")
+        -- target:add("links", "pthread", "m", "dl")
+    end
 
 
 -- If you want to known more usage about xmake, please see https://xmake.io
