@@ -75,7 +75,7 @@ auto initial_guess(const std::vector<double> &coeffs) -> std::vector<Vec2> {
     auto N = coeffs.size() - 1;
     const auto c = -coeffs[1] / (double(N) * coeffs[0]);
     auto coeffs1 = coeffs;
-    const auto Pc = horner_eval(coeffs1, N, c); // TODO
+    const auto Pc = horner_eval(coeffs1, N, c);  // TODO
     const auto re = std::pow(std::abs(Pc), 1.0 / double(N));
     N /= 2;
     N *= 2;  // make even
@@ -103,8 +103,7 @@ auto initial_guess(const std::vector<double> &coeffs) -> std::vector<Vec2> {
  * @return std::pair<unsigned int, bool>
  */
 auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
-                    const Options &options = Options())
-    -> std::pair<unsigned int, bool> {
+                    const Options &options = Options()) -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
 
     // const auto degree = coeffs.size() - 1; // degree, assume even
@@ -117,7 +116,7 @@ auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
 
         for (auto i = 0U; i != M; ++i) {
             results.emplace_back(pool.enqueue([&, i]() -> double {
-                const auto degree = coeffs.size() - 1; // degree, assume even
+                const auto degree = coeffs.size() - 1;  // degree, assume even
                 const auto &vri = vrs[i];
                 auto coeffs1 = coeffs;
                 auto vA = horner(coeffs1, degree, vri);

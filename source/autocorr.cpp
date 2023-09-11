@@ -52,8 +52,7 @@ auto initial_autocorr(const std::vector<double> &coeffs) -> std::vector<Vec2> {
  * @return std::pair<unsigned int, bool>
  */
 auto pbairstow_autocorr(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
-                        const Options &options = Options())
-    -> std::pair<unsigned int, bool> {
+                        const Options &options = Options()) -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
 
     const auto M = vrs.size();
@@ -65,13 +64,13 @@ auto pbairstow_autocorr(const std::vector<double> &coeffs, std::vector<Vec2> &vr
         for (auto i = 0U; i != M; ++i) {
             results.emplace_back(pool.enqueue([&, i]() {
                 auto coeffs1 = coeffs;
-                const auto N = coeffs.size() - 1; // degree, assume even
+                const auto N = coeffs.size() - 1;  // degree, assume even
                 const auto &vri = vrs[i];
                 auto vA = horner(coeffs1, N, vri);
                 const auto tol_i = std::max(std::abs(vA.x()), std::abs(vA.y()));
                 auto vA1 = horner(coeffs1, N - 2, vri);
-                for (auto j : rr.exclude(i)) { // exclude i
-                    const auto vrj = vrs[j];   // make a copy, don't reference!
+                for (auto j : rr.exclude(i)) {  // exclude i
+                    const auto vrj = vrs[j];    // make a copy, don't reference!
                     suppress(vA, vA1, vri, vrj);
                     const auto vrjn = numeric::Vector2<double>(-vrj.x(), 1.0) / vrj.y();
                     suppress(vA, vA1, vri, vrjn);

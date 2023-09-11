@@ -68,13 +68,12 @@ auto initial_aberth(const vector<double> &coeffs) -> vector<Complex> {
  * @param[in] options maximum iterations and tolorance
  * @return std::pair<unsigned int, bool>
  */
-auto aberth(const vector<double> &coeffs, vector<Complex> &zs,
-            const Options &options = Options())
+auto aberth(const vector<double> &coeffs, vector<Complex> &zs, const Options &options = Options())
     -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
 
     const auto m = zs.size();
-    const auto degree = coeffs.size() - 1; // degree, assume even
+    const auto degree = coeffs.size() - 1;  // degree, assume even
     const auto rr = fun::Robin<size_t>(m);
     auto coeffs1 = vector<double>(degree);
     for (auto i = 0U; i != degree; ++i) {
