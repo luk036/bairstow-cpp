@@ -37,9 +37,8 @@ extern auto initial_guess(const std::vector<double> &coeffs) -> std::vector<Vec2
  * @param options
  * @return std::pair<unsigned int, bool>
  */
-extern auto pbairstow_even(const std::vector<double> &coeffs,
-                           std::vector<Vec2> &vrs, const Options &options)
-    -> std::pair<unsigned int, bool>;
+extern auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
+                           const Options &options) -> std::pair<unsigned int, bool>;
 
 /**
  * @brief Horner's rule
@@ -59,8 +58,7 @@ extern auto pbairstow_even(const std::vector<double> &coeffs,
  * @param vr
  * @return Vec2
  */
-extern auto horner(std::vector<double> &coeffs1, std::size_t degree, const Vec2 &vr)
-    -> Vec2;
+extern auto horner(std::vector<double> &coeffs1, std::size_t degree, const Vec2 &vr) -> Vec2;
 
 /**
  * @brief zero suppression

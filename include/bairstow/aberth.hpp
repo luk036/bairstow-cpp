@@ -13,8 +13,7 @@ class Options;
  * @param coeffs
  * @return std::vector<std::complex<double>>
  */
-extern auto initial_aberth(const std::vector<double> &coeffs)
-    -> std::vector<std::complex<double>>;
+extern auto initial_aberth(const std::vector<double> &coeffs) -> std::vector<std::complex<double>>;
 
 /**
  * @brief
@@ -28,6 +27,5 @@ extern auto initial_aberth(const std::vector<double> &coeffs)
  * @param options
  * @return std::pair<unsigned int, bool>
  */
-extern auto aberth(const std::vector<double> &coeffs,
-                   std::vector<std::complex<double>> &zs,
+extern auto aberth(const std::vector<double> &coeffs, std::vector<std::complex<double>> &zs,
                    const Options &options) -> std::pair<unsigned int, bool>;

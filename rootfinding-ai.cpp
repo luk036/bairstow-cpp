@@ -3,8 +3,7 @@
 
 class Vector2 {
   public:
-    double x
-    double y;
+    double x double y;
     Vector2(double x = 0, double y = 0) : x(x), y(y) {}
     Vector2 operator+(const Vector2 &other) const { return Vector2(x + other.x, y + other.y); }
     Vector2 operator-(const Vector2 &other) const { return Vector2(x - other.x, y - other.y); }
@@ -19,7 +18,7 @@ class Vector2 {
 class Matrix2 {
   public:
     std::array<Vector2, 2> rows;
-    
+
     Matrix2(Vector2 row1 = Vector2(), Vector2 row2 = Vector2()) {
         rows[0] = row1;
         rows[1] = row2;
@@ -164,9 +163,9 @@ std::vector<Vector2> initial_guess(const std::vector<double> &coeffs) {
     return vr0s;
 }
 
-std::pair<std::vector<Vector2>, int, bool>
-pbairstow_even(const std::vector<double> &coeffs, const std::vector<Vector2> &vrs,
-               const Options &options = Options()) {
+std::pair<std::vector<Vector2>, int, bool> pbairstow_even(const std::vector<double> &coeffs,
+                                                          const std::vector<Vector2> &vrs,
+                                                          const Options &options = Options()) {
     int M = vrs.size();
     int N = coeffs.size() - 1;
     std::vector<bool> converged(M, false);
