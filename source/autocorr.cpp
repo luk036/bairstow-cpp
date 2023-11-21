@@ -42,7 +42,7 @@ auto initial_autocorr(const std::vector<double> &coeffs) -> std::vector<Vec2> {
  * @brief Multi-threading Bairstow's method (specific for auto-correlation
  * function)
  *
- * The function `pbairstow_even` is implementing the Bairstow's method for
+ * The function `pbairstow_autocorr` is implementing the Bairstow's method for
  * finding the roots of a real polynomial (specific for auto-correlation
  * function)
  *

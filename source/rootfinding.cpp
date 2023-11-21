@@ -63,11 +63,12 @@ auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void {
 }
 
 /**
- * The function calculates the initial values for the parallel Bairstow method
- * for finding the roots of a real polynomial.
+ * @brief Initial guess for the parallel Bairstow method
  *
- * @param[in] coeffs coeffs is a vector of doubles that represents the coefficients of a
- * polynomial.
+ * The `initial_guess` function calculates the initial values for the parallel Bairstow method for
+ * finding the roots of a real polynomial.
+ *
+ * @param[in] coeffs coeffs is a vector of doubles that represents the coefficients of a polynomial.
  *
  * @return The function `initial_guess` returns a vector of `Vec2` objects.
  */

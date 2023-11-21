@@ -19,10 +19,11 @@ using Complex = std::complex<double>;
  * The function `horner_eval_g` is implementing the Horner's method for
  * evaluating a polynomial at a given point.
  *
- * @param[in,out] coeffs
- * @param[in] degree
- * @param[in] r
- * @return double
+ * @param[in] coeffs The `coeffs` parameter is a vector representing the coefficients of a
+ * polynomial. Each element of the vector corresponds to a term in the polynomial, starting from the
+ * highest degree term and ending with the constant term.
+ * @param[in] z
+ * @return Tp
  */
 template <typename C, typename Tp> inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
     Tp res = coeffs[0];
@@ -33,12 +34,17 @@ template <typename C, typename Tp> inline auto horner_eval_g(const C &coeffs, co
 }
 
 /**
- * The function calculates the initial values for the Aberth-Ehrlich method for
+ * @brief Initial guess for the Aberth-Ehrlich method
+ *
+ * The `initial_aberth` function calculates the initial values for the Aberth-Ehrlich method for
  * finding the roots of a polynomial.
  *
- * @param[in] coeffs The parameter `coeffs` is a vector of doubles.
+ * @param[in] coeffs The `coeffs` parameter is a vector representing the coefficients of a
+ * polynomial. Each element of the vector corresponds to a term in the polynomial, starting from the
+ * highest degree term and ending with the constant term.
  *
- * @return The function `initial_aberth` returns a vector of Complex numbers.
+ * @return The function `initial_aberth` returns a vector of Complex numbers representing the
+ * initial guesses for the roots of the polynomial.
  */
 auto initial_aberth(const vector<double> &coeffs) -> vector<Complex> {
     static const auto TWO_PI = 2.0 * std::acos(-1.0);
@@ -60,13 +66,27 @@ auto initial_aberth(const vector<double> &coeffs) -> vector<Complex> {
 /**
  * @brief Multi-threading Aberth-Ehrlich method
  *
- * The `aberth` function is an implementation of the Aberth-Ehrlich method for
- * finding the roots of a polynomial.
+ * The `aberth` function is a multi-threaded implementation of the Aberth-Ehrlich method for finding
+ * the roots of a polynomial.
  *
- * @param[in] coeffs polynomial
- * @param[in,out] zs vector of iterates
- * @param[in] options maximum iterations and tolorance
- * @return std::pair<unsigned int, bool>
+ * Aberth's method is a method for finding the roots of a polynomial that is
+ * robust but requires complex arithmetic even if the polynomial is real. This
+ * is because it starts with complex initial approximations.
+ *
+ * @param[in] coeffs The `coeffs` parameter is a vector representing the coefficients of a
+ * polynomial. Each element of the vector corresponds to a term in the polynomial, starting from the
+ * highest degree term and ending with the constant term. For example, if the polynomial is `3x^2 +
+ * 2x +
+ * @param[in,out] zs `zs` is a vector of complex numbers representing the initial guesses for the
+ * roots of the polynomial. The function will update these values iteratively to converge to the
+ * actual roots.
+ * @param[in] options The `options` parameter is an object of type `Options` that contains the
+ * maximum number of iterations (`max_iters`) and the tolerance (`tol`). These options control the
+ * convergence criteria for the Aberth-Ehrlich method.
+ *
+ * @return The `aberth` function returns a `std::pair<unsigned int, bool>`. The first element of the
+ * pair represents the number of iterations performed, and the second element represents whether the
+ * method converged to a solution within the specified tolerance.
  */
 auto aberth(const vector<double> &coeffs, vector<Complex> &zs, const Options &options = Options())
     -> std::pair<unsigned int, bool> {

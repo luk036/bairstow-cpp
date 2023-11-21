@@ -12,8 +12,10 @@ using Vec2 = numeric::Vector2<double>;
 using Mat2 = numeric::Matrix2<Vec2>;
 
 /**
- * @brief
+ * @brief Options
  *
+ * The code snippet defines a class called `Options` that represents the options for a specific
+ * algorithm or function. It has two public member variables: `max_iters` and `tol`.
  */
 class Options {
   public:
@@ -22,10 +24,14 @@ class Options {
 };
 
 /**
- * @brief
+ * @brief Initial guess for the parallel Bairstow method
  *
- * @param coeffs
- * @return std::vector<Vec2>
+ * The `initial_guess` function calculates the initial values for the parallel Bairstow method for
+ * finding the roots of a real polynomial.
+ *
+ * @param[in] coeffs coeffs is a vector of doubles that represents the coefficients of a polynomial.
+ *
+ * @return The function `initial_guess` returns a vector of `Vec2` objects.
  */
 extern auto initial_guess(const std::vector<double> &coeffs) -> std::vector<Vec2>;
 
