@@ -48,8 +48,6 @@ auto horner(std::vector<double> &coeffs1, size_t degree, const Vec2 &vr) -> Vec2
  * @param[in] vrj The parameter `vrj` represents a `Vec2` object.
  */
 auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void {
-    // const auto [r, q] = vri;
-    // const auto [p, s] = vri - vrj;
     const auto vp = vri - vrj;
     auto &&p = vp.x();
     auto &&s = vp.y();
@@ -72,11 +70,10 @@ auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void {
  *
  * @return The function `initial_guess` returns a vector of `Vec2` objects.
  */
-auto initial_guess(const std::vector<double> &coeffs) -> std::vector<Vec2> {
+auto initial_guess(std::vector<double> coeffs) -> std::vector<Vec2> {
     auto N = coeffs.size() - 1;
     const auto c = -coeffs[1] / (double(N) * coeffs[0]);
-    auto coeffs1 = coeffs;
-    const auto Pc = horner_eval(coeffs1, N, c);  // TODO
+    const auto Pc = horner_eval(std::move(coeffs), N, c);
     const auto re = std::pow(std::abs(Pc), 1.0 / double(N));
     N /= 2;
     N *= 2;  // make even
@@ -87,7 +84,7 @@ auto initial_guess(const std::vector<double> &coeffs) -> std::vector<Vec2> {
         const auto temp = re * std::cos(k * i);
         auto r0 = 2 * (c + temp);
         auto t0 = -(m + 2 * c * temp);
-        vr0s.emplace_back(Vec2{std::move(r0), std::move(t0)});
+        vr0s.emplace_back(Vec2{r0, t0});
     }
     return vr0s;
 }
@@ -95,19 +92,28 @@ auto initial_guess(const std::vector<double> &coeffs) -> std::vector<Vec2> {
 /**
  * @brief Multi-threading Bairstow's method (even degree only)
  *
- * The function `pbairstow_even` is implementing the Bairstow's method for
- * finding the roots of a real polynomial with an even degree.
- *
- * @param[in] coeffs polynomial
- * @param[in,out] vrs vector of iterates
- * @param[in] options maximum iterations and tolorance
- * @return std::pair<unsigned int, bool>
+ * The `pbairstow_even` function implements Bairstow's method for finding the roots of a real
+ * polynomial with an even degree using multi-threading.
+ * 
+ * @param[in] coeffs The `coeffs` parameter is a vector representing the coefficients of the polynomial.
+ * Each element of the vector corresponds to the coefficient of a term in the polynomial, starting from
+ * the highest degree term and ending with the constant term. For example, if the polynomial is `3x^2 +
+ * 2
+ * @param[in, out] vrs `vrs` is a vector of iterates, which represents the initial guesses for the roots of the
+ * polynomial. The Bairstow's method will update these iterates iteratively until the desired tolerance
+ * is reached or the maximum number of iterations is reached.
+ * @param[in] options The `options` parameter is an object of type `Options` which contains the maximum
+ * number of iterations (`max_iters`) and the tolerance (`tol`). These options are used to control the
+ * convergence criteria for the Bairstow's method.
+ * 
+ * @return The function `pbairstow_even` returns a `std::pair<unsigned int, bool>`. The first element
+ * of the pair represents the number of iterations performed, and the second element represents whether
+ * the method converged to a solution within the specified tolerance.
  */
 auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
                     const Options &options = Options()) -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
 
-    // const auto degree = coeffs.size() - 1; // degree, assume even
     const auto M = vrs.size();
     const auto rr = fun::Robin<size_t>(M);
 
@@ -116,7 +122,7 @@ auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
         std::vector<std::future<double>> results;
 
         for (auto i = 0U; i != M; ++i) {
-            results.emplace_back(pool.enqueue([&, i]() -> double {
+            results.emplace_back(pool.enqueue([&coeffs, &vrs, &rr, i]() {
                 const auto degree = coeffs.size() - 1;  // degree, assume even
                 const auto &vri = vrs[i];
                 auto coeffs1 = coeffs;
@@ -127,7 +133,7 @@ auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
                     const auto vrj = vrs[j];  // make a copy, don't reference!
                     suppress(vA, vA1, vri, vrj);
                 }
-                vrs[i] -= delta(vA, vri, std::move(vA1));  // Gauss-Seidel fashion
+                vrs[i] -= delta(vA, vri, vA1);  // Gauss-Seidel fashion
                 return tol_i;
             }));
         }
@@ -143,16 +149,3 @@ auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
     }
     return {options.max_iters, false};
 }
-
-// auto find_rootq(const Vec2& r) {
-//     auto hb = b / 2.;
-//     auto d = hb * hb - c;
-//     if (d < 0.) {
-//         auto x1 = -hb + (sqrt(-d) if (hb < 0. else -sqrt(-d))*1j;
-//     }
-//     else {
-//         auto x1 = -hb + (sqrt(d) if (hb < 0. else -sqrt(d));
-//     }
-//     auto x2 = c / x1;
-//     return x1, x2;
-// }
