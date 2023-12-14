@@ -33,27 +33,27 @@ class Options {
  */
 extern auto initial_guess(std::vector<double> coeffs) -> std::vector<Vec2>;
 
-
 /**
  * @brief Multi-threading Bairstow's method (even degree only)
  *
  * The `pbairstow_even` function implements Bairstow's method for finding the roots of a real
  * polynomial with an even degree using multi-threading.
- * 
- * @param[in] coeffs The `coeffs` parameter is a vector representing the coefficients of the polynomial.
- * Each element of the vector corresponds to the coefficient of a term in the polynomial, starting from
- * the highest degree term and ending with the constant term. For example, if the polynomial is `3x^2 +
+ *
+ * @param[in] coeffs The `coeffs` parameter is a vector representing the coefficients of the
+ * polynomial. Each element of the vector corresponds to the coefficient of a term in the
+ * polynomial, starting from the highest degree term and ending with the constant term. For example,
+ * if the polynomial is `3x^2 +
  * 2
- * @param[in, out] vrs `vrs` is a vector of iterates, which represents the initial guesses for the roots of the
- * polynomial. The Bairstow's method will update these iterates iteratively until the desired tolerance
- * is reached or the maximum number of iterations is reached.
- * @param[in] options The `options` parameter is an object of type `Options` which contains the maximum
- * number of iterations (`max_iters`) and the tolerance (`tol`). These options are used to control the
- * convergence criteria for the Bairstow's method.
- * 
- * @return The function `pbairstow_even` returns a `std::pair<unsigned int, bool>`. The first element
- * of the pair represents the number of iterations performed, and the second element represents whether
- * the method converged to a solution within the specified tolerance.
+ * @param[in, out] vrs `vrs` is a vector of iterates, which represents the initial guesses for the
+ * roots of the polynomial. The Bairstow's method will update these iterates iteratively until the
+ * desired tolerance is reached or the maximum number of iterations is reached.
+ * @param[in] options The `options` parameter is an object of type `Options` which contains the
+ * maximum number of iterations (`max_iters`) and the tolerance (`tol`). These options are used to
+ * control the convergence criteria for the Bairstow's method.
+ *
+ * @return The function `pbairstow_even` returns a `std::pair<unsigned int, bool>`. The first
+ * element of the pair represents the number of iterations performed, and the second element
+ * represents whether the method converged to a solution within the specified tolerance.
  */
 extern auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
                            const Options &options) -> std::pair<unsigned int, bool>;
@@ -103,12 +103,12 @@ extern auto horner(std::vector<double> &coeffs1, std::size_t degree, const Vec2 
 extern auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void;
 
 /**
- * The function "makeadjoint" takes in a vector vr and a vector vp, and returns a 2x2 matrix where the
- * elements are calculated based on the values of vr and vp.
- * 
+ * The function "makeadjoint" takes in a vector vr and a vector vp, and returns a 2x2 matrix where
+ * the elements are calculated based on the values of vr and vp.
+ *
  * @param[in] vr A constant reference to a Vec2 object, representing the vector vr.
  * @param[in] vp vp is a vector with two components, vp.x() and vp.y().
- * 
+ *
  * @return a `Mat2` object.
  */
 inline auto makeadjoint(const Vec2 &vr, const Vec2 &vp) -> Mat2 {
@@ -119,28 +119,28 @@ inline auto makeadjoint(const Vec2 &vr, const Vec2 &vp) -> Mat2 {
 
 /**
  * The function calculates the delta value using the given parameters.
- * 
+ *
  * @param[in] vA A vector of type Vec2.
  * @param[in] vr A vector representing the direction of rotation.
  * @param[in] vp The parameter `vp` is a `Vec2` object that is passed by rvalue reference.
- * 
+ *
  * @return a Vec2 object.
  */
 inline auto delta(const Vec2 &vA, const Vec2 &vr, const Vec2 &vp) -> Vec2 {
     const auto mp = makeadjoint(vr, vp);  // 2 mul's
-    return mp.mdot(vA) / mp.det();                   // 6 mul's + 2 div's
+    return mp.mdot(vA) / mp.det();        // 6 mul's + 2 div's
 }
 
 /**
  * The function `horner_eval` evaluates a polynomial using Horner's method.
- * 
- * @param[in,out] coeffs1 A vector of coefficients for a polynomial, where the coefficient at index i
- * corresponds to the term with degree i.
- * @param[in] degree The degree parameter represents the degree of the polynomial. It indicates the highest
- * power of the variable in the polynomial equation.
- * @param[in] z The parameter `z` is a constant value that is used as the input to the polynomial function
- * being evaluated.
- * 
+ *
+ * @param[in,out] coeffs1 A vector of coefficients for a polynomial, where the coefficient at index
+ * i corresponds to the term with degree i.
+ * @param[in] degree The degree parameter represents the degree of the polynomial. It indicates the
+ * highest power of the variable in the polynomial equation.
+ * @param[in] z The parameter `z` is a constant value that is used as the input to the polynomial
+ * function being evaluated.
+ *
  * @return a double value.
  */
 inline auto horner_eval(std::vector<double> coeffs1, std::size_t degree, const double &z)
