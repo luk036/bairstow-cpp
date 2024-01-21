@@ -40,7 +40,7 @@ namespace numeric {
          * @param y The parameter "y" is the y-coordinate of the Vector2 object. It represents the
          * vertical position of the vector in a 2D coordinate system.
          */
-        constexpr Vector2(T1 &&x, T2 &&y) noexcept : _x{std::move(x)}, _y{std::move(y)} {}
+        constexpr Vector2(T1 x, T2 y) noexcept : _x{x}, _y{y} {}
 
         /**
          * @brief Construct a new Vector2 object
@@ -54,7 +54,7 @@ namespace numeric {
          * @param y The parameter "y" is the y-coordinate of the Vector2 object. It represents the
          * vertical position of the vector in a 2D coordinate system.
          */
-        constexpr Vector2(const T1 &x, const T2 &y) : _x{x}, _y{y} {}
+        // constexpr Vector2(const T1 &x, const T2 &y) : _x{x}, _y{y} {}
 
         /**
          * @brief Construct a new Vector2 object
