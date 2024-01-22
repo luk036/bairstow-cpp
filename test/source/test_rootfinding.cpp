@@ -1,5 +1,6 @@
 // import numpy as np
 // -*- coding: utf-8 -*-
+#define DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #include <doctest/doctest.h>  // for ResultBuilder, CHECK, TEST_CASE
 
 #include <bairstow/rootfinding.hpp>  // for horner, initial_guess, pbairstow...
