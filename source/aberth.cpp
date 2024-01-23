@@ -4,9 +4,8 @@
 #include <bairstow/rootfinding.hpp>  // for Options
 #include <cmath>                     // for acos, cos, sin
 #include <complex>                   // for complex, operator*, operator+
-#include <functional>                // for __base
 #include <future>                    // for future
-#include <thread>                    // for thread
+#include <numeric>                   // for accumulate, partial_sum
 #include <utility>                   // for pair
 #include <vector>                    // for vector, vector<>::reference, __v...
 
@@ -26,10 +25,16 @@ using Complex = std::complex<double>;
  * @return Tp
  */
 template <typename C, typename Tp> inline auto horner_eval_g(const C &coeffs, const Tp &z) -> Tp {
-    Tp res = coeffs[0];
-    for (auto i = 1U; i != coeffs.size(); ++i) {
-        res = res * z + coeffs[i];
+    // return std::accumulate(coeffs.cbegin(), coeffs.cend(),
+    //                        [&z](Tp &res, auto &c) { return res * z + Tp(c); });
+    auto itr = coeffs.cbegin();
+    auto res = Tp(*itr++);
+    for (; itr != coeffs.cend(); ++itr) {
+        res = res * z + *itr;
     }
+    // for (auto i = 1U; i != coeffs.size(); ++i) {
+    //     res = res * z + coeffs[i];
+    // }
     return res;
 }
 
