@@ -5,12 +5,12 @@
 #include <bairstow/vector2.hpp>      // for operator-, Vector2
 #include <cmath>                     // for abs, acos, cos, pow
 #include <cstddef>                   // for size_t
-#include <functional>                // for __base
-#include <future>                    // for future
-#include <thread>                    // for thread
-#include <type_traits>               // for move
-#include <utility>                   // for pair
-#include <vector>                    // for vector, vector<>::reference, __v...
+// #include <functional>                // for __base
+// #include <future>                    // for future
+// #include <thread>                    // for thread
+// #include <type_traits>               // for move
+#include <utility>  // for pair
+#include <vector>   // for vector, vector<>::reference, __v...
 
 #ifndef M_PI
 #    define M_PI 3.14159265358979323846264338327950288
@@ -31,9 +31,14 @@
  * @return a Vec2 object.
  */
 auto horner(std::vector<double> &coeffs1, size_t degree, const Vec2 &vr) -> Vec2 {
-    for (auto i = 0U; i != degree - 1; ++i) {
-        coeffs1[i + 1] += coeffs1[i] * vr.x();
-        coeffs1[i + 2] += coeffs1[i] * vr.y();
+    auto itr0 = coeffs1.begin();
+    auto itr1 = std::next(itr0);
+    auto itr2 = std::next(itr1);
+    for (auto i = 0U; i != degree - 1; ++i, ++itr0, ++itr1, ++itr2) {
+        *itr1 += *itr0 * vr.x();
+        *itr2 += *itr0 * vr.y();
+        // coeffs1[i + 1] += coeffs1[i] * vr.x();
+        // coeffs1[i + 2] += coeffs1[i] * vr.y();
     }
     return Vec2{coeffs1[degree - 1], coeffs1[degree]};
 }
