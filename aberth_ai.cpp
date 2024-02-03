@@ -14,10 +14,10 @@ const double TWO_PI = 2 * M_PI;
  * The function `horner_eval_c` evaluates a polynomial with complex coefficients at a given complex
  * value using Horner's method.
  *
- * @param coeffs The `coeffs` parameter is a vector of double values representing the coefficients
+ * @param[in] coeffs The `coeffs` parameter is a vector of double values representing the coefficients
  * of a polynomial. Each element in the vector corresponds to a term in the polynomial, starting
  * from the highest degree term.
- * @param zval The parameter `zval` is a complex number that represents the value at which the
+ * @param[in] zval The parameter `zval` is a complex number that represents the value at which the
  * polynomial is evaluated.
  *
  * @return The function `horner_eval_c` returns a complex number of type `std::complex<double>`.
@@ -35,11 +35,11 @@ std::complex<double> horner_eval_c(const std::vector<double> &coeffs,
  * The function `aberth_mt` performs the Aberth method for finding the roots of a polynomial using
  * multiple threads.
  *
- * @param coeffs The `coeffs` parameter is a vector of doubles representing the coefficients of a
+ * @param[in] coeffs The `coeffs` parameter is a vector of doubles representing the coefficients of a
  * polynomial. The polynomial is of degree `degree`, where `degree` is the size of `coeffs` minus 1.
- * @param zs A vector of complex numbers representing the initial guesses for the roots of a
+ * @param[in] zs A vector of complex numbers representing the initial guesses for the roots of a
  * polynomial equation.
- * @param options The `options` parameter is an object of type `Options`. It contains various
+ * @param[in] options The `options` parameter is an object of type `Options`. It contains various
  * options for the Aberth method algorithm, such as the maximum number of iterations (`max_iters`)
  * and the tolerance (`tol`) for convergence.
  *

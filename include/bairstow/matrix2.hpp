@@ -26,8 +26,8 @@ namespace numeric {
         /**
          * @brief Construct a new Matrix2 object
          *
-         * @param x
-         * @param y
+         * @param[in] x
+         * @param[in] y
          */
         constexpr Matrix2(T1 &&x, T2 &&y) noexcept : _x{std::move(x)}, _y{std::move(y)} {}
 
@@ -48,8 +48,8 @@ namespace numeric {
         // /**
         //  * @brief Construct a new Matrix2 object
         //  *
-        //  * @param x
-        //  * @param y
+        //  * @param[in] x
+        //  * @param[in] y
         //  */
         // constexpr Matrix2(const T1& x, const T2& y) : Vector2<T1, T2>{x, y} {}
 
@@ -70,7 +70,7 @@ namespace numeric {
          *
          * @tparam U1
          * @tparam U2
-         * @param other
+         * @param[in] other
          * @return Matrix2<T1, T2>&
          */
         template <typename U1, typename U2>
@@ -85,7 +85,7 @@ namespace numeric {
          *
          * @tparam U1
          * @tparam U2
-         * @param other
+         * @param[in] other
          * @return Matrix2<T1, T2>&
          */
         template <typename U1, typename U2>  //
@@ -99,7 +99,7 @@ namespace numeric {
          * @brief Multiply
          *
          * @tparam R
-         * @param alpha
+         * @param[in] alpha
          * @return Matrix2<T1, T2>&
          */
         template <typename R> CONSTEXPR14 auto operator*=(const R &alpha) -> Matrix2<T1, T2> & {
@@ -112,7 +112,7 @@ namespace numeric {
          * @brief Divide
          *
          * @tparam R
-         * @param alpha
+         * @param[in] alpha
          * @return Matrix2<T1, T2>&
          */
         template <typename R> CONSTEXPR14 auto operator/=(const R &alpha) -> Matrix2<T1, T2> & {
@@ -126,8 +126,8 @@ namespace numeric {
          *
          * @tparam U1
          * @tparam U2
-         * @param x
-         * @param y
+         * @param[in] x
+         * @param[in] y
          * @return Matrix2<T1, T2>
          */
         template <typename U1, typename U2>  //
