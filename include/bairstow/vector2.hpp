@@ -33,12 +33,12 @@ namespace numeric {
          *
          * The function constructs a new Vector2 object with given x and y values.
          *
-         * @param[in] x The parameter `x` is of type `T1&&`, which means it is a forwarding reference.
-         * It can accept any type, and it is passed as an rvalue reference. This allows the
-         * constructor to efficiently move or forward the value of `x` into the `_x` member
+         * @param[in] x The parameter `x` is of type `T1&&`, which means it is a forwarding
+         * reference. It can accept any type, and it is passed as an rvalue reference. This allows
+         * the constructor to efficiently move or forward the value of `x` into the `_x` member
          * variable.
-         * @param[in] y The parameter "y" is the y-coordinate of the Vector2 object. It represents the
-         * vertical position of the vector in a 2D coordinate system.
+         * @param[in] y The parameter "y" is the y-coordinate of the Vector2 object. It represents
+         * the vertical position of the vector in a 2D coordinate system.
          */
         constexpr Vector2(T1 x, T2 y) noexcept : _x{x}, _y{y} {}
 
@@ -47,12 +47,12 @@ namespace numeric {
          *
          * The function constructs a new Vector2 object with given x and y values.
          *
-         * @param[in] x The parameter `x` is of type `T1&&`, which means it is a forwarding reference.
-         * It can accept any type, and it is passed as an rvalue reference. This allows the
-         * constructor to efficiently move or forward the value of `x` into the `_x` member
+         * @param[in] x The parameter `x` is of type `T1&&`, which means it is a forwarding
+         * reference. It can accept any type, and it is passed as an rvalue reference. This allows
+         * the constructor to efficiently move or forward the value of `x` into the `_x` member
          * variable.
-         * @param[in] y The parameter "y" is the y-coordinate of the Vector2 object. It represents the
-         * vertical position of the vector in a 2D coordinate system.
+         * @param[in] y The parameter "y" is the y-coordinate of the Vector2 object. It represents
+         * the vertical position of the vector in a 2D coordinate system.
          */
         // constexpr Vector2(const T1 &x, const T2 &y) : _x{x}, _y{y} {}
 
@@ -97,7 +97,8 @@ namespace numeric {
          *
          * @tparam U1
          * @tparam U2
-         * @param[in] other The parameter "other" is a reference to an object of type Vector2<U1, U2>.
+         * @param[in] other The parameter "other" is a reference to an object of type Vector2<U1,
+         * U2>.
          *
          * @return The `dot` function is returning the dot product of two vectors, which is a scalar
          * value of type `double`.
@@ -113,7 +114,8 @@ namespace numeric {
          *
          * @tparam U1
          * @tparam U2
-         * @param[in] other The parameter "other" is a reference to an object of type Vector2<U1, U2>.
+         * @param[in] other The parameter "other" is a reference to an object of type Vector2<U1,
+         * U2>.
          *
          * @return The function `cross` returns the result of the cross product between the current
          * vector and the `other` vector. The result is of type `double`.
@@ -142,7 +144,8 @@ namespace numeric {
          *
          * @tparam U1
          * @tparam U2
-         * @param[in] other The parameter "other" is a reference to an object of type Vector2<U1, U2>.
+         * @param[in] other The parameter "other" is a reference to an object of type Vector2<U1,
+         * U2>.
          *
          * @return a reference to a Vector2 object.
          */
@@ -159,7 +162,8 @@ namespace numeric {
          *
          * @tparam U1
          * @tparam U2
-         * @param[in] other The parameter "other" is a reference to an object of type Vector2<U1, U2>.
+         * @param[in] other The parameter "other" is a reference to an object of type Vector2<U1,
+         * U2>.
          *
          * @return a reference to a Vector2 object.
          */
@@ -206,8 +210,8 @@ namespace numeric {
          * @tparam U1
          * @tparam U2
          * @param[in] x A Vector2 object with template types T1 and T2.
-         * @param[in] y The parameter `y` is a constant reference to a `Vector2` object with template
-         * parameters `U1` and `U2`.
+         * @param[in] y The parameter `y` is a constant reference to a `Vector2` object with
+         * template parameters `U1` and `U2`.
          *
          * @return a Vector2 object.
          */
@@ -224,8 +228,8 @@ namespace numeric {
          * @tparam U1
          * @tparam U2
          * @param[in] x A Vector2 object with template types T1 and T2.
-         * @param[in] y The parameter `y` is a constant reference to a `Vector2` object with template
-         * parameters `U1` and `U2`.
+         * @param[in] y The parameter `y` is a constant reference to a `Vector2` object with
+         * template parameters `U1` and `U2`.
          *
          * @return a Vector2 object.
          */
@@ -240,8 +244,8 @@ namespace numeric {
          *
          * @tparam R
          * @param[in] x A Vector2 object of type T1 and T2.
-         * @param[in] alpha The parameter `alpha` is a scalar value that will be used to multiply each
-         * component of the `Vector2` object `x`.
+         * @param[in] alpha The parameter `alpha` is a scalar value that will be used to multiply
+         * each component of the `Vector2` object `x`.
          *
          * @return a Vector2 object.
          */

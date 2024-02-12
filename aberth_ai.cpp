@@ -14,9 +14,9 @@ const double TWO_PI = 2 * M_PI;
  * The function `horner_eval_c` evaluates a polynomial with complex coefficients at a given complex
  * value using Horner's method.
  *
- * @param[in] coeffs The `coeffs` parameter is a vector of double values representing the coefficients
- * of a polynomial. Each element in the vector corresponds to a term in the polynomial, starting
- * from the highest degree term.
+ * @param[in] coeffs The `coeffs` parameter is a vector of double values representing the
+ * coefficients of a polynomial. Each element in the vector corresponds to a term in the polynomial,
+ * starting from the highest degree term.
  * @param[in] zval The parameter `zval` is a complex number that represents the value at which the
  * polynomial is evaluated.
  *
@@ -35,8 +35,9 @@ std::complex<double> horner_eval_c(const std::vector<double> &coeffs,
  * The function `aberth_mt` performs the Aberth method for finding the roots of a polynomial using
  * multiple threads.
  *
- * @param[in] coeffs The `coeffs` parameter is a vector of doubles representing the coefficients of a
- * polynomial. The polynomial is of degree `degree`, where `degree` is the size of `coeffs` minus 1.
+ * @param[in] coeffs The `coeffs` parameter is a vector of doubles representing the coefficients of
+ * a polynomial. The polynomial is of degree `degree`, where `degree` is the size of `coeffs`
+ * minus 1.
  * @param[in] zs A vector of complex numbers representing the initial guesses for the roots of a
  * polynomial equation.
  * @param[in] options The `options` parameter is an object of type `Options`. It contains various

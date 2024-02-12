@@ -1,9 +1,11 @@
 // import numpy as np
 // -*- coding: utf-8 -*-
 #include <doctest/doctest.h>  // for ResultBuilder, CHECK, TEST_CASE
+
+#include <vector>
+
 #include "bairstow/vector2.hpp"  // for Vector2
 #include "fmt/format.h"          // for print
-#include <vector>
 
 TEST_CASE("test vector2") {
     auto h = std::vector<double>{1.0, 2.0, 3.0, 4.0};
@@ -21,4 +23,3 @@ TEST_CASE("test vector2") {
     // CHECK(vA.x() == 8.0);
     // CHECK(vA.y() == 10.0);
 }
-
