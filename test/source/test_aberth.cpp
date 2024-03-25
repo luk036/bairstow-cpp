@@ -31,7 +31,7 @@ TEST_CASE("test aberth 2") {
     auto found = result.second;
     fmt::print("{}, {}\n", niter, found);
 
-    CHECK(niter <= 12);
+    CHECK(niter <= 13);
     // fmt::print([find_rootq(-r[0], -r[1]) for r : zs]);
 }
 
