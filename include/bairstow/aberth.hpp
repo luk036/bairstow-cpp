@@ -48,7 +48,6 @@ extern auto initial_aberth(const std::vector<double> &coeffs) -> std::vector<std
 extern auto aberth(const std::vector<double> &coeffs, std::vector<std::complex<double>> &zs,
                    const Options &options) -> std::pair<unsigned int, bool>;
 
-
 /**
  * @brief Multi-threading Aberth-Ehrlich method
  *
@@ -75,5 +74,4 @@ extern auto aberth(const std::vector<double> &coeffs, std::vector<std::complex<d
  * method converged to a solution within the specified tolerance.
  */
 extern auto aberth_mt(const std::vector<double> &coeffs, std::vector<std::complex<double>> &zs,
-                   const Options &options) -> std::pair<unsigned int, bool>;
-
+                      const Options &options) -> std::pair<unsigned int, bool>;

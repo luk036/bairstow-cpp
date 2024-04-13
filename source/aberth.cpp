@@ -134,8 +134,8 @@ auto aberth(const vector<double> &coeffs, vector<Complex> &zs, const Options &op
 /**
  * @brief Multi-threading Aberth-Ehrlich method
  *
- * The `aberth_mt` function is a multi-threaded implementation of the Aberth-Ehrlich method for finding
- * the roots of a polynomial.
+ * The `aberth_mt` function is a multi-threaded implementation of the Aberth-Ehrlich method for
+ * finding the roots of a polynomial.
  *
  * Aberth's method is a method for finding the roots of a polynomial that is
  * robust but requires complex arithmetic even if the polynomial is real. This
@@ -156,8 +156,8 @@ auto aberth(const vector<double> &coeffs, vector<Complex> &zs, const Options &op
  * pair represents the number of iterations performed, and the second element represents whether the
  * method converged to a solution within the specified tolerance.
  */
-auto aberth_mt(const vector<double> &coeffs, vector<Complex> &zs, const Options &options = Options())
-    -> std::pair<unsigned int, bool> {
+auto aberth_mt(const vector<double> &coeffs, vector<Complex> &zs,
+               const Options &options = Options()) -> std::pair<unsigned int, bool> {
     ThreadPool pool(std::thread::hardware_concurrency());
 
     const auto m = zs.size();
