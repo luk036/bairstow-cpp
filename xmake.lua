@@ -52,6 +52,16 @@ target("test_autocorr")
         -- target:add("links", "pthread", "m", "dl")
     end
 
+target("test_aberth")
+    set_kind("binary")
+    add_deps("Bairstow")
+    add_files("bench/BM_aberth.cpp")
+    add_packages("benchmark", "fmt")
+    if is_plat("linux", "macosx") then
+        add_syslinks("pthread")
+        -- target:add("links", "pthread", "m", "dl")
+    end
+
 
 -- If you want to known more usage about xmake, please see https://xmake.io
 --
