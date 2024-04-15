@@ -109,7 +109,7 @@ auto initial_guess(std::vector<double> coeffs) -> std::vector<Vec2> {
  * roots of the polynomial. The Bairstow's method will update these iterates iteratively until the
  * desired tolerance is reached or the maximum number of iterations is reached.
  * @param[in] options The `options` parameter is an object of type `Options` which contains the
- * maximum number of iterations (`max_iters`) and the tolerance (`tol`). These options are used to
+ * maximum number of iterations (`max_iters`) and the tolerance (`tolerance`). These options are used to
  * control the convergence criteria for the Bairstow's method.
  *
  * @return The function `pbairstow_even` returns a `std::pair<unsigned int, bool>`. The first
@@ -124,7 +124,7 @@ auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
     const auto rr = fun::Robin<size_t>(M);
 
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
-        auto tol = 0.0;
+        auto tolerance = 0.0;
         std::vector<std::future<double>> results;
 
         for (auto i = 0U; i != M; ++i) {
@@ -145,11 +145,11 @@ auto pbairstow_even(const std::vector<double> &coeffs, std::vector<Vec2> &vrs,
         }
         for (auto &&result : results) {
             auto &&res = result.get();
-            if (tol < res) {
-                tol = res;
+            if (tolerance < res) {
+                tolerance = res;
             }
         }
-        if (tol < options.tol) {
+        if (tolerance < options.tolerance) {
             return {niter, true};
         }
     }

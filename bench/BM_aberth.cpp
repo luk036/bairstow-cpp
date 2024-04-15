@@ -17,7 +17,7 @@ auto run_fir_aberth() -> std::pair<unsigned int, bool> {
     auto r = global_r;
     auto vrs = initial_aberth(r);
     auto options = Options();
-    options.tol = 1e-8;
+    options.tolerance = 1e-8;
     auto result = aberth(r, vrs, options);
     return result;
 }
@@ -35,7 +35,7 @@ auto run_fir_aberth_mt() -> std::pair<unsigned int, bool> {
     auto r = global_r;
     auto vrs = initial_aberth(r);
     auto options = Options();
-    options.tol = 1e-8;
+    options.tolerance = 1e-8;
     auto result = aberth_mt(r, vrs, options);
     return result;
 }

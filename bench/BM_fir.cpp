@@ -17,7 +17,7 @@ auto run_fir_autocorr() -> std::pair<unsigned int, bool> {
     auto r = global_r;
     auto vrs = initial_autocorr(r);
     auto options = Options();
-    options.tol = 1e-2;
+    options.tolerance = 1e-2;
     auto result = pbairstow_autocorr(r, vrs, options);
     return result;
 }
@@ -35,7 +35,7 @@ auto run_fir_pbairstow() -> std::pair<unsigned int, bool> {
     auto r = global_r;
     auto vrs = initial_guess(r);
     auto options = Options();
-    options.tol = 1e-2;
+    options.tolerance = 1e-2;
     auto result = pbairstow_even(r, vrs, options);
     return result;
 }

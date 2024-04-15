@@ -59,7 +59,7 @@ auto pbairstow_autocorr(const std::vector<double> &coeffs, std::vector<Vec2> &vr
     const auto rr = fun::Robin<size_t>(M);
 
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
-        auto tol = 0.0;
+        auto tolerance = 0.0;
         std::vector<std::future<double>> results;
         for (auto i = 0U; i != M; ++i) {
             results.emplace_back(pool.enqueue([&, i]() {
@@ -84,11 +84,11 @@ auto pbairstow_autocorr(const std::vector<double> &coeffs, std::vector<Vec2> &vr
         }
         for (auto &&result : results) {
             auto &&res = result.get();
-            if (tol < res) {
-                tol = res;
+            if (tolerance < res) {
+                tolerance = res;
             }
         }
-        if (tol < options.tol) {
+        if (tolerance < options.tolerance) {
             return {niter, true};
         }
     }

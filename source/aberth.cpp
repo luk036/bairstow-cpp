@@ -86,7 +86,7 @@ auto initial_aberth(const vector<double> &coeffs) -> vector<Complex> {
  * roots of the polynomial. The function will update these values iteratively to converge to the
  * actual roots.
  * @param[in] options The `options` parameter is an object of type `Options` that contains the
- * maximum number of iterations (`max_iters`) and the tolerance (`tol`). These options control the
+ * maximum number of iterations (`max_iters`) and the tolerance (`tolerance`). These options control the
  * convergence criteria for the Aberth-Ehrlich method.
  *
  * @return The `aberth` function returns a `std::pair<unsigned int, bool>`. The first element of the
@@ -104,7 +104,7 @@ auto aberth(const vector<double> &coeffs, vector<Complex> &zs, const Options &op
     }
 
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
-        auto tol = 0.0;
+        auto tolerance = 0.0;
         vector<std::future<double>> results;
 
         for (auto i = 0U; i != m; ++i) {
@@ -120,11 +120,11 @@ auto aberth(const vector<double> &coeffs, vector<Complex> &zs, const Options &op
                 return tol_i;
             };
             auto res = do_core();
-            if (tol < res) {
-                tol = res;
+            if (tolerance < res) {
+                tolerance = res;
             }
         }
-        if (tol < options.tol) {
+        if (tolerance < options.tolerance) {
             return {niter, true};
         }
     }
@@ -149,7 +149,7 @@ auto aberth(const vector<double> &coeffs, vector<Complex> &zs, const Options &op
  * roots of the polynomial. The function will update these values iteratively to converge to the
  * actual roots.
  * @param[in] options The `options` parameter is an object of type `Options` that contains the
- * maximum number of iterations (`max_iters`) and the tolerance (`tol`). These options control the
+ * maximum number of iterations (`max_iters`) and the tolerance (`tolerance`). These options control the
  * convergence criteria for the Aberth-Ehrlich method.
  *
  * @return The `aberth` function returns a `std::pair<unsigned int, bool>`. The first element of the
@@ -169,7 +169,7 @@ auto aberth_mt(const vector<double> &coeffs, vector<Complex> &zs,
     }
 
     for (auto niter = 0U; niter != options.max_iters; ++niter) {
-        auto tol = 0.0;
+        auto tolerance = 0.0;
         vector<std::future<double>> results;
 
         for (auto i = 0U; i != m; ++i) {
@@ -187,11 +187,11 @@ auto aberth_mt(const vector<double> &coeffs, vector<Complex> &zs,
         }
         for (auto &&result : results) {
             auto &&res = result.get();
-            if (tol < res) {
-                tol = res;
+            if (tolerance < res) {
+                tolerance = res;
             }
         }
-        if (tol < options.tol) {
+        if (tolerance < options.tolerance) {
             return {niter, true};
         }
     }

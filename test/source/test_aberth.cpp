@@ -25,7 +25,7 @@ TEST_CASE("test aberth 2") {
     auto h = std::vector<double>{10.0, 34.0, 75.0, 94.0, 150.0, 94.0, 75.0, 34.0, 10.0};
     auto zs = initial_aberth(h);
     auto options = Options();
-    options.tol = 1e-12;
+    options.tolerance = 1e-12;
     auto result = aberth(h, zs, options);
     auto niter = result.first;
     auto found = result.second;
@@ -47,7 +47,7 @@ TEST_CASE("test aberth FIR") {
     };
     auto zs = initial_aberth(r);
     auto options = Options();
-    options.tol = 1e-8;
+    options.tolerance = 1e-8;
     auto result = aberth(r, zs, options);
     auto niter = result.first;
     auto found = result.second;
@@ -61,7 +61,7 @@ TEST_CASE("test horners method") {
     auto r = std::vector<double>{10, 34, 75, 94, 150, 94, 75, 34, 10};
     auto zs = initial_aberth(r);
     auto options = Options();
-    options.tol = 1e-8;
+    options.tolerance = 1e-8;
     auto result = aberth(r, zs, options);
     auto niter = result.first;
     auto found = result.second;

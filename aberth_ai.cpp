@@ -42,7 +42,7 @@ std::complex<double> horner_eval_c(const std::vector<double> &coeffs,
  * polynomial equation.
  * @param[in] options The `options` parameter is an object of type `Options`. It contains various
  * options for the Aberth method algorithm, such as the maximum number of iterations (`max_iters`)
- * and the tolerance (`tol`) for convergence.
+ * and the tolerance (`tolerance`) for convergence.
  *
  * @return The function `aberth_mt` returns a `std::pair<size_t, bool>`. The first element of the
  * pair represents the number of iterations performed by the algorithm, and the second element
@@ -59,7 +59,7 @@ std::pair<size_t, bool> aberth_mt(const std::vector<double> &coeffs,
     std::vector<std::complex<double>> zsc(m_zs);
     std::vector<bool> converged(m_zs);
     for (size_t niter = 0; niter < options.max_iters; niter++) {
-        double tol = 0.0;
+        double tolerance = 0.0;
         zsc = zs;
         double tol_i = std::transform_reduce(
             zs.begin(), zs.end(), converged.begin(), 0.0,
@@ -67,10 +67,10 @@ std::pair<size_t, bool> aberth_mt(const std::vector<double> &coeffs,
             [&](const std::complex<double> &zi, bool &converged) {
                 return aberth_job(coeffs, zi, converged, zsc, coeffs1);
             });
-        if (tol < tol_i) {
-            tol = tol_i;
+        if (tolerance < tol_i) {
+            tolerance = tol_i;
         }
-        if (tol < options.tol) {
+        if (tolerance < options.tolerance) {
             return std::make_pair(niter, true);
         }
     }

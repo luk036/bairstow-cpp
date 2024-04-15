@@ -30,7 +30,7 @@ TEST_CASE("test auto-corr 1") {
     fmt::print("{}, {}\n", vA1h.x(), vA1h.y());
 
     auto options = Options();
-    options.tol = 1e-12;
+    options.tolerance = 1e-12;
     auto result = pbairstow_autocorr(r, vrs, options);
     auto niter = result.first;
     auto found = result.second;
@@ -73,7 +73,7 @@ TEST_CASE("test autocorr FIR") {
     fmt::print("{}, {}\n", vA1h.x(), vA1h.y());
 
     auto options = Options();
-    options.tol = 1e-5;
+    options.tolerance = 1e-5;
     auto result = pbairstow_autocorr(r, vrs, options);
     auto niter = result.first;
     auto found = result.second;

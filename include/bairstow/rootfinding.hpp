@@ -13,12 +13,12 @@ using Mat2 = numeric::Matrix2<Vec2>;
  * @brief Options
  *
  * The code snippet defines a class called `Options` that represents the options for a specific
- * algorithm or function. It has two public member variables: `max_iters` and `tol`.
+ * algorithm or function. It has two public member variables: `max_iters` and `tolerance`.
  */
 class Options {
   public:
     unsigned int max_iters = 2000U;
-    double tol = 1e-14;
+    double tolerance = 1e-14;
 };
 
 /**
@@ -48,7 +48,7 @@ extern auto initial_guess(std::vector<double> coeffs) -> std::vector<Vec2>;
  * roots of the polynomial. The Bairstow's method will update these iterates iteratively until the
  * desired tolerance is reached or the maximum number of iterations is reached.
  * @param[in] options The `options` parameter is an object of type `Options` which contains the
- * maximum number of iterations (`max_iters`) and the tolerance (`tol`). These options are used to
+ * maximum number of iterations (`max_iters`) and the tolerance (`tolerance`). These options are used to
  * control the convergence criteria for the Bairstow's method.
  *
  * @return The function `pbairstow_even` returns a `std::pair<unsigned int, bool>`. The first

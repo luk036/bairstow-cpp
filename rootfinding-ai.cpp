@@ -80,7 +80,7 @@ const double PI = std::acos(-1.0);
 class Options {
   public:
     int max_iters = 2000;
-    double tol = 1e-12;
+    double tolerance = 1e-12;
     double tol_ind = 1e-15;
 };
 
@@ -171,7 +171,7 @@ std::pair<std::vector<Vector2>, int, bool> pbairstow_even(const std::vector<doub
     std::vector<bool> converged(M, false);
     Robin robin(M);
     for (int niter = 0; niter < options.max_iters; niter++) {
-        double tol = 0.0;
+        double tolerance = 0.0;
 
         for (int i = 0; i < M; i++) {
             if (converged[i]) {
@@ -185,7 +185,7 @@ std::pair<std::vector<Vector2>, int, bool> pbairstow_even(const std::vector<doub
                 continue;
             }
             Vector2 vA1 = horner(coeffs1, N - 2, vrs[i]);
-            tol = std::max(tol_i, tol);
+            tolerance = std::max(tol_i, tolerance);
 
             for (int j : robin.exclude_list) {
                 std::tie(vA, vA1) = suppress(vA, vA1, vrs[i], vrs[j]);
@@ -193,7 +193,7 @@ std::pair<std::vector<Vector2>, int, bool> pbairstow_even(const std::vector<doub
 
             vrs[i] -= delta(vA, vrs[i], vA1);
         }
-        if (tol < options.tol) {
+        if (tolerance < options.tolerance) {
             return {vrs, niter, true};
         }
     }
