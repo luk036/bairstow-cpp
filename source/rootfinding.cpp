@@ -54,15 +54,35 @@ auto horner(std::vector<double> &coeffs1, size_t degree, const Vec2 &vr) -> Vec2
  */
 auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void {
     const auto vp = vri - vrj;
-    auto &&p = vp.x();
-    auto &&s = vp.y();
-    const auto M = Mat2{Vec2{s, -p}, Vec2{-p * vri.y(), p * vri.x() + s}};
-    const auto e = M.det();
-    vA = M.mdot(vA) / e;
+    const auto p = vp.x();
+    const auto s = vp.y();
+    const auto m_adjoint = Mat2{Vec2{s, -p}, Vec2{-p * vri.y(), p * vri.x() + s}};
+    const auto e = m_adjoint.det();
+    const auto va = m_adjoint.mdot(vA);
+    const auto vd = vA1 * e - va;
+    const auto vc = Vec2{vd.x(), vd.y() - va.x() * p};
+    vA = va * e;
+    vA1 = m_adjoint.mdot(vc);
+}
 
-    const auto vd = vA1 - vA;
-    const auto vc = Vec2{vd.x(), vd.y() - vA.x() * p};
-    vA1 = M.mdot(vc) / e;
+/**
+ * The function `suppress` calculates and updates the values of `vA` and `vA1`
+ * based on the given input vectors `vri` and `vrj`.
+ *
+ * @param[in, out] vA A reference to a Vec2 object representing vector A.
+ * @param[in, out] vA1 vA1 is a reference to a Vec2 object.
+ * @param[in] vri A vector representing the position of point i.
+ * @param[in] vrj The parameter `vrj` represents a `Vec2` object.
+ */
+auto suppress2(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void {
+    const auto vp = vri - vrj;
+    auto p = vp.x();
+    auto s = vp.y();
+    const auto m_adjoint = Mat2{Vec2{s, -p}, Vec2{-p * vrj.y(), p * vrj.x() + s}};
+    const auto e = m_adjoint.det();
+    vA1 *= e; // e may tend to zero
+    vA1 -= m_adjoint.mdot(vA);
+    vA *= e;
 }
 
 /**

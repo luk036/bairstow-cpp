@@ -10,6 +10,131 @@
 #include "bairstow/vector2.hpp"  // for Vector2
 #include "fmt/format.h"          // for print
 
+using namespace numeric;
+
+TEST_CASE("test delta1()") {
+    const auto vri = Vector2(-2.0, 0.0);
+    const auto vrj = Vector2(4.0, 5.0);
+    const auto vrk = Vector2(3.0, 7.0);
+    const auto vpj = vri - vrj;
+    const auto vpk = vri - vrk;
+
+    auto vA = Vector2(3.0, 3.0);
+    vA = delta(vA, vri, vpj);
+    auto dr1 = delta(vA, vri, vpk);
+
+    vA = Vector2(3.0, 3.0);
+    vA = delta(vA, vri, vpk);
+    auto dr2 = delta(vA, vri, vpj);
+    CHECK_EQ(dr1.dot(dr1), doctest::Approx(dr2.dot(dr2)));
+}
+
+TEST_CASE("test suppress 1") {
+    const auto vri = Vector2(-2.0, 0.0);
+    const auto vrj = Vector2(4.0, 5.0);
+    const auto vrk = Vector2(3.0, 7.0);
+
+    auto vA = Vector2(3.0, 3.0);
+    auto vA1 = Vector2(1.0, 2.0);
+
+    suppress(vA, vA1, vri, vrj);
+    suppress(vA, vA1, vri, vrk);
+    auto dr1 = vA;
+
+    vA = Vector2(3.0, 3.0);
+    vA1 = Vector2(1.0, 2.0);
+    suppress(vA, vA1, vri, vrk);
+    suppress(vA, vA1, vri, vrj);
+    auto dr2 = vA;
+    CHECK_EQ(dr1.dot(dr1), doctest::Approx(dr2.dot(dr2)));
+}
+
+TEST_CASE("test suppress 2") {
+    const auto vri = Vector2(-2.0, 0.0);
+    const auto vrj = Vector2(4.0, 5.0);
+    const auto vrk = Vector2(3.0, 7.0);
+    const auto vrl = Vector2(3.0, 7.0);
+
+    auto vA = Vector2(3.0, 3.0);
+    auto vA1 = Vector2(1.0, 2.0);
+
+    suppress(vA, vA1, vri, vrj);
+    suppress(vA, vA1, vri, vrk);
+    suppress(vA, vA1, vri, vrl);
+    auto dr1 = vA;
+
+    vA = Vector2(3.0, 3.0);
+    vA1 = Vector2(1.0, 2.0);
+    suppress(vA, vA1, vri, vrl);
+    suppress(vA, vA1, vri, vrk);
+    suppress(vA, vA1, vri, vrj);
+    auto dr2 = vA;
+    CHECK_EQ(dr1.dot(dr1), doctest::Approx(dr2.dot(dr2)));
+}
+
+TEST_CASE("test suppress 3") {
+    const auto vri = Vector2(-2.0, 0.0);
+    const auto vrj = Vector2(4.0, 5.0);
+    const auto vrk = Vector2(3.0, 7.0);
+
+    auto vA = Vector2(3.0, 3.0);
+    auto vA1 = Vector2(1.0, 2.0);
+
+    suppress2(vA, vA1, vri, vrj);
+    suppress2(vA, vA1, vri, vrk);
+    auto dr1 = vA;
+
+    vA = Vector2(3.0, 3.0);
+    vA1 = Vector2(1.0, 2.0);
+    suppress2(vA, vA1, vri, vrk);
+    suppress2(vA, vA1, vri, vrj);
+    auto dr2 = vA;
+    CHECK_EQ(dr1.dot(dr1), doctest::Approx(dr2.dot(dr2)));
+}
+
+TEST_CASE("test suppress 4") {
+    const auto vri = Vector2(-2.0, 0.0);
+    const auto vrj = Vector2(4.0, 5.0);
+    const auto vrk = Vector2(3.0, 7.0);
+    const auto vrl = Vector2(3.0, 7.0);
+
+    auto vA = Vector2(3.0, 3.0);
+    auto vA1 = Vector2(1.0, 2.0);
+
+    suppress2(vA, vA1, vri, vrj);
+    suppress2(vA, vA1, vri, vrk);
+    suppress2(vA, vA1, vri, vrl);
+    auto dr1 = vA;
+
+    vA = Vector2(3.0, 3.0);
+    vA1 = Vector2(1.0, 2.0);
+    suppress2(vA, vA1, vri, vrl);
+    suppress2(vA, vA1, vri, vrk);
+    suppress2(vA, vA1, vri, vrj);
+    auto dr2 = vA;
+    CHECK_EQ(dr1.dot(dr1), doctest::Approx(dr2.dot(dr2)));
+}
+
+TEST_CASE("test suppress 5") {
+    const auto vri = Vector2(-2.0, 0.0);
+    const auto vrj = Vector2(4.0, 5.0);
+    // const auto vrk = Vector2(3.0, 7.0);
+
+    auto vA = Vector2(3.0, 3.0);
+    auto vA1 = Vector2(1.0, 2.0);
+
+    suppress(vA, vA1, vri, vrj);
+    // suppress(vA, vA1, vri, vrk);
+    auto dr1 = delta(vA, vri, vA1);
+
+    vA = Vector2(3.0, 3.0);
+    vA1 = Vector2(1.0, 2.0);
+    suppress2(vA, vA1, vri, vrj);
+    //suppress2(vA, vA1, vri, vrk);
+    auto dr2 = delta(vA, vri, vA1);
+    CHECK_EQ(dr1.dot(dr1), doctest::Approx(dr2.dot(dr2)));
+}
+
 TEST_CASE("test horner_eval") {
     auto h = std::vector<double>{1.0, 2.0, 3.0, 4.0};
     auto vA = horner_eval(h, 3, 1.0);

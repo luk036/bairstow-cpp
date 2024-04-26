@@ -103,6 +103,25 @@ extern auto horner(std::vector<double> &coeffs1, std::size_t degree, const Vec2 
 extern auto suppress(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void;
 
 /**
+ * @brief zero suppression
+ *
+ * zero suppression is a technique used in the Bairstow method to find the
+ * coefficients of the linear remainder of a deflated polynomial without
+ * explicitly constructing the deflated polynomial. The goal of zero suppression
+ * is to perform the Bairstow process without the need for complex arithmetic
+ * within iterations. The technique involves finding the coefficients of the
+ * linear remainder of the deflated polynomial using the coefficients of the
+ * linear remainder of the original polynomial and the known factor of the
+ * original polynomial.
+ *
+ * @param[in,out] vA
+ * @param[in,out] vA1
+ * @param[in] vri
+ * @param[in] vrj
+ */
+extern auto suppress2(Vec2 &vA, Vec2 &vA1, const Vec2 &vri, const Vec2 &vrj) -> void;
+
+/**
  * The function "makeadjoint" takes in a vector vr and a vector vp, and returns a 2x2 matrix where
  * the elements are calculated based on the values of vr and vp.
  *
