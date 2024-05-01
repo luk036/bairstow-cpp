@@ -131,8 +131,8 @@ namespace numeric {
          * @return Matrix2<T1, T2>
          */
         template <typename U1, typename U2>  //
-        friend constexpr auto operator+(Matrix2<T1, T2> x, const Matrix2<U1, U2> &y)
-            -> Matrix2<T1, T2> {
+        friend constexpr auto operator+(Matrix2<T1, T2> x,
+                                        const Matrix2<U1, U2> &y) -> Matrix2<T1, T2> {
             return std::move(x) += y;
         }
 
@@ -146,8 +146,8 @@ namespace numeric {
          * @return Matrix2<T1, T2>
          */
         template <typename U1, typename U2>  //
-        friend constexpr auto operator-(Matrix2<T1, T2> x, const Matrix2<U1, U2> &y)
-            -> Matrix2<T1, T2> {
+        friend constexpr auto operator-(Matrix2<T1, T2> x,
+                                        const Matrix2<U1, U2> &y) -> Matrix2<T1, T2> {
             return std::move(x) -= y;
         }
 
@@ -159,8 +159,8 @@ namespace numeric {
          * @param[in] alpha
          * @return Matrix2<T1, T2>
          */
-        template <typename R> friend constexpr auto operator*(Matrix2<T1, T2> x, const R &alpha)
-            -> Matrix2<T1, T2> {
+        template <typename R>
+        friend constexpr auto operator*(Matrix2<T1, T2> x, const R &alpha) -> Matrix2<T1, T2> {
             return x *= alpha;
         }
 
@@ -172,8 +172,8 @@ namespace numeric {
          * @param[in] x
          * @return Matrix2<T1, T2>
          */
-        template <typename R> friend constexpr auto operator*(const R &alpha, Matrix2<T1, T2> x)
-            -> Matrix2<T1, T2> {
+        template <typename R>
+        friend constexpr auto operator*(const R &alpha, Matrix2<T1, T2> x) -> Matrix2<T1, T2> {
             return x *= alpha;
         }
 
@@ -185,8 +185,8 @@ namespace numeric {
          * @param[in] alpha
          * @return Matrix2<T1, T2>
          */
-        template <typename R> friend constexpr auto operator/(Matrix2<T1, T2> x, const R &alpha)
-            -> Matrix2<T1, T2> {
+        template <typename R>
+        friend constexpr auto operator/(Matrix2<T1, T2> x, const R &alpha) -> Matrix2<T1, T2> {
             return x /= alpha;
         }
 

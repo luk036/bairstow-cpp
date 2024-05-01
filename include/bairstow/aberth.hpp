@@ -38,8 +38,8 @@ extern auto initial_aberth(const std::vector<double> &coeffs) -> std::vector<std
  * of the polynomial. The function will update these values iteratively to converge to the actual
  * roots.
  * @param[in] options The `options` parameter is an object of type `Options` that contains the
- * maximum number of iterations (`max_iters`) and the tolerance (`tolerance`). These options control the
- * convergence criteria for the Aberth-Ehrlich method.
+ * maximum number of iterations (`max_iters`) and the tolerance (`tolerance`). These options control
+ * the convergence criteria for the Aberth-Ehrlich method.
  *
  * @return The `aberth` function returns a `std::pair<unsigned int, bool>`. The first element of the
  * pair represents the number of iterations performed, and the second element represents whether the
@@ -66,8 +66,8 @@ extern auto aberth(const std::vector<double> &coeffs, std::vector<std::complex<d
  * of the polynomial. The function will update these values iteratively to converge to the actual
  * roots.
  * @param[in] options The `options` parameter is an object of type `Options` that contains the
- * maximum number of iterations (`max_iters`) and the tolerance (`tolerance`). These options control the
- * convergence criteria for the Aberth-Ehrlich method.
+ * maximum number of iterations (`max_iters`) and the tolerance (`tolerance`). These options control
+ * the convergence criteria for the Aberth-Ehrlich method.
  *
  * @return The `aberth` function returns a `std::pair<unsigned int, bool>`. The first element of the
  * pair represents the number of iterations performed, and the second element represents whether the

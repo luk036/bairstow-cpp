@@ -48,8 +48,8 @@ extern auto initial_guess(std::vector<double> coeffs) -> std::vector<Vec2>;
  * roots of the polynomial. The Bairstow's method will update these iterates iteratively until the
  * desired tolerance is reached or the maximum number of iterations is reached.
  * @param[in] options The `options` parameter is an object of type `Options` which contains the
- * maximum number of iterations (`max_iters`) and the tolerance (`tolerance`). These options are used to
- * control the convergence criteria for the Bairstow's method.
+ * maximum number of iterations (`max_iters`) and the tolerance (`tolerance`). These options are
+ * used to control the convergence criteria for the Bairstow's method.
  *
  * @return The function `pbairstow_even` returns a `std::pair<unsigned int, bool>`. The first
  * element of the pair represents the number of iterations performed, and the second element
@@ -162,8 +162,8 @@ inline auto delta(const Vec2 &vA, const Vec2 &vr, const Vec2 &vp) -> Vec2 {
  *
  * @return a double value.
  */
-inline auto horner_eval(std::vector<double> coeffs1, std::size_t degree, const double &z)
-    -> double {
+inline auto horner_eval(std::vector<double> coeffs1, std::size_t degree,
+                        const double &z) -> double {
     for (auto i = 0U; i != degree; ++i) {
         coeffs1[i + 1] += coeffs1[i] * z;
     }

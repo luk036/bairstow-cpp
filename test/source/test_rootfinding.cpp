@@ -130,7 +130,7 @@ TEST_CASE("test suppress 5") {
     vA = Vector2(3.0, 3.0);
     vA1 = Vector2(1.0, 2.0);
     suppress2(vA, vA1, vri, vrj);
-    //suppress2(vA, vA1, vri, vrk);
+    // suppress2(vA, vA1, vri, vrk);
     auto dr2 = delta(vA, vri, vA1);
     CHECK_EQ(dr1.dot(dr1), doctest::Approx(dr2.dot(dr2)));
 }
