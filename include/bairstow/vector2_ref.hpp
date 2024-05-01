@@ -163,8 +163,8 @@ namespace numeric {
          *
          * @return The return type of the `operator<<` function is `Stream&`.
          */
-        template <class Stream>
-        friend auto operator<<(Stream &out, const Vector2Ref &vec) -> Stream & {
+        template <class Stream> friend auto operator<<(Stream &out, const Vector2Ref &vec)
+            -> Stream & {
             out << "{" << vec.x() << ", " << vec.y() << "}";
             return out;
         }
